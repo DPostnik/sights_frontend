@@ -1,0 +1,31 @@
+.home-page__container {
+  background-image: url("assets/img/home-page/background_home_page.svg");
+  filter: brightness(80%);
+  background-size: contain;
+  height: 1048px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .home-page__title {
+    width: 40%;
+    text-align: center;
+    color: white;
+    filter: brightness(100%);
+    line-height: 1.2;
+    letter-spacing: 0.5px;
+
+    h1 {
+      letter-spacing: 1px;
+      font-size: 48px;
+      font-weight: bold;
+      font-family: Montserrat, sans-serif;
+    }
+
+    p {
+      font-size: 22px;
+      margin-top: 30px;
+    }
+  }
+}
