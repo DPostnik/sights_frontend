@@ -1,0 +1,17 @@
+.login__container{
+  width: 400px;
+  height: 50vh;
+  background-color: white;
+  padding: 40px 60px;
+  border-radius: 20px;
+  text-align: center;
+
+  span.login__title{
+    font-size: 30px;
+  }
+
+  .validation
+  {
+    color: red;
+  }
+}
