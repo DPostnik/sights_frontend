@@ -1,6 +1,6 @@
 .home-page__container {
-  background-image: url("assets/img/home-page/background_home_page.svg");
-  filter: brightness(80%);
+  background: url(/assets/img/home-page/background_home_page.svg) no-repeat center center fixed;
+  //filter: brightness(100%);
   background-size: contain;
   height: 1048px;
   width: 100%;
@@ -15,6 +15,8 @@
     filter: brightness(100%);
     line-height: 1.2;
     letter-spacing: 0.5px;
+    box-shadow: -10px 0 0 #FE8020, 10px 0 0 #FE8020;
+    text-shadow: 1px 1px 2px black;
 
     h1 {
       letter-spacing: 1px;
