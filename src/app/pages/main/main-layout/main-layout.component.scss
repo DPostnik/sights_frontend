@@ -1,6 +1,8 @@
+@import 'src/assets/styles/global';
+
 .main-layout__container {
   padding: 0 20px;
   margin: 0 auto;
-  background-color: #e5e5e5;
+  background-color: $secondary-color;
   min-height: 813px;
 }

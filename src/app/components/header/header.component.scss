@@ -1,7 +1,10 @@
+@import 'src/assets/styles/global';
+
 .mat-toolbar {
   display: flex;
   justify-content: space-between;
   padding: 8px 30px;
+  background: $primary-color;
 
   .header__content {
     display: flex;
@@ -11,12 +14,16 @@
     .header__title {
       font-size: 24px;
       margin-right: 100px;
+
+      .img:hover {
+        cursor: pointer;
+      }
     }
 
     .header__tabs {
       font-size: 20px;
-      color: #8c8c8c;
-      display:flex;
+      color: $tertiary-color;
+      display: flex;
       align-items: center;
 
       span {
@@ -25,14 +32,13 @@
 
       a {
         text-decoration: none;
-        color: #8c8c8c;
+        color: $tertiary-color;
         letter-spacing: 0.5px;
       }
 
       .active-link {
-        color: #000;
+        color: $accent-color;
         font-weight: 500;
-        border-bottom: 2px solid #000;
       }
     }
   }
@@ -45,23 +51,24 @@
 
     .user-info__person-icon {
       font-size: 24px;
-      background: linear-gradient(0.25turn, #ecb43a 70%, #f6c58d);
+      background-color: $accent-color;
       border-radius: 20%;
       padding: 7px;
       margin-right: 10px;
-      color: #ffffff;
+      color: $tertiary-color;
     }
 
     .user-info__logout-icon {
       font-size: 24px;
       margin-left: 10px;
-      color: #8c8c8c;
+      color: $tertiary-color;
       padding: 10px;
       border-radius: 50%;
+      opacity: 0.7;
+      transition: all .3s;
 
       &:hover {
-        background-color: #dadada;
-        transition: all 0.2s;
+        background-color: $accent-color;
       }
     }
 
@@ -71,6 +78,7 @@
   }
 
   span {
+    color: $tertiary-color;
 
     &:hover {
       cursor: pointer;

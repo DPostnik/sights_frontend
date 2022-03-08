@@ -12,7 +12,6 @@ import {AppComponent} from './app.component';
 import {HeaderComponent} from './components/header/header.component';
 import {NotFoundPageComponent} from './pages/notFoundPage/not-found-page/not-found-page.component';
 import {AdminPageComponent} from './pages/admin/admin-page/admin-page.component';
-import {LogoIconComponent} from '../assets/icons/logoIcon';
 import { MainLayoutComponent } from './pages/main/main-layout/main-layout.component';
 import { HomeComponent } from './pages/main/home/home.component';
 import { SightsMapComponent } from './pages/main/sights-map/sights-map.component';
@@ -25,7 +24,6 @@ import { FooterComponent } from './components/footer/footer.component';
     HeaderComponent,
     AdminPageComponent,
     NotFoundPageComponent,
-    LogoIconComponent,
     MainLayoutComponent,
     HomeComponent,
     SightsMapComponent,
