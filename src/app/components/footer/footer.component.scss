@@ -1,11 +1,14 @@
+@import 'src/assets/styles/global';
+
 .footer {
   &__container {
     width: 100%;
     height: 60px;
-    background-color: #d5aeec;
+    background-color: $primary-color;
   }
 
   &__content {
+    color: $accent-color;
     display: flex;
     width: 50%;
     margin: 0 auto;

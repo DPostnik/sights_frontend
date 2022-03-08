@@ -1,6 +1,7 @@
+@import 'src/assets/styles/global';
+
 .home-page__container {
   background: url(/assets/img/home-page/background_home_page.svg) no-repeat center center fixed;
-  //filter: brightness(100%);
   background-size: contain;
   height: 1048px;
   width: 100%;
@@ -15,7 +16,7 @@
     filter: brightness(100%);
     line-height: 1.2;
     letter-spacing: 0.5px;
-    box-shadow: -10px 0 0 #FE8020, 10px 0 0 #FE8020;
+    box-shadow: -10px 0 0 $accent-color, 10px 0 0 $accent-color;
     text-shadow: 1px 1px 2px black;
 
     h1 {

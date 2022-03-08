@@ -2,7 +2,8 @@
   <div class="header__content">
     <div class="header__title">
       <a routerLink="home">
-        <app-logo-icon></app-logo-icon>
+        <img src="assets/img/header/logo.svg"
+             alt=""/>
       </a>
     </div>
 
@@ -16,7 +17,7 @@
 
   <div class="user-info">
     <mat-icon class="user-info__person-icon">person</mat-icon>
-    <span>Account</span>
-    <mat-icon class="user-info__logout-icon">logout</mat-icon>
+    <span>{{userName}}</span>
+    <mat-icon (click)="logout()" class="user-info__logout-icon">logout</mat-icon>
   </div>
 </mat-toolbar>
