@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {getDecodedAccessToken} from "../../utils/jwtParse";
+import {AuthService} from "../../services/auth.service";
 
 @Component({
   selector: 'app-header',
@@ -7,9 +9,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor() { }
+  public userName = 'Account';
+
+  constructor(private auth: AuthService) {
+  }
 
   ngOnInit(): void {
+    const token = getDecodedAccessToken();
+    if (token) {
+      this.userName = token.name || 'Account';
+    }
+  }
+
+  logout(): void {
+    this.auth.logout();
+    this.userName = 'Account'
   }
 
 }

@@ -3,10 +3,9 @@ import {RouterModule} from "@angular/router";
 import {AuthLayoutComponent} from './auth-layout/auth-layout.component';
 import {LoginPageComponent} from './login-page/login-page.component';
 import {RegisterPageComponent} from './register-page/register-page.component';
-import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {CommonModule} from "@angular/common";
-import {AuthService} from "../../../auth.service";
-import {HttpClientModule} from "@angular/common/http";
+import {AuthService} from "../../services/auth.service";
+import {SharedModule} from "../../shared/shared.module";
 
 @NgModule({
   imports: [
@@ -20,9 +19,7 @@ import {HttpClientModule} from "@angular/common/http";
         ]
       }
     ]),
-    ReactiveFormsModule,
-    FormsModule,
-    HttpClientModule
+    SharedModule,
   ],
   exports: [RouterModule],
   declarations: [
@@ -30,7 +27,7 @@ import {HttpClientModule} from "@angular/common/http";
     LoginPageComponent,
     RegisterPageComponent
   ],
-  providers: [AuthService]
+  providers: []
 })
 
 export class AuthModule {

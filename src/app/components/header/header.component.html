@@ -17,7 +17,7 @@
 
   <div class="user-info">
     <mat-icon class="user-info__person-icon">person</mat-icon>
-    <span>Account</span>
-    <mat-icon class="user-info__logout-icon">logout</mat-icon>
+    <span>{{userName}}</span>
+    <mat-icon (click)="logout()" class="user-info__logout-icon">logout</mat-icon>
   </div>
 </mat-toolbar>

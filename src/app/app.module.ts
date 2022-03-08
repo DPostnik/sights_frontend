@@ -17,6 +17,7 @@ import { HomeComponent } from './pages/main/home/home.component';
 import { SightsMapComponent } from './pages/main/sights-map/sights-map.component';
 import { SightsListComponent } from './pages/main/sights-list/sights-list.component';
 import { FooterComponent } from './components/footer/footer.component';
+import {SharedModule} from "./shared/shared.module";
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { FooterComponent } from './components/footer/footer.component';
     MatIconModule,
     AdminModule,
     AuthModule,
+    SharedModule,
   ],
   providers: [],
   exports: [],
