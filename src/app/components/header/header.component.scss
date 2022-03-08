@@ -1,5 +1,11 @@
 @import 'src/assets/styles/global';
 
+:host {
+  position: fixed;
+  width: 100%;
+  z-index: 1000;
+}
+
 .mat-toolbar {
   display: flex;
   justify-content: space-between;
