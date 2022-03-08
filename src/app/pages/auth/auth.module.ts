@@ -4,7 +4,6 @@ import {AuthLayoutComponent} from './auth-layout/auth-layout.component';
 import {LoginPageComponent} from './login-page/login-page.component';
 import {RegisterPageComponent} from './register-page/register-page.component';
 import {CommonModule} from "@angular/common";
-import {AuthService} from "../../services/auth.service";
 import {SharedModule} from "../../shared/shared.module";
 
 @NgModule({
