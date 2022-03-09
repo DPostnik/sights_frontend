@@ -7,7 +7,7 @@
 }
 
 .home-page__container {
-  background: linear-gradient(65deg, #232931 0%, #232931 50%, #232931e6 70%, #232931b3 100%) fixed,
+  background: linear-gradient(65deg, $primary-color 0%, $primary-color 50%, rgba($primary-color, .9) 70%, rgba($primary-color, .6) 100%) fixed,
   url(/assets/img/home-page/background.png) no-repeat center center fixed;
   background-size: cover;
   width: 100%;
