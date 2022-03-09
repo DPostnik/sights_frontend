@@ -1,8 +1,13 @@
 @import 'src/assets/styles/global';
 
+:host, .main-layout__container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}
+
 .main-layout__container {
-  padding: 0 20px;
-  margin: 0 auto;
+  flex-grow: 1;
+  margin-top: 64px;
   background-color: $secondary-color;
-  min-height: 813px;
 }
