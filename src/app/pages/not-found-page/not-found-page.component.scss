@@ -1,0 +1,56 @@
+@import 'src/assets/styles/global';
+
+:host, .not-found-content, .not-found-background {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  min-height: 100%;
+}
+
+.not-found-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: $tertiary-color;
+  text-shadow: 0 0 15px black;
+
+  .error {
+    line-height: 0.9em;
+    font-size: 150px;
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
+  }
+
+  .description {
+    letter-spacing: 1.5px;
+    text-shadow: inherit;
+    font-size: 40px;
+    margin-bottom: 10px;
+    font-weight: bold;
+  }
+
+  .link {
+    color: $accent-color;
+    letter-spacing: 1.5px;
+    font-size: 30px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    cursor: pointer;
+    border-bottom: $accent-color 2px solid;
+  }
+}
+
+.not-found-background {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  z-index: -1;
+  background: url(/assets/img/not-found-page/background.jpg) no-repeat center center fixed;
+  filter: blur(3px);
+  background-size: cover;
+}
