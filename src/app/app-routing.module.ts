@@ -1,6 +1,6 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {NotFoundPageComponent} from "./pages/notFoundPage/not-found-page/not-found-page.component";
+import {NotFoundPageComponent} from "./pages/not-found-page/not-found-page.component";
 import {MainLayoutComponent} from "./pages/main/main-layout/main-layout.component";
 import {HomeComponent} from "./pages/main/home/home.component";
 import {SightsMapComponent} from "./pages/main/sights-map/sights-map.component";
@@ -23,7 +23,8 @@ const routes: Routes = [
     path: 'auth', loadChildren: () => import('./pages/auth/auth.module')
       .then(m => m.AuthModule),
   },
-  {path: '**', component: NotFoundPageComponent},
+  {path: 'not-found', component: NotFoundPageComponent, pathMatch: 'full'},
+  {path: '**', redirectTo: '/not-found'},
 ];
 
 @NgModule({

@@ -36,6 +36,10 @@ $sights_frontend-theme: mat.define-light-theme((
 
 @import 'src/assets/styles/global';
 
+* {
+  box-sizing: border-box;
+}
+
 html, body {
   height: 100%;
 }
