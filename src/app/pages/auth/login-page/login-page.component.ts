@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {AuthService, IUser} from "../../../services/auth.service";
 
@@ -9,10 +9,13 @@ import {AuthService, IUser} from "../../../services/auth.service";
 })
 export class LoginPageComponent implements OnInit {
 
+  loginWindow: any = null;
   form: FormGroup = new FormGroup({});
   submitted = false;
   message: string = '';
-  constructor(public auth: AuthService) { }
+
+  constructor(public auth: AuthService) {
+  }
 
   ngOnInit(): void {
     this.form = new FormGroup({
@@ -29,8 +32,7 @@ export class LoginPageComponent implements OnInit {
   }
 
   submit(): void {
-    if(this.form?.invalid)
-    {
+    if (this.form?.invalid) {
       return
     }
     this.submitted = true;
@@ -45,6 +47,16 @@ export class LoginPageComponent implements OnInit {
       this.submitted = false;
     })
 
+  }
+
+  redirect(): void {
+    this.loginWindow = window.open('http://localhost:3000/auth/login', '', 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, copyhistory=no');
+    const timer = setInterval(() => {
+      if(this.loginWindow.closed) {
+        clearInterval(timer);
+        alert('closed');
+      }
+    }, .500);
   }
 
 }

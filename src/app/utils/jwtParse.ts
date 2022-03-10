@@ -4,7 +4,7 @@ export function getDecodedAccessToken(): any {
   try {
     const token = localStorage.getItem('token') || '';
     return jwt_decode(token);
-  } catch(Error) {
+  } catch (Error) {
     return null;
   }
 }
