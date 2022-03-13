@@ -9,6 +9,7 @@ import {AuthService, IUser} from "../../../services/auth.service";
 })
 export class LoginPageComponent implements OnInit {
 
+  errorMessage: string = '';
   loginWindow: any = null;
   form: FormGroup = new FormGroup({});
   submitted = false;
@@ -42,8 +43,12 @@ export class LoginPageComponent implements OnInit {
       password: this.form?.value.password
     };
 
-    this.auth.login(user).subscribe(() => {
-      this.form.reset();
+    this.auth.login(user).subscribe((response) => {
+      if (response.data) {
+        this.form.reset();
+      } else {
+        this.errorMessage = response.message;
+      }
       this.submitted = false;
     })
 
@@ -62,6 +67,10 @@ export class LoginPageComponent implements OnInit {
         }
       }
     }, 500)
+  }
+
+  resetErrorMessage() {
+    this.errorMessage = '';
   }
 
 

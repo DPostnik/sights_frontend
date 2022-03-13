@@ -4,11 +4,13 @@
       <span class="login__title">Welcome</span>
     </div>
 
+    <span>{{this.errorMessage}}</span>
+
     <div class="form_control"
          [ngClass]="{invalid: form?.get('email')?.invalid && form?.get('email')?.touched}">
 
       <label for="email">Login:</label><br>
-      <input id="email" type="text" class="form-control" formControlName='email'>
+      <input id="email" type="text" class="form-control" formControlName='email' (input)="resetErrorMessage()">
 
       <div class="validation"
            *ngIf="form?.get('email')?.touched && form?.get('email')?.invalid">
@@ -20,7 +22,7 @@
     <div class="form_control"
          [ngClass]="{invalid: form?.get('password')?.invalid && form?.get('password')?.touched}">
       <label for="password">Password:</label><br>
-      <input id="password" type="password" class="form-control" formControlName='password'>
+      <input id="password" type="password" class="form-control" formControlName='password' (input)="resetErrorMessage()">
 
       <div class="validation"
            *ngIf="form?.get('password')?.touched&& form?.get('password')?.invalid">

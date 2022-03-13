@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {AuthService, CreateUserDto} from "../../../services/auth.service";
-import {Router} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'register-page',
@@ -14,19 +14,27 @@ export class RegisterPageComponent implements OnInit {
   submitted = false;
   message: string = '';
 
-  constructor(public auth: AuthService, private router: Router) {
+  constructor(public auth: AuthService, private router: Router, private route: ActivatedRoute) {
   }
 
   ngOnInit(): void {
+    let name = '', email = '';
+    this.route.queryParams.subscribe((params) => {
+      if (params) {
+        name = params['name'];
+        email = params['email'];
+      }
+    })
     this.form = new FormGroup({
-      email: new FormControl(null, [
+      email: new FormControl(email, [
           Validators.required,
+          Validators.email
         ]
       ),
       password: new FormControl(null, [
         Validators.required,
       ]),
-      name: new FormControl(null, [
+      name: new FormControl(name, [
         Validators.required,
       ])
     });
