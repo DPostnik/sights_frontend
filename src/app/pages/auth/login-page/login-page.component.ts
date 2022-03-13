@@ -50,13 +50,19 @@ export class LoginPageComponent implements OnInit {
   }
 
   redirect(): void {
-    this.loginWindow = window.open('http://localhost:3000/auth/login', '', 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, copyhistory=no');
-    const timer = setInterval(() => {
-      if(this.loginWindow.closed) {
-        clearInterval(timer);
-        alert('closed');
+    let href = '';
+    const ref = window.open('http://localhost:3000/auth/login', '', 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, copyhistory=no');
+    const interval = setInterval(() => {
+      if (ref) {
+        href = ref.location.href;
+        if (href.includes('4200')) {
+          ref.close();
+          clearInterval(interval);
+          window.location.href = href;
+        }
       }
-    }, .500);
+    }, 500)
   }
+
 
 }

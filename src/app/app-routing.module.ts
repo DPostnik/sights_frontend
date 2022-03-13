@@ -24,7 +24,7 @@ const routes: Routes = [
       .then(m => m.AuthModule),
   },
   {path: 'not-found', component: NotFoundPageComponent, pathMatch: 'full'},
-  {path: '**', redirectTo: '/not-found'},
+  // {path: '**', redirectTo: '/not-found'},
 ];
 
 @NgModule({
