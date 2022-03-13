@@ -12,9 +12,9 @@ import {SharedModule} from "../../shared/shared.module";
     RouterModule.forChild([
       {
         path: '', component: AuthLayoutComponent, children: [
-          {path: '', redirectTo: '/auth/login', pathMatch: 'full'},
           {path: 'login', component: LoginPageComponent},
           {path: 'register', component: RegisterPageComponent},
+          {path: '**', redirectTo: '/auth/login'},
         ]
       }
     ]),

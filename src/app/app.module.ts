@@ -10,7 +10,7 @@ import {AuthModule} from './pages/auth/auth.module';
 
 import {AppComponent} from './app.component';
 import {HeaderComponent} from './components/header/header.component';
-import {NotFoundPageComponent} from './pages/not-found-page/not-found-page.component';
+import {NotFoundComponent} from './pages/not-found/not-found.component';
 import {AdminPageComponent} from './pages/admin/admin-page/admin-page.component';
 import {MainLayoutComponent} from './pages/main/main-layout/main-layout.component';
 import {HomeComponent} from './pages/main/home/home.component';
@@ -24,7 +24,7 @@ import {SharedModule} from "./shared/shared.module";
     AppComponent,
     HeaderComponent,
     AdminPageComponent,
-    NotFoundPageComponent,
+    NotFoundComponent,
     MainLayoutComponent,
     HomeComponent,
     SightsMapComponent,
