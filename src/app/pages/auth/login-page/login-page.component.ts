@@ -1,50 +1,47 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {AuthService, IUser} from "../../../services/auth.service";
+import {AuthService, IUser} from '../../../services/auth.service';
 
 @Component({
-  selector: 'login-page',
-  templateUrl: './login-page.component.html',
-  styleUrls: ['./login-page.component.scss']
+    selector: 'app-login-page',
+    templateUrl: './login-page.component.html',
+    styleUrls: ['./login-page.component.scss'],
 })
 export class LoginPageComponent implements OnInit {
+    form: FormGroup = new FormGroup({});
 
-  form: FormGroup = new FormGroup({});
-  submitted = false;
-  message: string = '';
-  constructor(public auth: AuthService) { }
+    submitted = false;
+    message: string = '';
 
-  ngOnInit(): void {
-    this.form = new FormGroup({
-      email: new FormControl(null, [
-          Validators.required,
-          // Validators.email
-        ]
-      ),
-      password: new FormControl(null, [
-        Validators.required,
-        // Validators.minLength(6)
-      ])
-    });
-  }
+    constructor(public auth: AuthService) {}
 
-  submit(): void {
-    if(this.form?.invalid)
-    {
-      return
+    ngOnInit(): void {
+        this.form = new FormGroup({
+            email: new FormControl(null, [
+                Validators.required,
+                // Validators.email
+            ]),
+            password: new FormControl(null, [
+                Validators.required,
+                // Validators.minLength(6)
+            ]),
+        });
     }
-    this.submitted = true;
 
-    const user: IUser = {
-      email: this.form?.value.email,
-      password: this.form?.value.password
-    };
+    submit(): void {
+        if (this.form?.invalid) {
+            return;
+        }
+        this.submitted = true;
 
-    this.auth.login(user).subscribe(() => {
-      this.form.reset();
-      this.submitted = false;
-    })
+        const user: IUser = {
+            email: this.form?.value.email,
+            password: this.form?.value.password,
+        };
 
-  }
-
+        this.auth.login(user).subscribe(() => {
+            this.form.reset();
+            this.submitted = false;
+        });
+    }
 }

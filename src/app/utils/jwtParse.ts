@@ -1,11 +1,10 @@
-import jwt_decode from 'jwt-decode';
+import jwtDecode from 'jwt-decode';
 
 export function getDecodedAccessToken(): any {
-  try {
-    const token = localStorage.getItem('token') || '';
-    return jwt_decode(token);
-  } catch(Error) {
-    return null;
-  }
+    try {
+        const token = localStorage.getItem('token') || '';
+        return jwtDecode(token);
+    } catch (Error) {
+        return null;
+    }
 }
-
