@@ -1,5 +1,13 @@
-.admin-layout{
-  background-color: #ccc;
-  height: 100vh;
-  width: 100%;
+app-layout {
+  justify-content: center;
+  align-items: center;
+}
+
+.auth-container {
+  width: 400px;
+  height: 50vh;
+  background-color: white;
+  padding: 40px 60px;
+  border-radius: 20px;
+  text-align: center;
 }

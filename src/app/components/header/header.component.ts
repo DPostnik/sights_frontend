@@ -1,29 +1,26 @@
 import {Component, OnInit} from '@angular/core';
-import {getDecodedAccessToken} from "../../utils/jwtParse";
-import {AuthService} from "../../services/auth.service";
+import {getDecodedAccessToken} from '../../utils/jwtParse';
+import {AuthService} from '../../services/auth.service';
 
 @Component({
-  selector: 'app-header',
-  templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss']
+    selector: 'app-header',
+    templateUrl: './header.component.html',
+    styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
+    public userName = 'Account';
 
-  public userName = 'Account';
+    constructor(private auth: AuthService) {}
 
-  constructor(private auth: AuthService) {
-  }
-
-  ngOnInit(): void {
-    const token = getDecodedAccessToken();
-    if (token) {
-      this.userName = token.name || 'Account';
+    ngOnInit(): void {
+        const token = getDecodedAccessToken();
+        if (token) {
+            this.userName = token.name || 'Account';
+        }
     }
-  }
 
-  logout(): void {
-    this.auth.logout();
-    this.userName = 'Account'
-  }
-
+    logout(): void {
+        this.auth.logout();
+        this.userName = 'Account';
+    }
 }

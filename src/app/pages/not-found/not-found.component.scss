@@ -1,15 +1,6 @@
 @import 'src/assets/styles/global';
 
-:host, .not-found-content, .not-found-background {
-  display: flex;
-  flex-direction: column;
-  flex-grow: 1;
-  min-height: 100%;
-}
-
-.not-found-content {
-  display: flex;
-  flex-direction: column;
+.not-found-container {
   justify-content: center;
   align-items: center;
   color: $tertiary-color;
@@ -42,15 +33,3 @@
   }
 }
 
-.not-found-background {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  z-index: -1;
-  background: url(/assets/img/not-found-page/background.jpg) no-repeat center center fixed;
-  filter: blur(3px);
-  background-size: cover;
-}

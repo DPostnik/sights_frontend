@@ -1,15 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import {Component} from '@angular/core';
+import {Store} from '@ngxs/store';
+import {GetTests} from '../../../store/actions/test.actions';
 
 @Component({
-  selector: 'sights-list',
-  templateUrl: './sights-list.component.html',
-  styleUrls: ['./sights-list.component.scss']
+    selector: 'app-sights-list',
+    templateUrl: './sights-list.component.html',
+    styleUrls: ['./sights-list.component.scss'],
 })
-export class SightsListComponent implements OnInit {
+export class SightsListComponent {
+    constructor(private store: Store) {}
 
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
+    onClick() {
+        this.store.dispatch(new GetTests(1000));
+    }
 }
