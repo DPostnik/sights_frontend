@@ -36,7 +36,7 @@ export class TestState {
                 ),
             ),
             catchError(() => ctx.dispatch(GetTestsFailure)),
-            finalize(() => ctx.patchState({isLoading: true})),
+            finalize(() => ctx.patchState({isLoading: false})),
         );
     }
 
