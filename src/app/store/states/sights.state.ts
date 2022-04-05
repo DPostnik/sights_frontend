@@ -14,6 +14,7 @@ import {
     defaults: {
         isLoading: false,
         sights: [],
+        total: 0,
     },
 })
 @Injectable()
@@ -35,7 +36,12 @@ export class SightsState {
         ctx.patchState({isLoading: true});
         try {
             return this.sightService.getSights(10, 0).pipe(
-                tap((sights) => ctx.patchState({sights})),
+                tap((sights) =>
+                    ctx.patchState({
+                        sights: sights.data,
+                        total: sights.total,
+                    }),
+                ),
                 switchMap(() => ctx.dispatch(GetSightsSuccess)),
             );
         } catch (e) {

@@ -7,6 +7,7 @@ import {RouterModule} from '@angular/router';
 import {MatIconModule} from '@angular/material/icon';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatTableModule} from '@angular/material/table';
+import {MatPaginatorModule} from '@angular/material/paginator';
 
 @NgModule({
     declarations: [LayoutComponent],
@@ -28,6 +29,7 @@ import {MatTableModule} from '@angular/material/table';
         MatToolbarModule,
         CommonModule,
         MatTableModule,
+        MatPaginatorModule,
     ],
 })
 export class SharedModule {}

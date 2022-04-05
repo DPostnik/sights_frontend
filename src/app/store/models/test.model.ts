@@ -6,6 +6,7 @@ export interface TestStateModel {
 export interface SightsStateModel {
     isLoading: boolean;
     sights: SightModel[];
+    total: number;
 }
 
 export interface SightModel {
@@ -15,10 +16,17 @@ export interface SightModel {
     date: Date;
     founder: string;
     coordinates: ICoordinates;
-    cityId: number;
+    city: ICity;
 }
 
 export interface ICoordinates {
+    id: number;
     longitude: number;
     latitude: number;
+}
+
+export interface ICity {
+    id: number;
+    regionId: number;
+    name: string;
 }
