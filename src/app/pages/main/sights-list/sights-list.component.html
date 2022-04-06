@@ -47,7 +47,10 @@
         <mat-paginator
             [pageSizeOptions]="[10]"
             showFirstLastButtons
+            [length]="total"
             aria-label="Select page of periodic elements"
+            [pageIndex]="currentPage"
+            (page)="handlePage($event)"
         >
         </mat-paginator>
     </div>

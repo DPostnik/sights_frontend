@@ -6,6 +6,7 @@ import {SightsState} from '../../../store/states/sights.state';
 import {Observable, Subscription} from 'rxjs';
 import {SightModel} from '../../../store/models/test.model';
 import {MatTable, MatTableDataSource} from '@angular/material/table';
+import {PageEvent} from '@angular/material/paginator';
 
 @Component({
     selector: 'app-sights-list',
@@ -13,11 +14,16 @@ import {MatTable, MatTableDataSource} from '@angular/material/table';
     styleUrls: ['./sights-list.component.scss'],
 })
 export class SightsListComponent implements OnInit, OnDestroy {
-    // displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
     @ViewChild('table1', {static: false}) table?: MatTable<SightModel>;
 
     @Select(SightsState.selectSights) sights$?: Observable<SightModel[]>;
     sub?: Subscription;
+
+    @Select(SightsState.selectTotal) total$?: Observable<number>;
+    sub1?: Subscription;
+    total?: number;
+
+    currentPage?: number;
 
     displayedColumns = ['city', 'founder', 'name', 'date', 'coordinates'];
     dataSource?: MatTableDataSource<SightModel>;
@@ -32,11 +38,20 @@ export class SightsListComponent implements OnInit, OnDestroy {
         this.store.dispatch(new GetSights(10, 0));
         this.sub = this.sights$?.subscribe((sights) => {
             this.dataSource = new MatTableDataSource<SightModel>(sights);
-            console.log(sights);
+        });
+        this.sub1 = this.total$?.subscribe((total) => {
+            this.total = total;
         });
     }
 
     ngOnDestroy() {
         this.sub?.unsubscribe();
+        this.sub1?.unsubscribe();
+    }
+
+    handlePage($event: PageEvent) {
+        const {pageIndex} = $event;
+        console.log(pageIndex);
+        this.store.dispatch(new GetSights(10, pageIndex * 10));
     }
 }
