@@ -27,15 +27,20 @@ export class SightsState {
     }
 
     @Selector()
+    static selectTotal(state: SightsStateModel) {
+        return state.total;
+    }
+
+    @Selector()
     static selectIsLoading(state: SightsStateModel) {
         return state.isLoading;
     }
 
     @Action(GetSights)
-    getSights(ctx: StateContext<SightsStateModel>) {
+    getSights(ctx: StateContext<SightsStateModel>, {limit, offset}: GetSights) {
         ctx.patchState({isLoading: true});
         try {
-            return this.sightService.getSights(10, 0).pipe(
+            return this.sightService.getSights(limit, offset).pipe(
                 tap((sights) =>
                     ctx.patchState({
                         sights: sights.data,
@@ -54,6 +59,6 @@ export class SightsState {
 
     @Action(GetSightsFailure)
     getSightsFailure() {
-        console.log('pizda');
+        console.log('something happened wrong');
     }
 }

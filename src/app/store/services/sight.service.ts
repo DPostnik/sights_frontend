@@ -18,7 +18,7 @@ export class SightService {
 
     getSights(limit: number, offset: number): Observable<SightDto> {
         return this.http.get<SightDto>(
-            `${this.prefix}sight?_limit=${limit}&_offset=${offset}`,
+            `${this.prefix}sight?limit=${limit}&offset=${offset}`,
         );
     }
 }
