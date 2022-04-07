@@ -1,14 +1,10 @@
 <div class="container">
-    <ya-map
-        [center]="[longitude, latitude]"
-        [zoom]="13"
-        [state]="{controls: []}"
+  <ya-map [center]="[longitude, latitude]" [zoom]="13" [state]="{controls: []}">
+    <ya-placemark
+      *ngFor="let item of data"
+      [properties]="{balloonContent: item.balloonContent}"
+      [geometry]="[item.longitude, item.latitude]"
     >
-        <ya-placemark
-            *ngFor="let item of data; let index = index"
-            [properties]="{balloonContent: item.balloonContent}"
-            [geometry]="[item.longitude, item.latitude]"
-        >
-        </ya-placemark>
-    </ya-map>
+    </ya-placemark>
+  </ya-map>
 </div>
