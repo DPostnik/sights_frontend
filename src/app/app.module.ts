@@ -12,28 +12,27 @@ import {AppComponent} from './app.component';
 import {NotFoundComponent} from './pages/not-found/not-found.component';
 import {AdminPageComponent} from './pages/admin/admin-page/admin-page.component';
 import {environment} from '../environments/environment';
-import {TestService} from './store/services/test.service';
-import {TestState} from './store/states/test.state';
 import {MainModule} from './pages/main/main.module';
 import {SightsState} from './store/states/sights.state';
 import {SightService} from './store/services/sight.service';
+import {AppState} from './store/states/app.state';
 
 @NgModule({
-    declarations: [AppComponent, AdminPageComponent, NotFoundComponent],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        BrowserAnimationsModule,
-        NgxsModule.forRoot([TestState, SightsState], {
-            developmentMode: !environment.production,
-        }),
-        AdminModule,
-        AuthModule,
-        SharedModule,
-        MainModule,
-    ],
-    providers: [TestService, SightService],
-    exports: [],
-    bootstrap: [AppComponent],
+  declarations: [AppComponent, AdminPageComponent, NotFoundComponent],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    NgxsModule.forRoot([AppState, SightsState], {
+      developmentMode: !environment.production,
+    }),
+    AdminModule,
+    AuthModule,
+    SharedModule,
+    MainModule,
+  ],
+  providers: [SightService],
+  exports: [],
+  bootstrap: [AppComponent],
 })
 export class AppModule {}

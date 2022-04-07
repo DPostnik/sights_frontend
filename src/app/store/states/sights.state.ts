@@ -1,64 +1,59 @@
 import {Action, Selector, State, StateContext} from '@ngxs/store';
-import {SightsStateModel} from '../models/test.model';
 import {Injectable} from '@angular/core';
+import {catchError, EMPTY, finalize, switchMap, tap} from 'rxjs';
 import {SightService} from '../services/sight.service';
-import {switchMap, tap} from 'rxjs';
 import {
-    GetSights,
-    GetSightsFailure,
-    GetSightsSuccess,
+  GetSights,
+  GetSightsFailure,
+  GetSightsSuccess,
 } from '../actions/sights.actions';
+import {SightsStateModel} from '../models/sights.model';
+import {SetLoading} from '../actions/app.actions';
 
 @State<SightsStateModel>({
-    name: 'sightsState',
-    defaults: {
-        isLoading: false,
-        sights: [],
-        total: 0,
-    },
+  name: 'sightsState',
+  defaults: {
+    data: [],
+    total: 0,
+  },
 })
 @Injectable()
 export class SightsState {
-    constructor(private sightService: SightService) {}
+  constructor(private sightService: SightService) {}
 
-    @Selector()
-    static selectSights(state: SightsStateModel) {
-        return state.sights;
-    }
+  @Selector()
+  static selectData(state: SightsStateModel) {
+    return state.data;
+  }
 
-    @Selector()
-    static selectTotal(state: SightsStateModel) {
-        return state.total;
-    }
+  @Selector()
+  static selectTotal(state: SightsStateModel) {
+    return state.total;
+  }
 
-    @Selector()
-    static selectIsLoading(state: SightsStateModel) {
-        return state.isLoading;
-    }
+  @Action(GetSights)
+  getSights(ctx: StateContext<SightsStateModel>, {limit, offset}: GetSights) {
+    ctx.dispatch(new SetLoading(true));
+    return this.sightService.getSights(limit, offset).pipe(
+      tap(() => ctx.dispatch(new SetLoading(true))),
+      tap((sights) =>
+        ctx.patchState({
+          data: sights.data,
+          total: sights.total,
+        }),
+      ),
+      switchMap(() => ctx.dispatch(GetSightsSuccess)),
+      finalize(() => ctx.dispatch(new SetLoading(false))),
+      catchError((e) => {
+        ctx.dispatch(GetSightsFailure);
+        console.error(e);
+        return EMPTY;
+      }),
+    );
+  }
 
-    @Action(GetSights)
-    getSights(ctx: StateContext<SightsStateModel>, {limit, offset}: GetSights) {
-        ctx.patchState({isLoading: true});
-        try {
-            return this.sightService.getSights(limit, offset).pipe(
-                tap((sights) =>
-                    ctx.patchState({
-                        sights: sights.data,
-                        total: sights.total,
-                    }),
-                ),
-                switchMap(() => ctx.dispatch(GetSightsSuccess)),
-            );
-        } catch (e) {
-            ctx.dispatch(GetSightsFailure);
-        } finally {
-            ctx.patchState({isLoading: false});
-        }
-        return;
-    }
-
-    @Action(GetSightsFailure)
-    getSightsFailure() {
-        console.log('something happened wrong');
-    }
+  @Action(GetSightsFailure)
+  getSightsFailure(ctx: StateContext<SightsStateModel>) {
+    ctx.patchState({data: [], total: 0});
+  }
 }

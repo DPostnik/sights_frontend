@@ -1,57 +1,48 @@
 import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {Select, Store} from '@ngxs/store';
-import {GetTests} from '../../../store/actions/test.actions';
-import {GetSights} from '../../../store/actions/sights.actions';
-import {SightsState} from '../../../store/states/sights.state';
-import {Observable, Subscription} from 'rxjs';
-import {SightModel} from '../../../store/models/test.model';
 import {MatTable, MatTableDataSource} from '@angular/material/table';
 import {PageEvent} from '@angular/material/paginator';
+import {Select, Store} from '@ngxs/store';
+import {Observable, Subscription} from 'rxjs';
+import {GetSights} from '../../../store/actions/sights.actions';
+import {SightsState} from '../../../store/states/sights.state';
+import {ISight} from '../../../store/models/sights.model';
 
 @Component({
-    selector: 'app-sights-list',
-    templateUrl: './sights-list.component.html',
-    styleUrls: ['./sights-list.component.scss'],
+  selector: 'app-sights-list',
+  templateUrl: './sights-list.component.html',
+  styleUrls: ['./sights-list.component.scss'],
 })
 export class SightsListComponent implements OnInit, OnDestroy {
-    @ViewChild('table1', {static: false}) table?: MatTable<SightModel>;
+  @ViewChild('table1', {static: false}) table?: MatTable<ISight>;
 
-    @Select(SightsState.selectSights) sights$?: Observable<SightModel[]>;
-    sub?: Subscription;
+  @Select(SightsState.selectData) sights$!: Observable<ISight[]>;
+  @Select(SightsState.selectTotal) total$!: Observable<number>;
 
-    @Select(SightsState.selectTotal) total$?: Observable<number>;
-    sub1?: Subscription;
-    total?: number;
+  total?: number;
+  currentPage?: number;
+  displayedColumns = ['city', 'founder', 'name', 'date', 'coordinates'];
+  dataSource?: MatTableDataSource<ISight>;
 
-    currentPage?: number;
+  subscriptions: Subscription[] = [];
 
-    displayedColumns = ['city', 'founder', 'name', 'date', 'coordinates'];
-    dataSource?: MatTableDataSource<SightModel>;
+  constructor(private store: Store) {}
 
-    constructor(private store: Store) {}
+  ngOnInit(): void {
+    this.store.dispatch(new GetSights(10, 0));
 
-    onClick() {
-        this.store.dispatch(new GetTests(1000));
-    }
+    this.subscriptions.push(
+      this.sights$.subscribe((sights) => {
+        this.dataSource = new MatTableDataSource<ISight>(sights);
+      }),
+      this.total$.subscribe((total) => (this.total = total)),
+    );
+  }
 
-    ngOnInit(): void {
-        this.store.dispatch(new GetSights(10, 0));
-        this.sub = this.sights$?.subscribe((sights) => {
-            this.dataSource = new MatTableDataSource<SightModel>(sights);
-        });
-        this.sub1 = this.total$?.subscribe((total) => {
-            this.total = total;
-        });
-    }
+  ngOnDestroy() {
+    this.subscriptions.forEach((s) => s.unsubscribe());
+  }
 
-    ngOnDestroy() {
-        this.sub?.unsubscribe();
-        this.sub1?.unsubscribe();
-    }
-
-    handlePage($event: PageEvent) {
-        const {pageIndex} = $event;
-        console.log(pageIndex);
-        this.store.dispatch(new GetSights(10, pageIndex * 10));
-    }
+  handlePage($event: PageEvent) {
+    this.store.dispatch(new GetSights(10, $event.pageIndex * 10));
+  }
 }
