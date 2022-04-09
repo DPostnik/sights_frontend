@@ -1,9 +1,9 @@
-@import 'src/assets/styles/global';
+@import 'src/assets/styles/theme';
 
 .not-found-container {
   justify-content: center;
   align-items: center;
-  color: $tertiary-color;
+  color: $accent-color-lighter;
   text-shadow: 0 0 15px black;
 
   .error {
@@ -23,13 +23,13 @@
   }
 
   .link {
-    color: $accent-color;
+    color: $accent-color-light;
     letter-spacing: 1.5px;
     font-size: 30px;
     font-weight: bold;
     margin-bottom: 20px;
     cursor: pointer;
-    border-bottom: $accent-color 2px solid;
+    border-bottom: $accent-color-light 2px solid;
   }
 }
 

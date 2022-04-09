@@ -1,7 +1,12 @@
-.container {
-  width: 100%;
+.cards-container {
 
-  table {
-    width: 100%;
+  .card-list {
+    flex-wrap: wrap;
+    justify-content: space-around;
+
+    .card {
+      width: 20%;
+      margin: 20px;
+    }
   }
 }

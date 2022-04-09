@@ -1,6 +1,6 @@
 import {Action, Selector, State, StateContext} from '@ngxs/store';
 import {Injectable} from '@angular/core';
-import {SetLoading} from '../actions/app.actions';
+import {EndLoading, StartLoading} from '../actions/app.actions';
 import {AppStateModel} from '../models/app.model';
 
 @State<AppStateModel>({
@@ -16,8 +16,13 @@ export class AppState {
     return state.isLoading;
   }
 
-  @Action(SetLoading)
-  setLoading(ctx: StateContext<AppStateModel>, {isLoading}: SetLoading) {
-    ctx.patchState({isLoading});
+  @Action(StartLoading)
+  startLoading(ctx: StateContext<AppStateModel>) {
+    ctx.patchState({isLoading: true});
+  }
+
+  @Action(EndLoading)
+  endLoading(ctx: StateContext<AppStateModel>) {
+    ctx.patchState({isLoading: false});
   }
 }

@@ -1,0 +1,30 @@
+@use '@angular/material' as mat;
+
+@include mat.core();
+
+$primary-palette: mat.define-palette(mat.$blue-grey-palette, 900);
+$accent-palette: mat.define-palette(mat.$teal-palette, A200, A100, A400);
+$warn-palette: mat.define-palette(mat.$red-palette);
+
+$theme: mat.define-dark-theme($primary-palette, $accent-palette, $warn-palette);
+
+$bg-color: mat.get-color-from-palette(mat.$blue-grey-palette, 900);
+$background: map_merge(map-get($theme, background), (background: $bg-color, card: $bg-color, dialog: $bg-color));
+
+$theme: map-merge($theme, (background: $background));
+
+@include mat.all-component-themes($theme);
+
+$primary-color: mat.get-color-from-palette($primary-palette, 500);
+$primary-color-darker: mat.get-color-from-palette($primary-palette, 900);
+$primary-color-lighter: mat.get-color-from-palette($primary-palette, 100);
+
+$accent-color: mat.get-color-from-palette($accent-palette, 500);
+$accent-color-darker: mat.get-color-from-palette($accent-palette, 700);
+$accent-color-lighter: mat.get-color-from-palette($accent-palette, 100);
+$accent-color-light: mat.get-color-from-palette($accent-palette, 200);
+
+$warn-color: mat.get-color-from-palette($warn-palette);
+
+$white: white;
+$black: black;

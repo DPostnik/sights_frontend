@@ -1,5 +1,7 @@
-export class SetLoading {
-  static readonly type = '[App] SetLoading';
+export class StartLoading {
+  static readonly type = '[App] StartLoading';
+}
 
-  constructor(public isLoading: boolean) {}
+export class EndLoading {
+  static readonly type = '[App] EndLoading';
 }
