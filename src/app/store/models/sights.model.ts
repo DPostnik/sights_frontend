@@ -1,6 +1,8 @@
 import {PaginatedList} from '../../model/pagination';
 
-export interface SightsStateModel extends PaginatedList<ISight> {}
+export interface SightsStateModel extends PaginatedList<ISight> {
+  selectedSight?: ISight;
+}
 
 export interface ISight {
   categories: string[];
