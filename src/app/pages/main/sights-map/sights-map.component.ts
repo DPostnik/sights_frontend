@@ -16,4 +16,8 @@ export class SightsMapComponent implements OnInit {
   ngOnInit() {
     this.data = getPlaceMarks();
   }
+
+  onPlaceMarkClick() {
+    // todo открыть страницу
+  }
 }

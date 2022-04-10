@@ -1,23 +1,29 @@
-<mat-toolbar>
+<mat-toolbar color="primary">
   <div class="header__content">
     <div class="header__title">
       <a routerLink="home">
-        <img src="assets/img/header/logo.svg"
-             alt=""/>
+        <img src="assets/img/header/logo.svg" alt="" />
       </a>
     </div>
 
     <div class="header__tabs">
-      <span><a routerLink="home" routerLinkActive="active-link">Главная</a></span>
+      <span
+        ><a routerLink="home" routerLinkActive="active-link">Главная</a></span
+      >
       <span><a routerLink="map" routerLinkActive="active-link">Карта</a></span>
-      <span><a routerLink="list" routerLinkActive="active-link">Список объектов</a></span>
+      <span
+        ><a routerLink="list" routerLinkActive="active-link"
+          >Список объектов</a
+        ></span
+      >
     </div>
-
   </div>
 
   <div class="user-info">
     <mat-icon class="user-info__person-icon">person</mat-icon>
-    <span>{{userName}}</span>
-    <mat-icon (click)="logout()" class="user-info__logout-icon">logout</mat-icon>
+    <span>{{ userName }}</span>
+    <mat-icon (click)="logout()" class="user-info__logout-icon"
+      >logout</mat-icon
+    >
   </div>
 </mat-toolbar>

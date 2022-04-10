@@ -2,9 +2,8 @@
   <ya-map [center]="[longitude, latitude]" [zoom]="13" [state]="{controls: []}">
     <ya-placemark
       *ngFor="let item of data"
-      [properties]="{balloonContent: item.balloonContent}"
+      (yaclick)="onPlaceMarkClick()"
       [geometry]="[item.longitude, item.latitude]"
-    >
-    </ya-placemark>
+    ></ya-placemark>
   </ya-map>
 </div>

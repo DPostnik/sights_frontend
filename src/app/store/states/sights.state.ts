@@ -8,7 +8,7 @@ import {
   GetSightsSuccess,
 } from '../actions/sights.actions';
 import {SightsStateModel} from '../models/sights.model';
-import {SetLoading} from '../actions/app.actions';
+import {EndLoading, StartLoading} from '../actions/app.actions';
 
 @State<SightsStateModel>({
   name: 'sightsState',
@@ -33,9 +33,8 @@ export class SightsState {
 
   @Action(GetSights)
   getSights(ctx: StateContext<SightsStateModel>, {limit, offset}: GetSights) {
-    ctx.dispatch(new SetLoading(true));
+    ctx.dispatch(StartLoading);
     return this.sightService.getSights(limit, offset).pipe(
-      tap(() => ctx.dispatch(new SetLoading(true))),
       tap((sights) =>
         ctx.patchState({
           data: sights.data,
@@ -43,10 +42,11 @@ export class SightsState {
         }),
       ),
       switchMap(() => ctx.dispatch(GetSightsSuccess)),
-      finalize(() => ctx.dispatch(new SetLoading(false))),
+      finalize(() => ctx.dispatch(EndLoading)),
       catchError((e) => {
         ctx.dispatch(GetSightsFailure);
-        console.error(e);
+        console.error('getSights error', e);
+        // todo notifier/push
         return EMPTY;
       }),
     );

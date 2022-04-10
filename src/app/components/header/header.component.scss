@@ -1,10 +1,10 @@
-@import 'src/assets/styles/global';
+@import 'src/assets/styles/theme';
 
 .mat-toolbar {
   display: flex;
   justify-content: space-between;
   padding: 8px 30px;
-  background: $primary-color;
+  background: $primary-color-darker;
 
   .header__content {
     display: flex;
@@ -22,7 +22,7 @@
 
     .header__tabs {
       font-size: 20px;
-      color: $tertiary-color;
+      color: $white;
       display: flex;
       align-items: center;
 
@@ -32,12 +32,16 @@
 
       a {
         text-decoration: none;
-        color: $tertiary-color;
+        color: $white;
         letter-spacing: 0.5px;
+
+        &:hover {
+          color: $accent-color-lighter;
+        }
       }
 
       .active-link {
-        color: $accent-color;
+        color: $accent-color-light;
         font-weight: 500;
       }
     }
@@ -51,24 +55,24 @@
 
     .user-info__person-icon {
       font-size: 24px;
-      background-color: $accent-color;
+      background-color: $white;
       border-radius: 20%;
-      padding: 7px;
+      padding: 5px;
       margin-right: 10px;
-      color: $tertiary-color;
+      color: $primary-color-darker;
     }
 
     .user-info__logout-icon {
       font-size: 24px;
       margin-left: 10px;
-      color: $tertiary-color;
+      color: $white;
       padding: 10px;
       border-radius: 50%;
       opacity: 0.7;
       transition: all .3s;
 
       &:hover {
-        background-color: $accent-color;
+        background-color: $accent-color-light;
       }
     }
 
@@ -78,7 +82,7 @@
   }
 
   span {
-    color: $tertiary-color;
+    color: $white;
 
     &:hover {
       cursor: pointer;

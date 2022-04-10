@@ -1,5 +1,4 @@
-import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {MatTable, MatTableDataSource} from '@angular/material/table';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {PageEvent} from '@angular/material/paginator';
 import {Select, Store} from '@ngxs/store';
 import {Observable, Subscription} from 'rxjs';
@@ -13,15 +12,12 @@ import {ISight} from '../../../store/models/sights.model';
   styleUrls: ['./sights-list.component.scss'],
 })
 export class SightsListComponent implements OnInit, OnDestroy {
-  @ViewChild('table1', {static: false}) table?: MatTable<ISight>;
-
   @Select(SightsState.selectData) sights$!: Observable<ISight[]>;
   @Select(SightsState.selectTotal) total$!: Observable<number>;
 
   total?: number;
   currentPage?: number;
-  displayedColumns = ['city', 'founder', 'name', 'date', 'coordinates'];
-  dataSource?: MatTableDataSource<ISight>;
+  data: ISight[] = [];
 
   subscriptions: Subscription[] = [];
 
@@ -31,9 +27,7 @@ export class SightsListComponent implements OnInit, OnDestroy {
     this.store.dispatch(new GetSights(10, 0));
 
     this.subscriptions.push(
-      this.sights$.subscribe((sights) => {
-        this.dataSource = new MatTableDataSource<ISight>(sights);
-      }),
+      this.sights$.subscribe((sights) => (this.data = sights)),
       this.total$.subscribe((total) => (this.total = total)),
     );
   }

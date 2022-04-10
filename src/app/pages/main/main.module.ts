@@ -10,21 +10,21 @@ import {FooterComponent} from '../../components/footer/footer.component';
 import {SharedModule} from '../../shared/shared.module';
 
 const mapConfig: YaConfig = {
-    apikey: environment.yaKey,
-    lang: 'ru_RU',
+  apikey: environment.yaKey,
+  lang: 'ru_RU',
 };
 
 @NgModule({
-    imports: [AngularYandexMapsModule.forRoot(mapConfig), SharedModule],
-    declarations: [
-        MainLayoutComponent,
-        HomeComponent,
-        SightsMapComponent,
-        SightsListComponent,
-        HeaderComponent,
-        FooterComponent,
-    ],
-    exports: [],
-    providers: [],
+  imports: [AngularYandexMapsModule.forRoot(mapConfig), SharedModule],
+  declarations: [
+    MainLayoutComponent,
+    HomeComponent,
+    SightsMapComponent,
+    SightsListComponent,
+    HeaderComponent,
+    FooterComponent,
+  ],
+  exports: [],
+  providers: [],
 })
 export class MainModule {}
