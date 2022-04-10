@@ -1,0 +1,19 @@
+<div class="container" *ngIf="sight">
+  <h2>{{ sight.name }}</h2>
+  <div>
+    Категории:
+    <span *ngFor="let tag of sight.categories" class="tag">{{ tag }}</span>
+  </div>
+  <p>{{ sight.description }}</p>
+  <p>{{ sight.country }}, {{ sight.region }}, {{ sight.city }}</p>
+  <p>Основатель: {{ sight.founder }}</p>
+  <p>Дата основания: {{ sight.date | date: 'longDate' }}</p>
+  <div>
+    <mat-icon>star</mat-icon>
+    {{ sight.rating }}
+  </div>
+</div>
+
+<div *ngIf="!sight">Объект не найден</div>
+
+<button (click)="handleReturnClick()">Назад</button>

@@ -4,7 +4,11 @@
 
 <div class="cards-container" *ngIf="data.length; else elseBlock">
   <div class="card-list flex-center">
-    <mat-card class="card" *ngFor="let card of data">
+    <mat-card
+      class="card pointer"
+      *ngFor="let card of data"
+      (click)="onCardClick(card)"
+    >
       <mat-card-header>
         <mat-card-title>{{ card.name }}</mat-card-title>
       </mat-card-header>

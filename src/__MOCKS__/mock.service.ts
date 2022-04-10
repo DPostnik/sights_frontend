@@ -1,6 +1,7 @@
-import {SightsStateModel} from '../app/store/models/sights.model';
+import {ISight} from '../app/store/models/sights.model';
 import {PlaceMark} from '../app/model/placeMark';
-import {Observable, of} from 'rxjs';
+import {delay, Observable, of} from 'rxjs';
+import {PaginatedList} from '../app/model/pagination';
 
 export const getPlaceMarks = (): PlaceMark[] => [
   {
@@ -15,7 +16,38 @@ export const getPlaceMarks = (): PlaceMark[] => [
   },
 ];
 
-export const getSights = (): Observable<SightsStateModel> => {
+export const getSight = (): Observable<ISight> => {
+  return of({
+    name: 'mac',
+    description: '',
+    date: new Date(),
+    founder: 'Иванушка Пудель',
+    mainImage:
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/7/72/Anser_anser_2_%28Piotr_Kuczynski%29.jpg/1200px-Anser_anser_2_%28Piotr_Kuczynski%29.jpg',
+    images: [
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/7/72/Anser_anser_2_%28Piotr_Kuczynski%29.jpg/1200px-Anser_anser_2_%28Piotr_Kuczynski%29.jpg',
+    ],
+    id: 0,
+    rating: 0,
+    country: 'Беларусь',
+    region: 'Гродненская область',
+    coordinates: {
+      longitude: 17.1,
+      latitude: 18.1,
+    },
+    city: 'Гродно',
+    categories: [
+      'Норма1ль',
+      'Норм2аль',
+      'Но3рмаль',
+      'Нор4маль',
+      'Норма5ль',
+      'Н66ормаль',
+    ],
+  }).pipe(delay(1000));
+};
+
+export const getSights = (): Observable<PaginatedList<ISight>> => {
   return of({
     total: 1,
     data: [
@@ -167,5 +199,5 @@ export const getSights = (): Observable<SightsStateModel> => {
         categories: ['Нормаль'],
       },
     ],
-  });
+  }).pipe(delay(1000));
 };

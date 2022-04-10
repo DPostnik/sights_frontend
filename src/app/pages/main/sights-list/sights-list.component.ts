@@ -5,6 +5,7 @@ import {Observable, Subscription} from 'rxjs';
 import {GetSights} from '../../../store/actions/sights.actions';
 import {SightsState} from '../../../store/states/sights.state';
 import {ISight} from '../../../store/models/sights.model';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-sights-list',
@@ -21,7 +22,7 @@ export class SightsListComponent implements OnInit, OnDestroy {
 
   subscriptions: Subscription[] = [];
 
-  constructor(private store: Store) {}
+  constructor(private store: Store, private router: Router) {}
 
   ngOnInit(): void {
     this.store.dispatch(new GetSights(10, 0));
@@ -38,5 +39,9 @@ export class SightsListComponent implements OnInit, OnDestroy {
 
   handlePage($event: PageEvent) {
     this.store.dispatch(new GetSights(10, $event.pageIndex * 10));
+  }
+
+  onCardClick(sight: ISight) {
+    this.router.navigate(['sight', sight.id]).then();
   }
 }

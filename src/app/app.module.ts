@@ -1,6 +1,8 @@
-import {NgModule} from '@angular/core';
+import {LOCALE_ID, NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {registerLocaleData} from '@angular/common';
+import localeRu from '@angular/common/locales/ru';
 import {NgxsModule} from '@ngxs/store';
 
 import {AppRoutingModule} from './app-routing.module';
@@ -17,6 +19,8 @@ import {SightsState} from './store/states/sights.state';
 import {SightService} from './store/services/sight.service';
 import {AppState} from './store/states/app.state';
 
+registerLocaleData(localeRu, 'ru');
+
 @NgModule({
   declarations: [AppComponent, AdminPageComponent, NotFoundComponent],
   imports: [
@@ -31,7 +35,7 @@ import {AppState} from './store/states/app.state';
     SharedModule,
     MainModule,
   ],
-  providers: [SightService],
+  providers: [SightService, {provide: LOCALE_ID, useValue: 'ru'}],
   exports: [],
   bootstrap: [AppComponent],
 })

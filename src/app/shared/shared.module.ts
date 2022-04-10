@@ -8,6 +8,9 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {LayoutComponent} from '../components/layout/layout.component';
 import {MatCardModule} from '@angular/material/card';
+import {MatMenuModule} from '@angular/material/menu';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatOptionModule} from '@angular/material/core';
 
 @NgModule({
   declarations: [LayoutComponent],
@@ -19,6 +22,9 @@ import {MatCardModule} from '@angular/material/card';
     RouterModule,
     MatIconModule,
     MatCardModule,
+    MatProgressSpinnerModule,
+    MatMenuModule,
+    MatOptionModule,
   ],
   exports: [
     HttpClientModule,
@@ -31,6 +37,9 @@ import {MatCardModule} from '@angular/material/card';
     MatPaginatorModule,
     LayoutComponent,
     MatCardModule,
+    MatProgressSpinnerModule,
+    MatMenuModule,
+    MatOptionModule,
   ],
 })
 export class SharedModule {}

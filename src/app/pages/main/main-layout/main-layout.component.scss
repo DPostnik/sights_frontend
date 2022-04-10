@@ -1,9 +1,5 @@
-:host, .main-layout__container {
+:host {
   display: flex;
   flex-direction: column;
   min-height: 100%;
-}
-
-.main-layout__container {
-  flex-grow: 1;
 }

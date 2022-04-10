@@ -8,6 +8,8 @@ import {SightsListComponent} from './sights-list/sights-list.component';
 import {HeaderComponent} from '../../components/header/header.component';
 import {FooterComponent} from '../../components/footer/footer.component';
 import {SharedModule} from '../../shared/shared.module';
+import {SightsInfoComponent} from './sight-info/sights-info.component';
+import {LoaderComponent} from '../../components/loader/loader.component';
 
 const mapConfig: YaConfig = {
   apikey: environment.yaKey,
@@ -21,6 +23,8 @@ const mapConfig: YaConfig = {
     HomeComponent,
     SightsMapComponent,
     SightsListComponent,
+    SightsInfoComponent,
+    LoaderComponent,
     HeaderComponent,
     FooterComponent,
   ],
