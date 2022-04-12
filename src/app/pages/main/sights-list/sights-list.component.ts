@@ -44,4 +44,8 @@ export class SightsListComponent implements OnInit, OnDestroy {
   onCardClick(sight: ISight) {
     this.router.navigate(['sight', sight.id]).then();
   }
+
+  handleSearch(value: string) {
+    this.store.dispatch(new GetSights(10, 0, value));
+  }
 }

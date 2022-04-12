@@ -13,9 +13,16 @@ export class SightService {
 
   prefix = environment.apiUrl;
 
-  getSights(limit: number, offset: number): Observable<PaginatedList<ISight>> {
+  getSights(
+    limit: number,
+    offset: number,
+    search: string = '',
+  ): Observable<PaginatedList<ISight>> {
+    const limitField = limit ? `limit=${limit}` : '';
+    const offsetField = offset ? `&offset=${offset}` : '';
+    const searchField = search ? `&search=${search}` : '';
     return this.http.get<PaginatedList<ISight>>(
-      `${this.prefix}sight?limit=${limit}&offset=${offset}`,
+      `${this.prefix}sight?${limitField}${offsetField}${searchField}`,
     );
   }
 

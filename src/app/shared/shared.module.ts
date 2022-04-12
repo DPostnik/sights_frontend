@@ -11,9 +11,12 @@ import {MatCardModule} from '@angular/material/card';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatOptionModule} from '@angular/material/core';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+import {SearchComponent} from '../components/search/search.component';
 
 @NgModule({
-  declarations: [LayoutComponent],
+  declarations: [LayoutComponent, SearchComponent],
   imports: [
     HttpClientModule,
     ReactiveFormsModule,
@@ -25,6 +28,8 @@ import {MatOptionModule} from '@angular/material/core';
     MatProgressSpinnerModule,
     MatMenuModule,
     MatOptionModule,
+    MatFormFieldModule,
+    MatInputModule,
   ],
   exports: [
     HttpClientModule,
@@ -40,6 +45,9 @@ import {MatOptionModule} from '@angular/material/core';
     MatProgressSpinnerModule,
     MatMenuModule,
     MatOptionModule,
+    MatFormFieldModule,
+    MatInputModule,
+    SearchComponent,
   ],
 })
 export class SharedModule {}

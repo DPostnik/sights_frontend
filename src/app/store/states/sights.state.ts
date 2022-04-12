@@ -41,9 +41,12 @@ export class SightsState {
   }
 
   @Action(GetSights)
-  getSights(ctx: StateContext<SightsStateModel>, {limit, offset}: GetSights) {
+  getSights(
+    ctx: StateContext<SightsStateModel>,
+    {limit, offset, search}: GetSights,
+  ) {
     ctx.dispatch(StartLoading);
-    return this.sightService.getSights(limit, offset).pipe(
+    return this.sightService.getSights(limit, offset, search).pipe(
       //return getSights().pipe(
       switchMap((sights) => ctx.dispatch(new GetSightsSuccess(sights))),
       finalize(() => ctx.dispatch(EndLoading)),
