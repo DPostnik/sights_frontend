@@ -5,7 +5,10 @@
     <span *ngFor="let tag of sight.categories" class="tag">{{ tag }}</span>
   </div>
   <p>{{ sight.description }}</p>
-  <p>{{ sight.country }}, {{ sight.region }}, {{ sight.city }}</p>
+  <p>
+    {{ sight.location.country }}, {{ sight.location.region }},
+    {{ sight.location.city }}
+  </p>
   <p>Основатель: {{ sight.founder }}</p>
   <p>Дата основания: {{ sight.date | date: 'longDate' }}</p>
   <div>
