@@ -2,9 +2,9 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {PageEvent} from '@angular/material/paginator';
 import {Select, Store} from '@ngxs/store';
 import {Observable, Subscription} from 'rxjs';
-import {GetSights} from '../../../store/actions/sights.actions';
-import {SightsState} from '../../../store/states/sights.state';
-import {ISight} from '../../../store/models/sights.model';
+import {GetSights} from '@store/actions/sights.actions';
+import {SightsState} from '@store/states/sights.state';
+import {Sight} from '@store/models/sights.model';
 import {Router} from '@angular/router';
 
 @Component({
@@ -13,12 +13,12 @@ import {Router} from '@angular/router';
   styleUrls: ['./sights-list.component.scss'],
 })
 export class SightsListComponent implements OnInit, OnDestroy {
-  @Select(SightsState.selectData) sights$!: Observable<ISight[]>;
+  @Select(SightsState.selectData) sights$!: Observable<Sight[]>;
   @Select(SightsState.selectTotal) total$!: Observable<number>;
 
   total?: number;
   currentPage?: number;
-  data: ISight[] = [];
+  data: Sight[] = [];
 
   subscriptions: Subscription[] = [];
 
@@ -41,7 +41,7 @@ export class SightsListComponent implements OnInit, OnDestroy {
     this.store.dispatch(new GetSights(10, $event.pageIndex * 10));
   }
 
-  onCardClick(sight: ISight) {
+  onCardClick(sight: Sight) {
     this.router.navigate(['sight', sight.id]).then();
   }
 

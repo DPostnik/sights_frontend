@@ -6,14 +6,14 @@ import {RouterModule} from '@angular/router';
 import {MatIconModule} from '@angular/material/icon';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatPaginatorModule} from '@angular/material/paginator';
-import {LayoutComponent} from '../components/layout/layout.component';
+import {LayoutComponent} from '@components/layout/layout.component';
 import {MatCardModule} from '@angular/material/card';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatOptionModule} from '@angular/material/core';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
-import {SearchComponent} from '../components/search/search.component';
+import {SearchComponent} from '@components/search/search.component';
 
 @NgModule({
   declarations: [LayoutComponent, SearchComponent],
