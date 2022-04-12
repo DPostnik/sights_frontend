@@ -6,9 +6,12 @@ export interface SightsStateModel extends PaginatedList<ISight> {
 
 export interface ISight {
   categories: string[];
-  city: string;
   coordinates: ICoordinates;
-  country: string;
+  location: {
+    country: string;
+    region: string;
+    city: string;
+  };
   date: Date;
   description: string;
   founder: string;
@@ -17,7 +20,6 @@ export interface ISight {
   mainImage: string;
   name: string;
   rating: number;
-  region: string;
 }
 
 export interface ICoordinates {

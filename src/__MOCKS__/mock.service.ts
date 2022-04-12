@@ -29,13 +29,15 @@ export const getSight = (): Observable<ISight> => {
     ],
     id: 0,
     rating: 0,
-    country: 'Беларусь',
-    region: 'Гродненская область',
+    location: {
+      country: 'Беларусь',
+      region: 'Регион',
+      city: 'Гродно',
+    },
     coordinates: {
       longitude: 17.1,
       latitude: 18.1,
     },
-    city: 'Гродно',
     categories: [
       'Норма1ль',
       'Норм2аль',
@@ -63,13 +65,15 @@ export const getSights = (): Observable<PaginatedList<ISight>> => {
         ],
         id: 0,
         rating: 0,
-        country: 'Беларусь',
-        region: 'Регион',
+        location: {
+          country: 'Беларусь',
+          region: 'Регион',
+          city: 'Гродно',
+        },
         coordinates: {
           longitude: 17.1,
           latitude: 18.1,
         },
-        city: 'Гродно',
         categories: ['Нормаль'],
       },
       {
@@ -84,13 +88,15 @@ export const getSights = (): Observable<PaginatedList<ISight>> => {
         ],
         id: 0,
         rating: 0,
-        country: 'Беларусь',
-        region: 'Регион',
+        location: {
+          country: 'Беларусь',
+          region: 'Регион',
+          city: 'Гродно',
+        },
         coordinates: {
           longitude: 17.1,
           latitude: 18.1,
         },
-        city: 'Гродно',
         categories: ['Нормаль'],
       },
       {
@@ -105,13 +111,15 @@ export const getSights = (): Observable<PaginatedList<ISight>> => {
         ],
         id: 0,
         rating: 0,
-        country: 'Беларусь',
-        region: 'Регион',
+        location: {
+          country: 'Беларусь',
+          region: 'Регион',
+          city: 'Гродно',
+        },
         coordinates: {
           longitude: 17.1,
           latitude: 18.1,
         },
-        city: 'Гродно',
         categories: ['Нормаль'],
       },
       {
@@ -126,13 +134,15 @@ export const getSights = (): Observable<PaginatedList<ISight>> => {
         ],
         id: 0,
         rating: 0,
-        country: 'Беларусь',
-        region: 'Регион',
+        location: {
+          country: 'Беларусь',
+          region: 'Регион',
+          city: 'Гродно',
+        },
         coordinates: {
           longitude: 17.1,
           latitude: 18.1,
         },
-        city: 'Гродно',
         categories: ['Нормаль'],
       },
       {
@@ -147,13 +157,15 @@ export const getSights = (): Observable<PaginatedList<ISight>> => {
         ],
         id: 0,
         rating: 0,
-        country: 'Беларусь',
-        region: 'Регион',
+        location: {
+          country: 'Беларусь',
+          region: 'Регион',
+          city: 'Гродно',
+        },
         coordinates: {
           longitude: 17.1,
           latitude: 18.1,
         },
-        city: 'Гродно',
         categories: ['Нормаль'],
       },
       {
@@ -168,13 +180,15 @@ export const getSights = (): Observable<PaginatedList<ISight>> => {
         ],
         id: 0,
         rating: 0,
-        country: 'Беларусь',
-        region: 'Регион',
+        location: {
+          country: 'Беларусь',
+          region: 'Регион',
+          city: 'Гродно',
+        },
         coordinates: {
           longitude: 17.1,
           latitude: 18.1,
         },
-        city: 'Гродно',
         categories: ['Нормаль'],
       },
       {
@@ -189,13 +203,15 @@ export const getSights = (): Observable<PaginatedList<ISight>> => {
         ],
         id: 0,
         rating: 0,
-        country: 'Беларусь',
-        region: 'Регион',
+        location: {
+          country: 'Беларусь',
+          region: 'Регион',
+          city: 'Гродно',
+        },
         coordinates: {
           longitude: 17.1,
           latitude: 18.1,
         },
-        city: 'Гродно',
         categories: ['Нормаль'],
       },
     ],
