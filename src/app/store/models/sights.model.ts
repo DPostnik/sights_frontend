@@ -1,14 +1,18 @@
-import {PaginatedList} from '../../model/pagination';
+import {PaginatedList} from '@model/pagination';
+import {Coordinates} from '@model/coordinates';
 
-export interface SightsStateModel extends PaginatedList<ISight> {
-  selectedSight?: ISight;
+export interface SightsStateModel extends PaginatedList<Sight> {
+  selectedSight?: Sight;
 }
 
-export interface ISight {
+export interface Sight {
+  location: {
+    country: string;
+    region: string;
+    city: string;
+  };
   categories: string[];
-  city: string;
-  coordinates: ICoordinates;
-  country: string;
+  coordinates: Coordinates;
   date: Date;
   description: string;
   founder: string;
@@ -17,10 +21,4 @@ export interface ISight {
   mainImage: string;
   name: string;
   rating: number;
-  region: string;
-}
-
-export interface ICoordinates {
-  longitude: number;
-  latitude: number;
 }

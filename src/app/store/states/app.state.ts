@@ -1,7 +1,7 @@
 import {Action, Selector, State, StateContext} from '@ngxs/store';
 import {Injectable} from '@angular/core';
-import {EndLoading, StartLoading} from '../actions/app.actions';
-import {AppStateModel} from '../models/app.model';
+import {EndLoading, StartLoading} from '@store/actions/app.actions';
+import {AppStateModel} from '@store/models/app.model';
 
 @State<AppStateModel>({
   name: 'appState',

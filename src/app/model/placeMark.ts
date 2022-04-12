@@ -1,5 +1,7 @@
-export interface PlaceMark {
-  longitude: number;
-  latitude: number;
+import {Coordinates} from '@model/coordinates';
+
+export interface PlaceMark extends Coordinates {
+  id: number;
   iconColor: string;
+  name: string;
 }

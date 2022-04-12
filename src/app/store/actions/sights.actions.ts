@@ -1,5 +1,5 @@
-import {PaginatedList} from 'src/app/model/pagination';
-import {ISight} from '../models/sights.model';
+import {Sight} from '@store/models/sights.model';
+import {PaginatedList} from '@model/pagination';
 
 export class GetSights {
   static readonly type = '[Sights] GetSights';
@@ -7,10 +7,16 @@ export class GetSights {
   constructor(public limit: number, public offset: number) {}
 }
 
+export class GetAllSights {
+  static readonly type = '[Sights] GetAllSights';
+
+  constructor(public limit: number, public offset: number) {}
+}
+
 export class GetSightsSuccess {
   static readonly type = '[Sights] GetSightsSuccess';
 
-  constructor(public sights: PaginatedList<ISight>) {}
+  constructor(public sights: PaginatedList<Sight>) {}
 }
 
 export class GetSightsFailure {
@@ -26,7 +32,7 @@ export class GetSight {
 export class GetSightSuccess {
   static readonly type = '[Sights] GetSightSuccess';
 
-  constructor(public sight: ISight) {}
+  constructor(public sight: Sight) {}
 }
 
 export class GetSightFailure {

@@ -3,9 +3,9 @@ import {ActivatedRoute} from '@angular/router';
 import {Location} from '@angular/common';
 import {Select, Store} from '@ngxs/store';
 import {Observable, Subscription} from 'rxjs';
-import {GetSight} from '../../../store/actions/sights.actions';
-import {SightsState} from '../../../store/states/sights.state';
-import {ISight} from '../../../store/models/sights.model';
+import {GetSight} from '@store/actions/sights.actions';
+import {SightsState} from '@store/states/sights.state';
+import {Sight} from '@store/models/sights.model';
 
 @Component({
   selector: 'app-sights-info',
@@ -13,9 +13,9 @@ import {ISight} from '../../../store/models/sights.model';
   styleUrls: ['./sights-info.component.scss'],
 })
 export class SightsInfoComponent implements OnInit, OnDestroy {
-  @Select(SightsState.selectSight) sight$!: Observable<ISight>;
+  @Select(SightsState.selectSight) sight$!: Observable<Sight>;
 
-  sight?: ISight;
+  sight?: Sight;
 
   subscriptions: Subscription[] = [];
 

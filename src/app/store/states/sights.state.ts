@@ -1,17 +1,19 @@
 import {Action, Selector, State, StateContext} from '@ngxs/store';
 import {Injectable} from '@angular/core';
 import {catchError, EMPTY, finalize, switchMap} from 'rxjs';
-import {SightService} from '../services/sight.service';
+import {SightService} from '@store/services/sight.service';
 import {
+  GetAllSights,
   GetSight,
   GetSightFailure,
   GetSights,
   GetSightsFailure,
   GetSightsSuccess,
   GetSightSuccess,
-} from '../actions/sights.actions';
-import {SightsStateModel} from '../models/sights.model';
-import {EndLoading, StartLoading} from '../actions/app.actions';
+} from '@store/actions/sights.actions';
+import {SightsStateModel} from '@store/models/sights.model';
+import {EndLoading, StartLoading} from '@store/actions/app.actions';
+import {getSights} from '@MOCKS/mock.service';
 
 @State<SightsStateModel>({
   name: 'sightsState',
@@ -40,6 +42,21 @@ export class SightsState {
     return state.total;
   }
 
+  @Action(GetAllSights)
+  getAllSights(ctx: StateContext<SightsStateModel>) {
+    ctx.dispatch(StartLoading);
+    //return this.sightService.getAllSights().pipe(
+    return getSights().pipe(
+      switchMap((sights) => ctx.dispatch(new GetSightsSuccess(sights))),
+      finalize(() => ctx.dispatch(EndLoading)),
+      catchError((e) => {
+        ctx.dispatch(GetSightsFailure);
+        console.error('getAllSights error', e); // todo notifier
+        return EMPTY;
+      }),
+    );
+  }
+
   @Action(GetSights)
   getSights(ctx: StateContext<SightsStateModel>, {limit, offset}: GetSights) {
     ctx.dispatch(StartLoading);
@@ -49,7 +66,7 @@ export class SightsState {
       finalize(() => ctx.dispatch(EndLoading)),
       catchError((e) => {
         ctx.dispatch(GetSightsFailure);
-        console.error('getSights error', e);
+        console.error('getSights error', e); // todo notifier
         return EMPTY;
       }),
     );
@@ -80,7 +97,7 @@ export class SightsState {
       finalize(() => ctx.dispatch(EndLoading)),
       catchError((e) => {
         ctx.dispatch(GetSightFailure);
-        console.error('getSights error', e);
+        console.error('getSight error', e); // todo notifier
         return EMPTY;
       }),
     );
