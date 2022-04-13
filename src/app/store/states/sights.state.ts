@@ -13,7 +13,6 @@ import {
 } from '@store/actions/sights.actions';
 import {SightsStateModel} from '@store/models/sights.model';
 import {EndLoading, StartLoading} from '@store/actions/app.actions';
-import {getSights} from '@MOCKS/mock.service';
 
 @State<SightsStateModel>({
   name: 'sightsState',
@@ -45,8 +44,7 @@ export class SightsState {
   @Action(GetAllSights)
   getAllSights(ctx: StateContext<SightsStateModel>) {
     ctx.dispatch(StartLoading);
-    //return this.sightService.getAllSights().pipe(
-    return getSights().pipe(
+    return this.sightService.getAllSights().pipe(
       switchMap((sights) => ctx.dispatch(new GetSightsSuccess(sights))),
       finalize(() => ctx.dispatch(EndLoading)),
       catchError((e) => {
@@ -58,10 +56,9 @@ export class SightsState {
   }
 
   @Action(GetSights)
-  getSights(ctx: StateContext<SightsStateModel>, {limit, offset}: GetSights) {
+  getSights(ctx: StateContext<SightsStateModel>, {limit, offset, search}: GetSights) {
     ctx.dispatch(StartLoading);
-    return this.sightService.getSights(limit, offset).pipe(
-      //return getSights().pipe(
+    return this.sightService.getSights(limit, offset, search).pipe(
       switchMap((sights) => ctx.dispatch(new GetSightsSuccess(sights))),
       finalize(() => ctx.dispatch(EndLoading)),
       catchError((e) => {
@@ -73,10 +70,7 @@ export class SightsState {
   }
 
   @Action(GetSightsSuccess)
-  getSightsSuccess(
-    ctx: StateContext<SightsStateModel>,
-    {sights}: GetSightsSuccess,
-  ) {
+  getSightsSuccess(ctx: StateContext<SightsStateModel>, {sights}: GetSightsSuccess) {
     ctx.patchState({
       data: sights.data,
       total: sights.total,
@@ -92,7 +86,6 @@ export class SightsState {
   getSight(ctx: StateContext<SightsStateModel>, {id}: GetSight) {
     ctx.dispatch(StartLoading);
     return this.sightService.getSight(id).pipe(
-      //return getSight().pipe(
       switchMap((sight) => ctx.dispatch(new GetSightSuccess(sight))),
       finalize(() => ctx.dispatch(EndLoading)),
       catchError((e) => {
@@ -104,10 +97,7 @@ export class SightsState {
   }
 
   @Action(GetSightSuccess)
-  getSightSuccess(
-    ctx: StateContext<SightsStateModel>,
-    {sight}: GetSightSuccess,
-  ) {
+  getSightSuccess(ctx: StateContext<SightsStateModel>, {sight}: GetSightSuccess) {
     ctx.patchState({
       selectedSight: sight,
     });

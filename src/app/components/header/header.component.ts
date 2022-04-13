@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {getDecodedAccessToken} from '../../utils/jwtParse';
-import {AuthService} from '../../services/auth.service';
-import {environment} from '../../../environments/environment';
+import {getDecodedAccessToken} from '@utils/jwtParse';
+import {AuthService} from '@services/auth.service';
+import {environment} from '@env/environment';
 
 @Component({
   selector: 'app-header',

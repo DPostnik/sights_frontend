@@ -6,7 +6,7 @@ import {GetAllSights} from '@store/actions/sights.actions';
 import {SightsState} from '@store/states/sights.state';
 import {Sight} from '@store/models/sights.model';
 import {PlaceMarkColor} from '@model/enums/placeMarksColor';
-import {environment} from 'src/environments/environment';
+import {environment} from '@env/environment';
 import {Router} from '@angular/router';
 
 @Component({
