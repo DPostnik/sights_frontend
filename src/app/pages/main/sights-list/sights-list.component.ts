@@ -1,11 +1,19 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {PageEvent} from '@angular/material/paginator';
 import {Select, Store} from '@ngxs/store';
-import {Observable, Subscription} from 'rxjs';
+import {
+  debounceTime,
+  distinctUntilChanged,
+  Observable,
+  Subject,
+  Subscription,
+  switchMap,
+} from 'rxjs';
 import {GetSights} from '@store/actions/sights.actions';
 import {SightsState} from '@store/states/sights.state';
 import {Sight} from '@store/models/sights.model';
 import {Router} from '@angular/router';
+import {environment} from '@env/environment';
 
 @Component({
   selector: 'app-sights-list',
@@ -20,6 +28,8 @@ export class SightsListComponent implements OnInit, OnDestroy {
   currentPage?: number;
   data: Sight[] = [];
 
+  search$ = new Subject<string>();
+
   subscriptions: Subscription[] = [];
 
   constructor(private store: Store, private router: Router) {}
@@ -30,6 +40,13 @@ export class SightsListComponent implements OnInit, OnDestroy {
     this.subscriptions.push(
       this.sights$.subscribe((sights) => (this.data = sights)),
       this.total$.subscribe((total) => (this.total = total)),
+      this.search$
+        .pipe(
+          debounceTime(environment.debounce),
+          distinctUntilChanged(),
+          switchMap((value) => this.store.dispatch(new GetSights(10, 0, value))),
+        )
+        .subscribe(),
     );
   }
 
@@ -46,6 +63,6 @@ export class SightsListComponent implements OnInit, OnDestroy {
   }
 
   handleSearch(value: string) {
-    this.store.dispatch(new GetSights(10, 0, value));
+    this.search$.next(value);
   }
 }

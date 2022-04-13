@@ -1,12 +1,6 @@
-import {
-  Component,
-  EventEmitter,
-  Input,
-  OnDestroy,
-  OnInit,
-  Output,
-} from '@angular/core';
-import {debounceTime, Subject} from 'rxjs';
+import {Component, EventEmitter, OnDestroy, OnInit, Output} from '@angular/core';
+import {Subscription} from 'rxjs';
+import {FormControl} from '@angular/forms';
 
 @Component({
   selector: 'app-search',
@@ -14,23 +8,18 @@ import {debounceTime, Subject} from 'rxjs';
   styleUrls: ['./search.component.scss'],
 })
 export class SearchComponent implements OnInit, OnDestroy {
-  @Output() changeSearch = new EventEmitter<string>();
-  @Input() timeout: number = 600;
-  searchReq = new Subject<string>();
+  @Output() search = new EventEmitter<string>();
+
+  searchField = new FormControl();
+  subscription?: Subscription;
 
   ngOnInit(): void {
-    this.searchReq
-      .pipe(debounceTime(+this.timeout))
-      .subscribe((searchValue: string) => {
-        this.changeSearch.emit(searchValue);
-      });
+    this.searchField.valueChanges.subscribe((value: string) => {
+      this.search.emit(value);
+    });
   }
 
   ngOnDestroy(): void {
-    this.searchReq.unsubscribe();
-  }
-
-  updateSearch(search: any) {
-    this.searchReq.next(search.target.value);
+    this.subscription?.unsubscribe();
   }
 }

@@ -1,23 +1,15 @@
 <div class="search-container">search block</div>
-<app-search [timeout]="600" (changeSearch)="handleSearch($event)"></app-search>
+<app-search (search)="handleSearch($event)"></app-search>
 
 <div class="filter-container">filter block</div>
 
 <div class="cards-container" *ngIf="data.length; else elseBlock">
   <div class="card-list flex-center">
-    <mat-card
-      class="card pointer"
-      *ngFor="let card of data"
-      (click)="onCardClick(card)"
-    >
+    <mat-card class="card pointer" *ngFor="let card of data" (click)="onCardClick(card)">
       <mat-card-header>
         <mat-card-title>{{ card.name }}</mat-card-title>
       </mat-card-header>
-      <img
-        mat-card-image
-        [src]="card.mainImage"
-        alt="Photo of {{ card.name }}"
-      />
+      <img mat-card-image [src]="card.mainImage" alt="Photo of {{ card.name }}" />
       <mat-card-content>
         <p>{{ card.description }}</p>
       </mat-card-content>
