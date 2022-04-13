@@ -2,7 +2,7 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Select, Store} from '@ngxs/store';
 import {Observable, Subscription} from 'rxjs';
 import {PlaceMark} from '@model/placeMark';
-import {GetAllSights} from '@store/actions/sights.actions';
+import {GetSights} from '@store/actions/sights.actions';
 import {SightsState} from '@store/states/sights.state';
 import {Sight} from '@store/models/sights.model';
 import {PlaceMarkColor} from '@model/enums/placeMarksColor';
@@ -26,7 +26,7 @@ export class SightsMapComponent implements OnInit, OnDestroy {
   constructor(private store: Store, private router: Router) {}
 
   ngOnInit() {
-    this.store.dispatch(GetAllSights);
+    this.store.dispatch(GetSights);
 
     this.subscription = this.sights$.subscribe((sights) => {
       this.placeMarks = sights.map((s) => ({
