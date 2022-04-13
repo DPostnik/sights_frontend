@@ -1,0 +1,46 @@
+<form [formGroup]="form" (submit)="submitForm()">
+  <div class="container">
+    <h3>Добавление нового объекта исторической значимости</h3>
+
+    <div class="form-group">
+      <label for="name">Название:</label>
+      <input id="name" type="text" class="form-control" formControlName="name" />
+    </div>
+
+    <div class="form-group">
+      <label for="description">Описание:</label>
+      <input id="description" type="text" class="form-control" formControlName="description" />
+    </div>
+
+    <div class="form-group">
+      <label for="founder">Основатель:</label>
+      <input id="founder" type="text" class="form-control" formControlName="founder" />
+    </div>
+
+    <div class="form-group">
+      <label for="date">Дата создания:</label>
+      <input id="date" type="date" class="form-control" formControlName="date" />
+    </div>
+
+    <div class="form-group">
+      <label>Местоположение:</label>
+      <label for="country">Страна:</label>
+      <input id="country" type="text" class="form-control" formControlName="latitude" />
+      <label for="region">Область:</label>
+      <input id="region" type="text" class="form-control" formControlName="longitude" />
+      <label for="city">Город:</label>
+      <input id="city" type="text" class="form-control" formControlName="longitude" />
+    </div>
+
+    <div class="form-group">
+      <label>Координаты:</label>
+      <input id="latitude" type="text" class="form-control" formControlName="latitude" />
+      <input id="longitude" type="text" class="form-control" formControlName="longitude" />
+    </div>
+
+    <div class="form-group">
+      <label>Категории:</label>
+      <select id="categories" class="form-control" formControlName="latitude"></select>
+    </div>
+  </div>
+</form>

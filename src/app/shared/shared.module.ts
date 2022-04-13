@@ -14,9 +14,10 @@ import {MatOptionModule} from '@angular/material/core';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {SearchComponent} from '@components/search/search.component';
+import {CreateSightComponent} from '@components/forms/create-sight/create-sight.component';
 
 @NgModule({
-  declarations: [LayoutComponent, SearchComponent],
+  declarations: [LayoutComponent, SearchComponent, CreateSightComponent],
   imports: [
     HttpClientModule,
     ReactiveFormsModule,
@@ -48,6 +49,7 @@ import {SearchComponent} from '@components/search/search.component';
     MatFormFieldModule,
     MatInputModule,
     SearchComponent,
+    CreateSightComponent,
   ],
 })
 export class SharedModule {}
