@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Sight} from '@store/models/sights.model';
 
@@ -6,6 +6,7 @@ import {Sight} from '@store/models/sights.model';
   selector: 'app-create-sight',
   templateUrl: './create-sight.component.html',
   styleUrls: ['./create-sight.component.scss'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class CreateSightComponent implements OnInit {
   form: FormGroup = new FormGroup({});

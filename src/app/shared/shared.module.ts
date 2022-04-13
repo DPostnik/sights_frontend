@@ -10,11 +10,12 @@ import {LayoutComponent} from '@components/layout/layout.component';
 import {MatCardModule} from '@angular/material/card';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
-import {MatOptionModule} from '@angular/material/core';
+import {MatNativeDateModule, MatOptionModule} from '@angular/material/core';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {SearchComponent} from '@components/search/search.component';
 import {CreateSightComponent} from '@components/forms/create-sight/create-sight.component';
+import {MatDatepickerModule} from '@angular/material/datepicker';
 
 @NgModule({
   declarations: [LayoutComponent, SearchComponent, CreateSightComponent],
@@ -31,6 +32,8 @@ import {CreateSightComponent} from '@components/forms/create-sight/create-sight.
     MatOptionModule,
     MatFormFieldModule,
     MatInputModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
   ],
   exports: [
     HttpClientModule,
@@ -48,6 +51,7 @@ import {CreateSightComponent} from '@components/forms/create-sight/create-sight.
     MatOptionModule,
     MatFormFieldModule,
     MatInputModule,
+    MatDatepickerModule,
     SearchComponent,
     CreateSightComponent,
   ],

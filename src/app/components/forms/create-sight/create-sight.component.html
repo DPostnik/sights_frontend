@@ -1,46 +1,88 @@
 <form [formGroup]="form" (submit)="submitForm()">
   <div class="container">
-    <h3>Добавление нового объекта исторической значимости</h3>
+    <mat-label class="sub-title">Добавление нового объекта исторической значимости</mat-label>
 
     <div class="form-group">
-      <label for="name">Название:</label>
-      <input id="name" type="text" class="form-control" formControlName="name" />
+      <mat-form-field color="primary" appearance="outline">
+        <mat-label>Название объекта исторической значимости:</mat-label>
+        <input matInput type="text" placeholder="Введите слово для поиска" formControlName="name" />
+      </mat-form-field>
     </div>
 
     <div class="form-group">
-      <label for="description">Описание:</label>
-      <input id="description" type="text" class="form-control" formControlName="description" />
+      <mat-form-field color="primary" appearance="outline">
+        <mat-label>Описание:</mat-label>
+        <input
+          matInput
+          type="text"
+          id="description"
+          class="form-control"
+          formControlName="description"
+        />
+      </mat-form-field>
     </div>
 
     <div class="form-group">
-      <label for="founder">Основатель:</label>
-      <input id="founder" type="text" class="form-control" formControlName="founder" />
+      <mat-form-field color="primary" appearance="outline">
+        <mat-label>Основатель:</mat-label>
+        <input matInput id="founder" type="text" class="form-control" formControlName="founder" />
+      </mat-form-field>
     </div>
 
     <div class="form-group">
-      <label for="date">Дата создания:</label>
-      <input id="date" type="date" class="form-control" formControlName="date" />
+      <mat-form-field appearance="outline">
+        <mat-label>Дата основания</mat-label>
+        <input readonly matInput [matDatepicker]="picker" formControlName="date" />
+        <mat-hint>Месяц/День/Год</mat-hint>
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker startView="year"></mat-datepicker>
+      </mat-form-field>
     </div>
 
     <div class="form-group">
-      <label>Местоположение:</label>
-      <label for="country">Страна:</label>
-      <input id="country" type="text" class="form-control" formControlName="latitude" />
-      <label for="region">Область:</label>
-      <input id="region" type="text" class="form-control" formControlName="longitude" />
-      <label for="city">Город:</label>
-      <input id="city" type="text" class="form-control" formControlName="longitude" />
+      <mat-label class="sub-title">Местоположение:</mat-label>
+      <mat-form-field appearance="outline">
+        <mat-label>Страна</mat-label>
+        <select matNativeControl required formControlName="country">
+          <option value="1">Беларусь</option>
+        </select>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Область</mat-label>
+        <select matNativeControl required formControlName="region">
+          <option value="1">Гроднеская</option>
+          <option value="1">Витебская</option>
+        </select>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Город</mat-label>
+        <select matNativeControl required formControlName="region">
+          <option value="1">Гродно</option>
+          <option value="1">Лида</option>
+        </select>
+      </mat-form-field>
     </div>
 
     <div class="form-group">
-      <label>Координаты:</label>
-      <input id="latitude" type="text" class="form-control" formControlName="latitude" />
-      <input id="longitude" type="text" class="form-control" formControlName="longitude" />
+      <mat-label class="sub-title">Координаты:</mat-label>
+      <mat-form-field color="primary" appearance="outline">
+        <mat-label>Долгота:</mat-label>
+        <input matInput type="text" class="form-control" formControlName="latitude" />
+      </mat-form-field>
+      <mat-form-field color="primary" appearance="outline">
+        <mat-label>Широта:</mat-label>
+        <input matInput type="text" class="form-control" formControlName="longitude" />
+      </mat-form-field>
     </div>
 
     <div class="form-group">
-      <label>Категории:</label>
-      <select id="categories" class="form-control" formControlName="latitude"></select>
+      <mat-form-field appearance="outline">
+        <mat-label>Категории</mat-label>
+        <select matNativeControl required formControlName="region">
+          <option value="1">Готика</option>
+          <option value="1">Нормаль</option>
+        </select>
+      </mat-form-field>
     </div>
   </div>
 </form>
