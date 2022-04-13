@@ -17,14 +17,10 @@ export class SightService {
     return this.http.get<PaginatedList<Sight>>(`${this.prefix}sight`);
   }
 
-  getSights(
-    limit: number,
-    offset: number,
-    search: string = '',
-  ): Observable<PaginatedList<Sight>> {
-    const limitField = limit ? `limit=${limit}` : '';
-    const offsetField = offset ? `&offset=${offset}` : '';
-    const searchField = search ? `&search=${search}` : '';
+  getSights(limit: number, offset: number, search: string = ''): Observable<PaginatedList<Sight>> {
+    const limitField = limit ? `_limit=${limit}` : '';
+    const offsetField = offset ? `&_offset=${offset}` : '';
+    const searchField = search ? `&_search=${search}` : '';
     return this.http.get<PaginatedList<Sight>>(
       `${this.prefix}sight?${limitField}${offsetField}${searchField}`,
     );
