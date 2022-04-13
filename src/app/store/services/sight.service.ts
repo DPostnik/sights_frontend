@@ -13,10 +13,6 @@ export class SightService {
 
   prefix = environment.apiUrl;
 
-  getAllSights(): Observable<PaginatedList<Sight>> {
-    return this.http.get<PaginatedList<Sight>>(`${this.prefix}sight`);
-  }
-
   getSights(
     limit?: number,
     offset?: number,

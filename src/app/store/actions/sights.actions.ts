@@ -7,12 +7,6 @@ export class GetSights {
   constructor(public limit?: number, public offset?: number, public search?: string) {}
 }
 
-export class GetAllSights {
-  static readonly type = '[Sights] GetAllSights';
-
-  constructor(public limit: number, public offset: number) {}
-}
-
 export class GetSightsSuccess {
   static readonly type = '[Sights] GetSightsSuccess';
 
