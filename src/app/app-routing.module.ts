@@ -1,11 +1,11 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {NotFoundComponent} from './pages/not-found/not-found.component';
-import {MainLayoutComponent} from './pages/main/main-layout/main-layout.component';
-import {HomeComponent} from './pages/main/home/home.component';
-import {SightsMapComponent} from './pages/main/sights-map/sights-map.component';
-import {SightsListComponent} from './pages/main/sights-list/sights-list.component';
-import {SightsInfoComponent} from './pages/main/sight-info/sights-info.component';
+import {NotFoundComponent} from '@pages/not-found/not-found.component';
+import {MainLayoutComponent} from '@pages/main/main-layout/main-layout.component';
+import {HomeComponent} from '@pages/main/home/home.component';
+import {SightsMapComponent} from '@pages/main/sights-map/sights-map.component';
+import {SightsListComponent} from '@pages/main/sights-list/sights-list.component';
+import {SightsInfoComponent} from '@pages/main/sight-info/sights-info.component';
 
 const routes: Routes = [
   {
@@ -21,14 +21,12 @@ const routes: Routes = [
   },
   {
     path: 'admin',
-    loadChildren: () =>
-      import('./pages/admin/admin.module').then((m) => m.AdminModule),
+    loadChildren: () => import('./pages/admin/admin.module').then((m) => m.AdminModule),
   },
   // todo u
   {
     path: 'auth',
-    loadChildren: () =>
-      import('./pages/auth/auth.module').then((m) => m.AuthModule),
+    loadChildren: () => import('./pages/auth/auth.module').then((m) => m.AuthModule),
   },
   {path: 'not-found', component: NotFoundComponent, pathMatch: 'full'},
   {path: '**', redirectTo: '/not-found'},
