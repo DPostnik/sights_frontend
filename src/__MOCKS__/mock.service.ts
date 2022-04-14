@@ -24,14 +24,7 @@ export const getSight = (): Observable<Sight> => {
       longitude: 53.669376,
       latitude: 23.821614,
     },
-    categories: [
-      'Норма1ль',
-      'Норм2аль',
-      'Но3рмаль',
-      'Нор4маль',
-      'Норма5ль',
-      'Н66ормаль',
-    ],
+    categories: ['Норма1ль', 'Норм2аль', 'Но3рмаль', 'Нор4маль', 'Норма5ль', 'Н66ормаль'],
   }).pipe(delay(1000));
 };
 
@@ -41,7 +34,8 @@ export const getSights = (): Observable<PaginatedList<Sight>> => {
     data: [
       {
         name: 'mac',
-        description: '',
+        description:
+          'оч длинае аписание уууф прям ващееее как его атабразить ну ни знаю мммм нада падуматьббб',
         date: new Date(),
         founder: '',
         mainImage:
@@ -63,8 +57,9 @@ export const getSights = (): Observable<PaginatedList<Sight>> => {
         categories: ['Нормаль'],
       },
       {
-        name: 'mac',
-        description: '',
+        name: 'ИВАААААНУШКА ПУДЕЕЕЕЛЬ',
+        description:
+          'оч длинае аписание уууф прям ващееее как его атабразить ну ни знаю мммм нада падуматьббб',
         date: new Date(),
         founder: '',
         mainImage:
@@ -87,7 +82,8 @@ export const getSights = (): Observable<PaginatedList<Sight>> => {
       },
       {
         name: 'mac',
-        description: '',
+        description:
+          'оч длинае аписание уууф прям ващееее как его атабразить ну ни знаю мммм нада падуматьббб',
         date: new Date(),
         founder: '',
         mainImage:
@@ -110,7 +106,8 @@ export const getSights = (): Observable<PaginatedList<Sight>> => {
       },
       {
         name: 'mac',
-        description: '',
+        description:
+          'оч длинае аписание уууф прям ващееее как его атабразить ну ни знаю мммм нада падуматьббб',
         date: new Date(),
         founder: '',
         mainImage:
@@ -133,7 +130,8 @@ export const getSights = (): Observable<PaginatedList<Sight>> => {
       },
       {
         name: 'mac',
-        description: '',
+        description:
+          'оч длинае аписание уууф прям ващееее как его атабразить ну ни знаю мммм нада падуматьббб',
         date: new Date(),
         founder: '',
         mainImage:
@@ -156,7 +154,8 @@ export const getSights = (): Observable<PaginatedList<Sight>> => {
       },
       {
         name: 'mac',
-        description: '',
+        description:
+          'оч длинае аписание уууф прям ващееее как его атабразить ну ни знаю мммм нада падуматьббб',
         date: new Date(),
         founder: '',
         mainImage:
@@ -179,7 +178,8 @@ export const getSights = (): Observable<PaginatedList<Sight>> => {
       },
       {
         name: 'mac',
-        description: '',
+        description:
+          'оч длинае аписание уууф прям ващееее как его атабразить ну ни знаю мммм нада падуматьббб',
         date: new Date(),
         founder: '',
         mainImage:

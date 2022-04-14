@@ -1,12 +1,14 @@
 @import 'src/assets/styles/theme.scss';
+@import 'mapbox-gl/dist/mapbox-gl.css';
 
-html, body {
+html,
+body {
   height: 100%;
 }
 
 body {
   margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-family: Roboto, 'Helvetica Neue', sans-serif;
 }
 
 .flex-center {
@@ -17,8 +19,4 @@ body {
 
 .pointer {
   cursor: pointer;
-}
-
-.mat-form-field-appearance-outline .mat-form-field-outline {
-  //color: $accent-color-light;
 }

@@ -7,27 +7,14 @@
     </div>
 
     <div class="header__tabs">
-      <span
-        ><a routerLink="home" routerLinkActive="active-link">Главная</a></span
-      >
+      <span><a routerLink="home" routerLinkActive="active-link">Главная</a></span>
       <span><a routerLink="map" routerLinkActive="active-link">Карта</a></span>
-      <span
-        ><a routerLink="list" routerLinkActive="active-link"
-          >Список объектов</a
-        ></span
-      >
-      <span
-        *ngIf="!environment.production"
-        class="dev-select"
-        [matMenuTriggerFor]="devMenu"
+      <span><a routerLink="list" routerLinkActive="active-link">Список объектов</a></span>
+      <span *ngIf="!environment.production" class="dev-select" [matMenuTriggerFor]="devMenu"
         >DEV
         <mat-menu #devMenu="matMenu">
-          <mat-option (click)="handleDevMenuClick('test1')"
-            >test option 1</mat-option
-          >
-          <mat-option (click)="handleDevMenuClick('test2')"
-            >test option 2</mat-option
-          >
+          <mat-option (click)="handleDevMenuClick('test1')">test option 1</mat-option>
+          <mat-option (click)="handleDevMenuClick('test2')">test option 2</mat-option>
         </mat-menu>
       </span>
     </div>
@@ -36,8 +23,6 @@
   <div class="user-info">
     <mat-icon class="user-info__person-icon">person</mat-icon>
     <span>{{ userName }}</span>
-    <mat-icon (click)="logout()" class="user-info__logout-icon"
-      >logout</mat-icon
-    >
+    <mat-icon (click)="logout()" class="user-info__logout-icon">logout</mat-icon>
   </div>
 </mat-toolbar>

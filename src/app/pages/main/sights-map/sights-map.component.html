@@ -1,9 +1,3 @@
 <div class="container">
-  <ya-map [center]="[initLong, initLat]" [zoom]="13" [state]="{controls: []}">
-    <ya-placemark
-      *ngFor="let placeMark of placeMarks"
-      (yaclick)="onPlaceMarkClick(placeMark)"
-      [geometry]="[placeMark.longitude, placeMark.latitude]"
-    ></ya-placemark>
-  </ya-map>
+  <div id="map"></div>
 </div>

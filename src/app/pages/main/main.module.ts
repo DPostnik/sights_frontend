@@ -1,6 +1,4 @@
-import {AngularYandexMapsModule, YaConfig} from 'angular8-yandex-maps';
 import {NgModule} from '@angular/core';
-import {environment} from '@env/environment';
 import {MainLayoutComponent} from './main-layout/main-layout.component';
 import {HomeComponent} from './home/home.component';
 import {SightsMapComponent} from './sights-map/sights-map.component';
@@ -11,13 +9,8 @@ import {SharedModule} from '@shared/shared.module';
 import {SightsInfoComponent} from './sight-info/sights-info.component';
 import {LoaderComponent} from '@components/loader/loader.component';
 
-const mapConfig: YaConfig = {
-  apikey: environment.yaKey,
-  lang: 'ru_RU',
-};
-
 @NgModule({
-  imports: [AngularYandexMapsModule.forRoot(mapConfig), SharedModule],
+  imports: [SharedModule],
   declarations: [
     MainLayoutComponent,
     HomeComponent,

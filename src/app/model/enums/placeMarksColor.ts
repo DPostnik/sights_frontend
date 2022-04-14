@@ -1,3 +1,3 @@
 export enum PlaceMarkColor {
-  Default = 'red',
+  Default = '#ff0000',
 }
