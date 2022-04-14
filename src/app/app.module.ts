@@ -18,6 +18,7 @@ import {MainModule} from '@pages/main/main.module';
 import {SightsState} from '@store/states/sights.state';
 import {SightService} from '@store/services/sight.service';
 import {AppState} from '@store/states/app.state';
+import {AppService} from '@store/services/app.service';
 
 registerLocaleData(localeRu, 'ru');
 
@@ -35,7 +36,7 @@ registerLocaleData(localeRu, 'ru');
     SharedModule,
     MainModule,
   ],
-  providers: [SightService, {provide: LOCALE_ID, useValue: 'ru'}],
+  providers: [SightService, AppService, {provide: LOCALE_ID, useValue: 'ru'}],
   exports: [],
   bootstrap: [AppComponent],
 })
