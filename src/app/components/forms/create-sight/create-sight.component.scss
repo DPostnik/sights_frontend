@@ -17,18 +17,16 @@
 
   .sub-title{
     font-size: 18px;
-    color: $accent-color-lighter;
+    //color: $accent-color-lighter;
   }
 
-  .mat-form-field-appearance-outline .mat-form-field-outline {
-    color: $accent-color-light;
+  .mat-form-field{
+    max-width:500px;
+    min-width: 400px;
   }
 
-  select{
-  }
   mat-label{
-    color: $accent-color-light;
-
+    //color: $accent-color-light;
   }
 
   .form-group{

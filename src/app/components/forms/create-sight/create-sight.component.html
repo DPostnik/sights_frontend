@@ -78,10 +78,38 @@
     <div class="form-group">
       <mat-form-field appearance="outline">
         <mat-label>Категории</mat-label>
-        <select matNativeControl required formControlName="region">
-          <option value="1">Готика</option>
-          <option value="1">Нормаль</option>
-        </select>
+        <mat-select formControlName="categories">
+          <mat-option>None</mat-option>
+          <mat-option value="option1">Option 1</mat-option>
+          <mat-option value="option2">Option 2</mat-option>
+          <mat-option value="option3">Option 3</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field class="example-chip-list" appearance="fill">
+        <mat-label>Favorite Fruits</mat-label>
+        <mat-chip-list #chipList aria-label="Fruit selection">
+          <mat-chip *ngFor="let fruit of fruits" (removed)="remove(fruit)">
+            {{ fruit }}
+            <button matChipRemove>
+              <mat-icon>cancel</mat-icon>
+            </button>
+          </mat-chip>
+          <input
+            placeholder="New fruit..."
+            #fruitInput
+            [formControl]="fruitCtrl"
+            [matAutocomplete]="auto"
+            [matChipInputFor]="chipList"
+            [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+            (matChipInputTokenEnd)="add($event)"
+          />
+        </mat-chip-list>
+        <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+          <mat-option *ngFor="let fruit of filteredFruits | async" [value]="fruit">
+            {{ fruit }}
+          </mat-option>
+        </mat-autocomplete>
       </mat-form-field>
     </div>
   </div>

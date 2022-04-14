@@ -16,6 +16,9 @@ import {MatInputModule} from '@angular/material/input';
 import {SearchComponent} from '@components/search/search.component';
 import {CreateSightComponent} from '@components/forms/create-sight/create-sight.component';
 import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatChipsModule} from '@angular/material/chips';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import {MatSelectModule} from '@angular/material/select';
 
 @NgModule({
   declarations: [LayoutComponent, SearchComponent, CreateSightComponent],
@@ -34,6 +37,9 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
     MatInputModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    MatChipsModule,
+    MatAutocompleteModule,
+    MatSelectModule,
   ],
   exports: [
     HttpClientModule,
@@ -54,6 +60,9 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
     MatDatepickerModule,
     SearchComponent,
     CreateSightComponent,
+    MatChipsModule,
+    MatAutocompleteModule,
+    MatSelectModule,
   ],
 })
 export class SharedModule {}
