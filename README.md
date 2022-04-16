@@ -13,5 +13,5 @@
   <li>Angular2+</li>
   <li>RxJS</li>
   <li>NGXS</li>
-  <li>YandexMaps</li>
+  <li>MapBoxGL</li>
 </ul>
