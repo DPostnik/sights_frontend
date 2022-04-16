@@ -1,13 +1,14 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Select, Store} from '@ngxs/store';
 import {Observable, Subscription} from 'rxjs';
-import {PlaceMark} from '@model/placeMark';
 import {GetAllSights} from '@store/actions/sights.actions';
 import {SightsState} from '@store/states/sights.state';
 import {Sight} from '@store/models/sights.model';
 import {environment} from '@env/environment';
-import mapboxgl from 'mapbox-gl';
-mapboxgl.accessToken = environment.mapApiKey;
+import mapBox from 'mapbox-gl';
+import {MarkerColor} from '@model/enums/markerColor';
+
+mapBox.accessToken = environment.mapApiKey;
 
 @Component({
   selector: 'app-sights-map',
@@ -19,7 +20,6 @@ export class SightsMapComponent implements OnInit, OnDestroy {
 
   initLong: number = environment.longitude;
   initLat: number = environment.latitude;
-  placeMarks: PlaceMark[] = [];
 
   subscription?: Subscription;
 
@@ -28,43 +28,45 @@ export class SightsMapComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.store.dispatch(GetAllSights);
 
-    const map = new mapboxgl.Map({
+    const map = new mapBox.Map({
       container: 'map',
       style: 'mapbox://styles/mapbox/streets-v11',
       center: [environment.longitude, environment.latitude],
       zoom: 9,
     });
+
     map.on('load', () => {
-      map.addLayer({
-        id: 'terrain-data',
-        type: 'line',
-        source: {
-          type: 'vector',
-          url: 'mapbox://mapbox.mapbox-terrain-v2',
-        },
-        'source-layer': 'contour',
-      });
+      map
+        .addLayer({
+          id: 'terrain-data',
+          type: 'line',
+          source: {
+            type: 'vector',
+            url: 'mapbox://mapbox.mapbox-terrain-v2',
+          },
+          'source-layer': 'contour',
+        })
+        .resize();
     });
-    map.on('load', () => {
-      map.addLayer({
-        id: 'rpd_parks',
-        type: 'fill',
-        source: {
-          type: 'vector',
-          url: 'mapbox://mapbox.3o7ubwm8',
-        },
-        'source-layer': 'RPD_Parks',
-        layout: {
-          visibility: 'visible',
-        },
-        paint: {
-          'fill-color': 'rgba(61,153,80,0.55)',
-        },
-      });
+
+    map.on('click', (event) => {
+      console.log(event.lngLat);
     });
-    map.on('load', () => {
-      map.resize();
+
+    map.on('dblclick', (event) => {
+      console.log('dblclick');
+      event.preventDefault();
     });
+
+    this.subscription = this.sights$.subscribe((sights) =>
+      sights.forEach((s) => {
+        new mapBox.Marker({
+          color: MarkerColor.Default,
+        })
+          .setLngLat([s.coordinates.longitude, s.coordinates.latitude])
+          .addTo(map);
+      }),
+    );
   }
 
   ngOnDestroy(): void {
