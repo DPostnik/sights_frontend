@@ -3,7 +3,6 @@ import {Injectable} from '@angular/core';
 import {catchError, EMPTY, finalize, switchMap} from 'rxjs';
 import {SightService} from '@store/services/sight.service';
 import {
-  GetAllSights,
   GetSight,
   GetSightFailure,
   GetSights,
@@ -39,20 +38,6 @@ export class SightsState {
   @Selector()
   static selectTotal(state: SightsStateModel) {
     return state.total;
-  }
-
-  @Action(GetAllSights)
-  getAllSights(ctx: StateContext<SightsStateModel>) {
-    ctx.dispatch(StartLoading);
-    return this.sightService.getAllSights().pipe(
-      switchMap((sights) => ctx.dispatch(new GetSightsSuccess(sights))),
-      finalize(() => ctx.dispatch(EndLoading)),
-      catchError((e) => {
-        ctx.dispatch(GetSightsFailure);
-        console.error('getAllSights error', e); // todo notifier
-        return EMPTY;
-      }),
-    );
   }
 
   @Action(GetSights)

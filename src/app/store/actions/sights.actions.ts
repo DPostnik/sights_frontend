@@ -4,17 +4,7 @@ import {PaginatedList} from '@model/pagination';
 export class GetSights {
   static readonly type = '[Sights] GetSights';
 
-  constructor(
-    public limit: number,
-    public offset: number,
-    public search?: string,
-  ) {}
-}
-
-export class GetAllSights {
-  static readonly type = '[Sights] GetAllSights';
-
-  constructor(public limit: number, public offset: number) {}
+  constructor(public limit?: number, public offset?: number, public search?: string) {}
 }
 
 export class GetSightsSuccess {
