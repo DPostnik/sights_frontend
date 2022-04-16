@@ -23,15 +23,4 @@ export class HeaderComponent implements OnInit {
     this.auth.logout();
     this.userName = 'Account';
   }
-
-  handleDevMenuClick(option: string) {
-    switch (option) {
-      case 'test1':
-        console.log('test1 -> ');
-        break;
-      case 'test2':
-        console.log('test2 -> ');
-        break;
-    }
-  }
 }
