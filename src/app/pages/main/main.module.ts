@@ -9,6 +9,7 @@ import {SharedModule} from '@shared/shared.module';
 import {SightsInfoComponent} from './sight-info/sights-info.component';
 import {LoaderComponent} from '@components/loader/loader.component';
 import {DevMenuComponent} from '@components/devMenu/devMenu.component';
+import {MapComponent} from '@components/map/map.component';
 
 @NgModule({
   imports: [SharedModule],
@@ -22,6 +23,7 @@ import {DevMenuComponent} from '@components/devMenu/devMenu.component';
     HeaderComponent,
     FooterComponent,
     DevMenuComponent,
+    MapComponent,
   ],
   exports: [],
   providers: [],

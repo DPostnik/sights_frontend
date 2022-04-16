@@ -1,5 +1,10 @@
-:host {
+:host, #map {
   display: flex;
   flex-direction: column;
   flex-grow: 1;
+}
+
+#map {
+  height: 100%;
+  width: 100%;
 }
