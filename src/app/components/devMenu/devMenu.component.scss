@@ -1,0 +1,13 @@
+@import 'src/assets/styles/theme';
+
+.dev-select {
+  color: $white;
+  margin: 0 10px;
+  width: 60px;
+  text-shadow: 0 0 4px $accent-color-light;
+
+  &:hover {
+    color: $accent-color-lighter;
+    cursor: pointer;
+  }
+}

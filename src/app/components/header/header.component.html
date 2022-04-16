@@ -10,13 +10,7 @@
       <span><a routerLink="home" routerLinkActive="active-link">Главная</a></span>
       <span><a routerLink="map" routerLinkActive="active-link">Карта</a></span>
       <span><a routerLink="list" routerLinkActive="active-link">Список объектов</a></span>
-      <span *ngIf="!environment.production" class="dev-select" [matMenuTriggerFor]="devMenu"
-        >DEV
-        <mat-menu #devMenu="matMenu">
-          <mat-option (click)="handleDevMenuClick('test1')">test option 1</mat-option>
-          <mat-option (click)="handleDevMenuClick('test2')">test option 2</mat-option>
-        </mat-menu>
-      </span>
+      <app-dev-menu *ngIf="!environment.production"></app-dev-menu>
     </div>
   </div>
 

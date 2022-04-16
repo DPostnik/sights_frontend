@@ -8,6 +8,7 @@ import {FooterComponent} from '@components/footer/footer.component';
 import {SharedModule} from '@shared/shared.module';
 import {SightsInfoComponent} from './sight-info/sights-info.component';
 import {LoaderComponent} from '@components/loader/loader.component';
+import {DevMenuComponent} from '@components/devMenu/devMenu.component';
 
 @NgModule({
   imports: [SharedModule],
@@ -20,6 +21,7 @@ import {LoaderComponent} from '@components/loader/loader.component';
     LoaderComponent,
     HeaderComponent,
     FooterComponent,
+    DevMenuComponent,
   ],
   exports: [],
   providers: [],
