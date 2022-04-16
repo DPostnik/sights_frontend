@@ -11,9 +11,9 @@ import {
 } from 'rxjs';
 import {GetSights} from '@store/actions/sights.actions';
 import {SightsState} from '@store/states/sights.state';
-import {Sight} from '@store/models/sights.model';
 import {Router} from '@angular/router';
 import {environment} from '@env/environment';
+import {Sight} from '@model/sight';
 
 @Component({
   selector: 'app-sights-list',

@@ -1,14 +1,15 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {Sight} from '@store/models/sights.model';
 import {Observable, Subscription} from 'rxjs';
 import {Country} from '@model/country';
 import {Region} from '@model/region';
 import {City} from '@model/city';
 import {Category} from '@model/category';
-import {Select} from '@ngxs/store';
+import {Select, Store} from '@ngxs/store';
 import {AppState} from '@store/states/app.state';
 import {Meta} from '@model/meta';
+import {CreateSightDto} from '@model/sight';
+import {CreateSight} from '@store/actions/sights.actions';
 
 @Component({
   selector: 'app-create-sight',
@@ -51,9 +52,10 @@ export class CreateSightComponent implements OnInit, OnDestroy {
     // }
   }
 
-  constructor() {
+  constructor(private store: Store) {
     this.initializeForm();
   }
+
   //
   // filteredCategories(value: string) {
   //   return this.categories
@@ -80,8 +82,8 @@ export class CreateSightComponent implements OnInit, OnDestroy {
   submitForm() {
     if (this.form.invalid) return;
 
-    const sight: Sight = {
-      categories: this.form.get('categories')?.value,
+    const sight: CreateSightDto = {
+      categories: [this.form.get('categories')?.value],
       coordinates: {
         latitude: this.form.get('latitude')?.value,
         longitude: this.form.get('longitude')?.value,
@@ -89,19 +91,11 @@ export class CreateSightComponent implements OnInit, OnDestroy {
       date: new Date(),
       description: this.form.get('description')?.value,
       founder: this.form.get('founder')?.value,
-      id: 0,
-      images: [],
-      location: {
-        city: this.form.get('city')?.value,
-        country: this.form.get('country')?.value,
-        region: this.form.get('region')?.value,
-      },
+      city: this.form.get('city')?.value,
       mainImage: '',
-      rating: 0,
       name: this.form.value.name,
     };
-    console.log(sight);
-    return sight;
+    this.store.dispatch(new CreateSight(sight));
   }
 
   ngOnDestroy(): void {

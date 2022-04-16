@@ -5,7 +5,7 @@ import {Select, Store} from '@ngxs/store';
 import {Observable, Subscription} from 'rxjs';
 import {GetSight} from '@store/actions/sights.actions';
 import {SightsState} from '@store/states/sights.state';
-import {Sight} from '@store/models/sights.model';
+import {Sight} from '@model/sight';
 
 @Component({
   selector: 'app-sights-info',
@@ -19,17 +19,11 @@ export class SightsInfoComponent implements OnInit, OnDestroy {
 
   subscriptions: Subscription[] = [];
 
-  constructor(
-    private store: Store,
-    private route: ActivatedRoute,
-    private location: Location,
-  ) {}
+  constructor(private store: Store, private route: ActivatedRoute, private location: Location) {}
 
   ngOnInit(): void {
     this.subscriptions.push(
-      this.route.params.subscribe((p) =>
-        this.store.dispatch(new GetSight(p['id'])),
-      ),
+      this.route.params.subscribe((p) => this.store.dispatch(new GetSight(p['id']))),
       this.sight$.subscribe((sight) => (this.sight = sight)),
     );
   }
