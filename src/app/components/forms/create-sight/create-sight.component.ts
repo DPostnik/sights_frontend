@@ -1,24 +1,67 @@
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Sight} from '@store/models/sights.model';
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
-import {MatAutocompleteSelectedEvent} from '@angular/material/autocomplete';
 import {MatChipInputEvent} from '@angular/material/chips';
-import {map, Observable, startWith} from 'rxjs';
-
-export interface Fruit {
-  name: string;
-}
+import {map, Observable, startWith, Subscription} from 'rxjs';
+import {Country} from '@model/country';
+import {Region} from '@model/region';
+import {City} from '@model/city';
+import {Category} from '@model/category';
+import {Select} from '@ngxs/store';
+import {AppState} from '@store/states/app.state';
+import {Meta} from '@model/meta';
+import {MatAutocompleteSelectedEvent} from '@angular/material/autocomplete';
 
 @Component({
   selector: 'app-create-sight',
   templateUrl: './create-sight.component.html',
   styleUrls: ['./create-sight.component.scss'],
 })
-export class CreateSightComponent implements OnInit {
+export class CreateSightComponent implements OnInit, OnDestroy {
+  @Select(AppState.selectMeta) meta$!: Observable<Meta>;
+  @ViewChild('categoryInput') categoryInput!: ElementRef<HTMLInputElement>;
   form: FormGroup = new FormGroup({});
+  separatorKeysCodes: number[] = [ENTER, COMMA];
+
+  subscriptions: Subscription[] = [];
+  countries?: Country[];
+  regions?: Region[];
+  cities?: City[];
+  categories!: Category[];
+
+  selectedCategories: string[] = [];
+  filteredCategories?: any;
 
   ngOnInit(): void {
+    this.subscriptions.push(
+      this.meta$.subscribe((meta) => {
+        this.countries = meta.countries;
+        this.regions = meta.regions;
+        this.cities = meta.cities;
+        this.categories = meta.categories;
+      }),
+    );
+    const categoriesForm = this.form.get('categories');
+    if (categoriesForm) {
+      this.subscriptions.push(
+        categoriesForm.valueChanges
+          .pipe(
+            startWith(null),
+            map((value: string | null) => {
+              return value ? this._filter(value) : this.categories.map((item) => item.name);
+            }),
+          )
+          .subscribe(),
+      );
+    }
+  }
+
+  constructor() {
+    this.initializeForm();
+  }
+
+  private initializeForm(): void {
     this.form = new FormGroup({
       name: new FormControl(null, [Validators.required]),
       description: new FormControl(null, [Validators.required]),
@@ -31,55 +74,6 @@ export class CreateSightComponent implements OnInit {
       longitude: new FormControl(null, [Validators.required]),
       categories: new FormControl(),
     });
-  }
-
-  separatorKeysCodes: number[] = [ENTER, COMMA];
-  fruitCtrl = new FormControl();
-  filteredFruits: Observable<string[]>;
-  fruits: string[] = ['Lemon'];
-  allFruits: string[] = ['Apple', 'Lemon', 'Lime', 'Orange', 'Strawberry'];
-
-  @ViewChild('fruitInput') fruitInput!: ElementRef<HTMLInputElement>;
-
-  constructor() {
-    this.filteredFruits = this.fruitCtrl.valueChanges.pipe(
-      startWith(null),
-      map((fruit: string | null) => (fruit ? this._filter(fruit) : this.allFruits.slice())),
-    );
-  }
-
-  add(event: MatChipInputEvent): void {
-    const value = (event.value || '').trim();
-
-    // Add our fruit
-    if (value) {
-      this.fruits.push(value);
-    }
-
-    // Clear the input value
-    event.chipInput!.clear();
-
-    this.fruitCtrl.setValue(null);
-  }
-
-  remove(fruit: string): void {
-    const index = this.fruits.indexOf(fruit);
-
-    if (index >= 0) {
-      this.fruits.splice(index, 1);
-    }
-  }
-
-  selected(event: MatAutocompleteSelectedEvent): void {
-    this.fruits.push(event.option.viewValue);
-    this.fruitInput.nativeElement.value = '';
-    this.fruitCtrl.setValue(null);
-  }
-
-  private _filter(value: string): string[] {
-    const filterValue = value.toLowerCase();
-
-    return this.allFruits.filter((fruit) => fruit.toLowerCase().includes(filterValue));
   }
 
   submitForm() {
@@ -106,5 +100,32 @@ export class CreateSightComponent implements OnInit {
       name: this.form.value.name,
     };
     return sight;
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.forEach((s) => s.unsubscribe());
+  }
+
+  onRemove(name: string) {
+    this.selectedCategories = this.selectedCategories.filter((item) => item !== name);
+  }
+
+  addCategory(event: MatChipInputEvent) {
+    console.log(event);
+    const value = (event.value || '').trim();
+    if (value) {
+      console.log(value);
+    }
+    event.chipInput!.clear();
+  }
+
+  selected(event: MatAutocompleteSelectedEvent) {
+    this.selectedCategories.push(event.option.value);
+    this.categoryInput.nativeElement.value = '';
+  }
+
+  private _filter(value: string) {
+    const filterValue = value.toLowerCase();
+    return this.categories.filter((item) => item.name.toLowerCase().includes(filterValue));
   }
 }

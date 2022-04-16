@@ -14,8 +14,6 @@ $background: map_merge(map-get($theme, background), (background: $bg-color, card
 $theme: map-merge($theme, (background: $background));
 
 @include mat.all-component-themes($theme);
-@include mat.form-field-theme($theme);
-@include mat.input-theme($theme);
 
 $primary-color: mat.get-color-from-palette($primary-palette, 500);
 $primary-color-darker: mat.get-color-from-palette($primary-palette, 900);

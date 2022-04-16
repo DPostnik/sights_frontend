@@ -43,23 +43,25 @@
       <mat-label class="sub-title">Местоположение:</mat-label>
       <mat-form-field appearance="outline">
         <mat-label>Страна</mat-label>
-        <select matNativeControl required formControlName="country">
-          <option value="1">Беларусь</option>
-        </select>
+        <mat-select required formControlName="country">
+          <mat-option *ngFor="let country of countries" [value]="country.name">{{
+            country.name
+          }}</mat-option>
+        </mat-select>
       </mat-form-field>
       <mat-form-field appearance="outline">
         <mat-label>Область</mat-label>
-        <select matNativeControl required formControlName="region">
-          <option value="1">Гроднеская</option>
-          <option value="1">Витебская</option>
-        </select>
+        <mat-select required formControlName="region">
+          <mat-option *ngFor="let region of regions" [value]="region.name">{{
+            region.name
+          }}</mat-option>
+        </mat-select>
       </mat-form-field>
       <mat-form-field appearance="outline">
         <mat-label>Город</mat-label>
-        <select matNativeControl required formControlName="region">
-          <option value="1">Гродно</option>
-          <option value="1">Лида</option>
-        </select>
+        <mat-select required formControlName="region">
+          <mat-option *ngFor="let city of cities" [value]="city.name">{{ city.name }}</mat-option>
+        </mat-select>
       </mat-form-field>
     </div>
 
@@ -80,34 +82,34 @@
         <mat-label>Категории</mat-label>
         <mat-select formControlName="categories">
           <mat-option>None</mat-option>
-          <mat-option value="option1">Option 1</mat-option>
-          <mat-option value="option2">Option 2</mat-option>
-          <mat-option value="option3">Option 3</mat-option>
+          <mat-option *ngFor="let category of categories" [value]="category.name">{{
+            category.name
+          }}</mat-option>
         </mat-select>
       </mat-form-field>
 
       <mat-form-field class="example-chip-list" appearance="fill">
-        <mat-label>Favorite Fruits</mat-label>
-        <mat-chip-list #chipList aria-label="Fruit selection">
-          <mat-chip *ngFor="let fruit of fruits" (removed)="remove(fruit)">
-            {{ fruit }}
+        <mat-label>Categories</mat-label>
+        <mat-chip-list #chipList aria-label="category selection">
+          <mat-chip *ngFor="let category of selectedCategories" (removed)="onRemove(category)">
+            {{ category }}
             <button matChipRemove>
               <mat-icon>cancel</mat-icon>
             </button>
           </mat-chip>
           <input
-            placeholder="New fruit..."
-            #fruitInput
-            [formControl]="fruitCtrl"
+            placeholder="New Category..."
+            #categoryInput
+            formControlName="categories"
             [matAutocomplete]="auto"
             [matChipInputFor]="chipList"
             [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-            (matChipInputTokenEnd)="add($event)"
+            (matChipInputTokenEnd)="addCategory($event)"
           />
         </mat-chip-list>
         <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
-          <mat-option *ngFor="let fruit of filteredFruits | async" [value]="fruit">
-            {{ fruit }}
+          <mat-option *ngFor="let category of filteredCategories" [value]="category">
+            {{ category }}
           </mat-option>
         </mat-autocomplete>
       </mat-form-field>

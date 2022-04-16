@@ -9,7 +9,8 @@ import {
 } from '@store/actions/app.actions';
 import {AppStateModel} from '@store/models/app.model';
 import {AppService} from '@store/services/app.service';
-import {catchError, EMPTY, switchMap} from 'rxjs';
+import {catchError, EMPTY, switchMap, tap} from 'rxjs';
+import {getMetaFromLocalStorage, setMetaLocalStorage} from '@utils/localStorage';
 
 @State<AppStateModel>({
   name: 'appState',
@@ -44,14 +45,18 @@ export class AppState {
 
   @Action(GetMeta)
   getMeta(ctx: StateContext<AppStateModel>) {
-    return this.appService.getMetaInformation().pipe(
-      switchMap((meta) => ctx.dispatch(new GetMetaSuccess(meta))),
-      catchError((e) => {
-        ctx.dispatch(GetMetaFailure);
-        console.error('getMeta error', e);
-        return EMPTY;
-      }),
-    );
+    const metaFromLocalStorage = getMetaFromLocalStorage();
+    return metaFromLocalStorage
+      ? ctx.dispatch(new GetMetaSuccess(metaFromLocalStorage))
+      : this.appService.getMetaInformation().pipe(
+          tap((meta) => setMetaLocalStorage(meta)),
+          switchMap((meta) => ctx.dispatch(new GetMetaSuccess(meta))),
+          catchError((e) => {
+            ctx.dispatch(GetMetaFailure);
+            console.error('getMeta error', e);
+            return EMPTY;
+          }),
+        );
   }
 
   @Action(GetMetaSuccess)
