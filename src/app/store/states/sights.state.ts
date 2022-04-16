@@ -3,6 +3,7 @@ import {Injectable} from '@angular/core';
 import {catchError, EMPTY, finalize, switchMap} from 'rxjs';
 import {SightService} from '@store/services/sight.service';
 import {
+  CreateSight,
   GetSight,
   GetSightFailure,
   GetSights,
@@ -91,5 +92,15 @@ export class SightsState {
   @Action(GetSightFailure)
   getSightFailure(ctx: StateContext<SightsStateModel>) {
     ctx.patchState({selectedSight: undefined});
+  }
+
+  @Action(CreateSight)
+  createSight(ctx: StateContext<SightsStateModel>, {dto}: CreateSight) {
+    return this.sightService.postSight(dto).pipe(
+      catchError((e) => {
+        console.error('getSight error', e);
+        return EMPTY;
+      }),
+    );
   }
 }

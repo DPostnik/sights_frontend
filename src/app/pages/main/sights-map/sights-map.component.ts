@@ -3,10 +3,10 @@ import {Select, Store} from '@ngxs/store';
 import {Observable, Subscription} from 'rxjs';
 import {GetSights} from '@store/actions/sights.actions';
 import {SightsState} from '@store/states/sights.state';
-import {Sight} from '@store/models/sights.model';
 import {environment} from '@env/environment';
 import mapBox from 'mapbox-gl';
 import {MarkerColor} from '@model/enums/markerColor';
+import {Sight} from '@model/sight';
 
 mapBox.accessToken = environment.mapApiKey;
 
@@ -29,7 +29,7 @@ export class SightsMapComponent implements OnInit, OnDestroy {
       container: 'map',
       style: 'mapbox://styles/mapbox/streets-v11',
       center: [environment.initLong, environment.initLat],
-      zoom: 9,
+      zoom: 13,
     });
 
     map.on('load', () => {
