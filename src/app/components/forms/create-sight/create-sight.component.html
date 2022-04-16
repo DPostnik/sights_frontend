@@ -59,7 +59,7 @@
       </mat-form-field>
       <mat-form-field appearance="outline">
         <mat-label>Город</mat-label>
-        <mat-select required formControlName="region">
+        <mat-select required formControlName="city">
           <mat-option *ngFor="let city of cities" [value]="city.name">{{ city.name }}</mat-option>
         </mat-select>
       </mat-form-field>
@@ -88,31 +88,32 @@
         </mat-select>
       </mat-form-field>
 
-      <mat-form-field class="example-chip-list" appearance="fill">
-        <mat-label>Categories</mat-label>
-        <mat-chip-list #chipList aria-label="category selection">
-          <mat-chip *ngFor="let category of selectedCategories" (removed)="onRemove(category)">
-            {{ category }}
-            <button matChipRemove>
-              <mat-icon>cancel</mat-icon>
-            </button>
-          </mat-chip>
-          <input
-            placeholder="New Category..."
-            #categoryInput
-            formControlName="categories"
-            [matAutocomplete]="auto"
-            [matChipInputFor]="chipList"
-            [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-            (matChipInputTokenEnd)="addCategory($event)"
-          />
-        </mat-chip-list>
-        <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
-          <mat-option *ngFor="let category of filteredCategories" [value]="category">
-            {{ category }}
-          </mat-option>
-        </mat-autocomplete>
-      </mat-form-field>
+      <!--      <mat-form-field class="example-chip-list" appearance="fill">-->
+      <!--        <mat-label>Categories</mat-label>-->
+      <!--        <mat-chip-list #chipList aria-label="category selection">-->
+      <!--          <mat-chip *ngFor="let category of selectedCategories" (removed)="onRemove(category)">-->
+      <!--            {{ category }}-->
+      <!--            <button matChipRemove>-->
+      <!--              <mat-icon>cancel</mat-icon>-->
+      <!--            </button>-->
+      <!--          </mat-chip>-->
+      <!--          <input-->
+      <!--            placeholder="New Category..."-->
+      <!--            #categoryInput-->
+      <!--            formControlName="categories"-->
+      <!--            [matAutocomplete]="auto"-->
+      <!--            [matChipInputFor]="chipList"-->
+      <!--            [matChipInputSeparatorKeyCodes]="separatorKeysCodes"-->
+      <!--            (matChipInputTokenEnd)="addCategory($event)"-->
+      <!--          />-->
+      <!--        </mat-chip-list>-->
+      <!--        <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">-->
+      <!--          <mat-option *ngFor="let category of filteredList" [value]="category">-->
+      <!--            {{ category }}-->
+      <!--          </mat-option>-->
+      <!--        </mat-autocomplete>-->
+      <!--      </mat-form-field>-->
     </div>
   </div>
+  <button (submit)="submitForm()">Submit</button>
 </form>
