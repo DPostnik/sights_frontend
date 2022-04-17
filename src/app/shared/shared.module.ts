@@ -19,9 +19,23 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatChipsModule} from '@angular/material/chips';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatSelectModule} from '@angular/material/select';
+import {LoaderComponent} from '@components/loader/loader.component';
+import {HeaderComponent} from '@components/header/header.component';
+import {FooterComponent} from '@components/footer/footer.component';
+import {DevMenuComponent} from '@components/devMenu/devMenu.component';
+import {MapComponent} from '@components/map/map.component';
 
 @NgModule({
-  declarations: [LayoutComponent, SearchComponent, CreateSightComponent],
+  declarations: [
+    LayoutComponent,
+    SearchComponent,
+    CreateSightComponent,
+    LoaderComponent,
+    HeaderComponent,
+    FooterComponent,
+    DevMenuComponent,
+    MapComponent,
+  ],
   imports: [
     HttpClientModule,
     ReactiveFormsModule,
@@ -30,6 +44,7 @@ import {MatSelectModule} from '@angular/material/select';
     RouterModule,
     MatIconModule,
     MatCardModule,
+    MatToolbarModule,
     MatProgressSpinnerModule,
     MatMenuModule,
     MatOptionModule,
@@ -63,6 +78,11 @@ import {MatSelectModule} from '@angular/material/select';
     MatChipsModule,
     MatAutocompleteModule,
     MatSelectModule,
+    LoaderComponent,
+    HeaderComponent,
+    FooterComponent,
+    DevMenuComponent,
+    MapComponent,
   ],
 })
 export class SharedModule {}
