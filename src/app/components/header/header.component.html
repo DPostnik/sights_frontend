@@ -7,9 +7,9 @@
     </div>
 
     <div class="header__tabs">
-      <span *ngFor="let tab of tabs"
-        ><a [routerLink]="tab.routerLink" routerLinkActive="active-link">{{ tab.value }}</a></span
-      >
+      <span *ngFor="let tab of tabs">
+        <a [routerLink]="tab.routerLink" routerLinkActive="active-link">{{ tab.value }}</a>
+      </span>
       <app-dev-menu *ngIf="!environment.production"></app-dev-menu>
     </div>
   </div>

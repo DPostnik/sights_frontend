@@ -1,6 +1,6 @@
 import {delay, Observable, of} from 'rxjs';
-import {Sight} from '@store/models/sights.model';
 import {PaginatedList} from '@model/pagination';
+import {Sight} from '@model/sight';
 
 export const getSight = (): Observable<Sight> => {
   return of({
@@ -34,8 +34,7 @@ export const getSights = (): Observable<PaginatedList<Sight>> => {
     data: [
       {
         name: 'mac',
-        description:
-          'оч длинае аписание уууф прям ващееее как его атабразить ну ни знаю мммм нада падуматьббб',
+        description: 'очка точфывафыв',
         date: new Date(),
         founder: '',
         mainImage:
@@ -43,7 +42,7 @@ export const getSights = (): Observable<PaginatedList<Sight>> => {
         images: [
           'https://upload.wikimedia.org/wikipedia/commons/thumb/7/72/Anser_anser_2_%28Piotr_Kuczynski%29.jpg/1200px-Anser_anser_2_%28Piotr_Kuczynski%29.jpg',
         ],
-        id: 0,
+        id: 123,
         location: {
           country: 'Беларусь',
           region: 'Регион',
@@ -51,8 +50,8 @@ export const getSights = (): Observable<PaginatedList<Sight>> => {
         },
         rating: 0,
         coordinates: {
-          longitude: 53.669532,
-          latitude: 23.820628,
+          longitude: 54.669532,
+          latitude: 24.820628,
         },
         categories: ['Нормаль'],
       },

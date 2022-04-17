@@ -1,19 +1,12 @@
 import {Coordinates} from '@model/coordinates';
 
-export interface Sight {
+export interface SightDto {
   categories?: string[];
+  city?: string;
   coordinates: Coordinates;
   date?: Date;
   description: string;
   founder: string;
-  id: number;
-  images: string[];
-  location: {
-    country: string;
-    region: string;
-    city: string;
-  };
   mainImage: string;
   name: string;
-  rating: number;
 }

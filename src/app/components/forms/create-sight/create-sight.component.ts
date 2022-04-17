@@ -8,8 +8,8 @@ import {Category} from '@model/category';
 import {Select, Store} from '@ngxs/store';
 import {AppState} from '@store/states/app.state';
 import {Meta} from '@model/meta';
-import {CreateSightDto} from '@model/sight';
 import {CreateSight} from '@store/actions/sights.actions';
+import {SightDto} from '@model/dto/sightDto';
 
 @Component({
   selector: 'app-create-sight',
@@ -60,7 +60,7 @@ export class CreateSightComponent implements OnInit, OnDestroy {
   submitForm() {
     if (this.form.invalid) return;
 
-    const sight: CreateSightDto = {
+    const sight: SightDto = {
       categories: [this.form.get('categories')?.value],
       coordinates: {
         latitude: this.form.get('latitude')?.value,

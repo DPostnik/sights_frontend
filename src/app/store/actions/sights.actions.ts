@@ -1,5 +1,6 @@
 import {PaginatedList} from '@model/pagination';
-import {CreateSightDto, Sight} from '@model/sight';
+import {Sight} from '@model/sight';
+import {SightDto} from '@model/dto/sightDto';
 
 export class GetSights {
   static readonly type = '[Sights] GetSights';
@@ -35,5 +36,5 @@ export class GetSightFailure {
 
 export class CreateSight {
   static readonly type = '[Sights] CreateSight';
-  constructor(public dto: CreateSightDto) {}
+  constructor(public dto: SightDto) {}
 }
