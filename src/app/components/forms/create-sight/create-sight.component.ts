@@ -1,6 +1,6 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {Observable, Subscription} from 'rxjs';
+import {Observable, Subscription, tap} from 'rxjs';
 import {Country} from '@model/country';
 import {Region} from '@model/region';
 import {City} from '@model/city';
@@ -8,8 +8,11 @@ import {Category} from '@model/category';
 import {Select, Store} from '@ngxs/store';
 import {AppState} from '@store/states/app.state';
 import {Meta} from '@model/meta';
-import {CreateSight} from '@store/actions/sights.actions';
+import {CreateSight, GetSight, UpdateSight} from '@store/actions/sights.actions';
 import {SightDto} from '@model/dto/sightDto';
+import {SightsState} from '@store/states/sights.state';
+import {Sight} from '@model/sight';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-create-sight',
@@ -17,8 +20,11 @@ import {SightDto} from '@model/dto/sightDto';
   styleUrls: ['./create-sight.component.scss'],
 })
 export class CreateSightComponent implements OnInit, OnDestroy {
+  @Input() update = false;
   @Select(AppState.selectMeta) meta$!: Observable<Meta>;
+  @Select(SightsState.selectSight) sight$!: Observable<Sight>;
   form: FormGroup = new FormGroup({});
+  sight?: Sight;
 
   subscriptions: Subscription[] = [];
   countries?: Country[];
@@ -35,29 +41,33 @@ export class CreateSightComponent implements OnInit, OnDestroy {
         this.categories = meta.categories;
       }),
     );
+    this.subscriptions.push(
+      this.route.params.subscribe((p) => this.store.dispatch(new GetSight(p['id']))),
+      this.sight$.pipe(tap((sight) => (this.sight = sight))).subscribe(() => {
+        this.initializeForm();
+      }),
+    );
   }
 
-  constructor(private store: Store) {
-    this.initializeForm();
-  }
+  constructor(private store: Store, private route: ActivatedRoute) {}
 
   private initializeForm(): void {
     this.form = new FormGroup({
-      name: new FormControl(null, [Validators.required]),
-      description: new FormControl(null, [Validators.required]),
-      mainImage: new FormControl(null),
-      founder: new FormControl(null),
-      date: new FormControl(new Date()),
-      country: new FormControl(null, [Validators.required]),
-      region: new FormControl(null, [Validators.required]),
-      city: new FormControl(null, [Validators.required]),
-      latitude: new FormControl(null, [Validators.required]),
-      longitude: new FormControl(null, [Validators.required]),
-      categories: new FormControl(null),
+      name: new FormControl(this.sight?.name || null, [Validators.required]),
+      description: new FormControl(this.sight?.description || null, [Validators.required]),
+      mainImage: new FormControl(this.sight?.mainImage || null),
+      founder: new FormControl(this.sight?.founder || null),
+      date: new FormControl(this.sight?.date || null),
+      country: new FormControl(this.sight?.location?.country || null, [Validators.required]),
+      region: new FormControl(this.sight?.location?.region || null, [Validators.required]),
+      city: new FormControl(this.sight?.location?.city || null, [Validators.required]),
+      latitude: new FormControl(this.sight?.coordinates?.latitude || null, [Validators.required]),
+      longitude: new FormControl(this.sight?.coordinates?.longitude || null, [Validators.required]),
+      categories: new FormControl(this.sight?.categories || null),
     });
   }
 
-  submitForm() {
+  submitForm(): void {
     if (this.form.invalid) return;
 
     const sight: SightDto = {
@@ -73,6 +83,10 @@ export class CreateSightComponent implements OnInit, OnDestroy {
       name: this.form.get('name')?.value,
       mainImage: this.form.get('mainImage')?.value,
     };
+    if (this.update) {
+      this.store.dispatch(new UpdateSight(sight, this.sight!.id));
+      return;
+    }
     this.store.dispatch(new CreateSight(sight));
   }
 

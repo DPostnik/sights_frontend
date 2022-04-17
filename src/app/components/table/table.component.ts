@@ -2,6 +2,7 @@ import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angula
 import {TableCol} from '@model/table';
 import {PageEvent} from '@angular/material/paginator';
 import {MatMenuTrigger} from '@angular/material/menu';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-table',
@@ -16,6 +17,8 @@ export class TableComponent implements OnInit {
   @Input() enableContextMenu = false;
   @Output() handlePage = new EventEmitter<number>();
 
+  constructor(private router: Router) {}
+
   ngOnInit(): void {
     this.displayedColumns = this.tableCols?.map((item) => item.def);
   }
@@ -29,22 +32,23 @@ export class TableComponent implements OnInit {
 
   contextMenuPosition = {x: '0px', y: '0px'};
 
-  onContextMenu(event: MouseEvent) {
+  onContextMenu(event: MouseEvent, id: number) {
     if (!this.contextMenu) {
       return;
     }
     event.preventDefault();
     this.contextMenuPosition.x = event.clientX + 'px';
     this.contextMenuPosition.y = event.clientY + 'px';
+    this.contextMenu.menuData = {item: id};
     this.contextMenu?.openMenu();
   }
 
-  view(id: number) {
-    console.log(id);
+  async view(id: number) {
+    await this.router.navigate(['sight', id]);
   }
 
-  edit(id: number) {
-    console.log(id);
+  async edit(id: number) {
+    await this.router.navigate([`/admin/edit`, id]);
   }
 
   remove(id: number) {

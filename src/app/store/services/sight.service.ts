@@ -34,4 +34,8 @@ export class SightService {
   postSight(dto: SightDto): Observable<void> {
     return this.http.post<void>(`${this.prefix}sight`, dto);
   }
+
+  putSight(dto: SightDto, id: number): Observable<void> {
+    return this.http.put<void>(`${this.prefix}sight/${id}`, dto);
+  }
 }
