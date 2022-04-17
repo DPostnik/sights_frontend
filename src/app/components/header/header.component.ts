@@ -1,7 +1,8 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {getDecodedAccessToken} from '@utils/jwtParse';
 import {AuthService} from '@services/auth.service';
 import {environment} from '@env/environment';
+import {Tab} from '@model/tab';
 
 @Component({
   selector: 'app-header',
@@ -9,6 +10,7 @@ import {environment} from '@env/environment';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
+  @Input() tabs!: Tab[];
   userName = 'Account';
   environment = environment;
 

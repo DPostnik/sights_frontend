@@ -3,10 +3,11 @@ import {Select, Store} from '@ngxs/store';
 import {environment} from '@env/environment';
 import mapBox from 'mapbox-gl';
 import {Observable, Subscription} from 'rxjs';
-import {Sight} from '@store/models/sights.model';
 import {SightsState} from '@store/states/sights.state';
 import {GetSights} from '@store/actions/sights.actions';
 import {MarkerColor} from '@model/enums/markerColor';
+import {Sight} from '@model/sight';
+
 mapBox.accessToken = environment.mapApiKey;
 
 @Component({

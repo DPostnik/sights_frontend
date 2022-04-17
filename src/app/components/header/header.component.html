@@ -1,15 +1,15 @@
 <mat-toolbar color="primary">
   <div class="header__content">
     <div class="header__title">
-      <a routerLink="home">
+      <a routerLink="/home">
         <img src="assets/img/header/logo.svg" alt="" />
       </a>
     </div>
 
     <div class="header__tabs">
-      <span><a routerLink="home" routerLinkActive="active-link">Главная</a></span>
-      <span><a routerLink="map" routerLinkActive="active-link">Карта</a></span>
-      <span><a routerLink="list" routerLinkActive="active-link">Список объектов</a></span>
+      <span *ngFor="let tab of tabs"
+        ><a [routerLink]="tab.routerLink" routerLinkActive="active-link">{{ tab.value }}</a></span
+      >
       <app-dev-menu *ngIf="!environment.production"></app-dev-menu>
     </div>
   </div>

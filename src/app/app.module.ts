@@ -4,12 +4,10 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {registerLocaleData} from '@angular/common';
 import localeRu from '@angular/common/locales/ru';
 import {NgxsModule} from '@ngxs/store';
-
 import {AppRoutingModule} from './app-routing.module';
 import {AdminModule} from '@pages/admin/admin.module';
 import {AuthModule} from '@pages/auth/auth.module';
 import {SharedModule} from '@shared/shared.module';
-
 import {AppComponent} from './app.component';
 import {NotFoundComponent} from '@pages/not-found/not-found.component';
 import {AdminPageComponent} from '@pages/admin/admin-page/admin-page.component';
