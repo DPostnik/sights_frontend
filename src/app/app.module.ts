@@ -10,7 +10,6 @@ import {AuthModule} from '@pages/auth/auth.module';
 import {SharedModule} from '@shared/shared.module';
 import {AppComponent} from './app.component';
 import {NotFoundComponent} from '@pages/not-found/not-found.component';
-import {AdminPageComponent} from '@pages/admin/admin-page/admin-page.component';
 import {environment} from '@env/environment';
 import {MainModule} from '@pages/main/main.module';
 import {SightsState} from '@store/states/sights.state';
@@ -21,7 +20,7 @@ import {AppService} from '@store/services/app.service';
 registerLocaleData(localeRu, 'ru');
 
 @NgModule({
-  declarations: [AppComponent, AdminPageComponent, NotFoundComponent],
+  declarations: [AppComponent, NotFoundComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

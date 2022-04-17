@@ -10,6 +10,7 @@ import {
   GetSightsFailure,
   GetSightsSuccess,
   GetSightSuccess,
+  UpdateSight,
 } from '@store/actions/sights.actions';
 import {SightsStateModel} from '@store/models/sights.model';
 import {EndLoading, StartLoading} from '@store/actions/app.actions';
@@ -97,6 +98,16 @@ export class SightsState {
   @Action(CreateSight)
   createSight(ctx: StateContext<SightsStateModel>, {dto}: CreateSight) {
     return this.sightService.postSight(dto).pipe(
+      catchError((e) => {
+        console.error('getSight error', e);
+        return EMPTY;
+      }),
+    );
+  }
+
+  @Action(UpdateSight)
+  updateSight(ctx: StateContext<SightsStateModel>, {sight, id}: UpdateSight) {
+    return this.sightService.putSight(sight, id).pipe(
       catchError((e) => {
         console.error('getSight error', e);
         return EMPTY;

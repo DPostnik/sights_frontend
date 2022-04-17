@@ -38,3 +38,8 @@ export class CreateSight {
   static readonly type = '[Sights] CreateSight';
   constructor(public dto: SightDto) {}
 }
+
+export class UpdateSight {
+  static readonly type = '[Sight] UpdateSight';
+  constructor(public sight: SightDto, public id: number) {}
+}

@@ -24,6 +24,9 @@ import {HeaderComponent} from '@components/header/header.component';
 import {FooterComponent} from '@components/footer/footer.component';
 import {DevMenuComponent} from '@components/devMenu/devMenu.component';
 import {MapComponent} from '@components/map/map.component';
+import {MatButtonModule} from '@angular/material/button';
+import {MatTableModule} from '@angular/material/table';
+import {TableComponent} from '@components/table/table.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +38,7 @@ import {MapComponent} from '@components/map/map.component';
     FooterComponent,
     DevMenuComponent,
     MapComponent,
+    TableComponent,
   ],
   imports: [
     HttpClientModule,
@@ -55,6 +59,9 @@ import {MapComponent} from '@components/map/map.component';
     MatChipsModule,
     MatAutocompleteModule,
     MatSelectModule,
+    MatButtonModule,
+    MatTableModule,
+    MatPaginatorModule,
   ],
   exports: [
     HttpClientModule,
@@ -83,6 +90,8 @@ import {MapComponent} from '@components/map/map.component';
     FooterComponent,
     DevMenuComponent,
     MapComponent,
+    MatTableModule,
+    TableComponent,
   ],
 })
 export class SharedModule {}
