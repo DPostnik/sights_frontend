@@ -3,7 +3,8 @@ import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {environment} from '@env/environment';
 import {PaginatedList} from '@model/pagination';
-import {CreateSightDto, Sight} from '@model/sight';
+import {Sight} from '@model/sight';
+import {SightDto} from '@model/dto/sightDto';
 
 @Injectable({
   providedIn: 'root',
@@ -30,7 +31,7 @@ export class SightService {
     return this.http.get<Sight>(`${this.prefix}sight/${id}`);
   }
 
-  postSight(dto: CreateSightDto): Observable<void> {
+  postSight(dto: SightDto): Observable<void> {
     return this.http.post<void>(`${this.prefix}sight`, dto);
   }
 }
