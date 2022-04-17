@@ -24,6 +24,7 @@ import {HeaderComponent} from '@components/header/header.component';
 import {FooterComponent} from '@components/footer/footer.component';
 import {DevMenuComponent} from '@components/devMenu/devMenu.component';
 import {MapComponent} from '@components/map/map.component';
+import {MatButtonModule} from '@angular/material/button';
 
 @NgModule({
   declarations: [
@@ -55,6 +56,7 @@ import {MapComponent} from '@components/map/map.component';
     MatChipsModule,
     MatAutocompleteModule,
     MatSelectModule,
+    MatButtonModule,
   ],
   exports: [
     HttpClientModule,
