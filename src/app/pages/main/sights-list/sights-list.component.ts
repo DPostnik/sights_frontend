@@ -25,7 +25,6 @@ export class SightsListComponent implements OnInit, OnDestroy {
   @Select(SightsState.selectTotal) total$!: Observable<number>;
 
   total?: number;
-  currentPage?: number;
   data: Sight[] = [];
 
   search$ = new Subject<string>();

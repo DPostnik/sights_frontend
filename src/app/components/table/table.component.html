@@ -1,0 +1,40 @@
+<div class="container">
+  <table mat-table [dataSource]="dataSource">
+    <ng-container *ngFor="let item of tableCols" [matColumnDef]="item.def">
+      <th mat-header-cell *matHeaderCellDef>{{ item.title }}</th>
+      <td mat-cell *matCellDef="let element" (contextmenu)="onContextMenu($event)">
+        {{ element[item.field] }}
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+
+  <ng-container *ngIf="enableContextMenu">
+    <div
+      style="visibility: hidden; position: fixed"
+      [style.left]="contextMenuPosition.x"
+      [style.top]="contextMenuPosition.y"
+      [matMenuTriggerFor]="contextMenu"
+    ></div>
+    <mat-menu #contextMenu="matMenu">
+      <ng-template matMenuContent let-item="item">
+        <button mat-menu-item (click)="view(item)">Просмотреть</button>
+        <button mat-menu-item (click)="edit(item)">Редактировать</button>
+        <button mat-menu-item (click)="remove(item)">Удалить</button>
+      </ng-template>
+    </mat-menu>
+  </ng-container>
+
+  <ng-container *ngIf="total">
+    <mat-paginator
+      [pageSizeOptions]="[10]"
+      showFirstLastButtons
+      aria-label="Select page of periodic elements"
+      [length]="total"
+      (page)="handleChangePage($event)"
+    >
+    </mat-paginator>
+  </ng-container>
+</div>

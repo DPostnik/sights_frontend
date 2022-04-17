@@ -1,7 +1,7 @@
 import {NgModule} from '@angular/core';
 import {RouterModule} from '@angular/router';
 import {AdminLayoutComponent} from './admin-layout/admin-layout.component';
-import {AdminPageComponent} from './admin-page/admin-page.component';
+import {DashboardPageComponent} from './dashboard-page/dashboard-page.component';
 import {SharedModule} from '@shared/shared.module';
 import {CreateSightPageComponent} from './create-sight-page/create-sight-page.component';
 
@@ -17,7 +17,7 @@ import {CreateSightPageComponent} from './create-sight-page/create-sight-page.co
             redirectTo: '/admin/dashboard',
             pathMatch: 'full',
           },
-          {path: 'dashboard', component: AdminPageComponent},
+          {path: 'dashboard', component: DashboardPageComponent},
           {path: 'create', component: CreateSightPageComponent},
         ],
       },
@@ -25,6 +25,6 @@ import {CreateSightPageComponent} from './create-sight-page/create-sight-page.co
     SharedModule,
   ],
   exports: [RouterModule],
-  declarations: [AdminLayoutComponent, CreateSightPageComponent],
+  declarations: [AdminLayoutComponent, CreateSightPageComponent, DashboardPageComponent],
 })
 export class AdminModule {}
