@@ -1,5 +1,4 @@
 .cards-container {
-
   .card-list {
     flex-wrap: wrap;
     justify-content: space-around;
@@ -14,4 +13,16 @@
       }
     }
   }
+}
+
+.search-container{
+  width:20%;
+  margin: 0 auto;
+}
+
+.mat-paginator{
+  position: fixed;
+  bottom: 60px;
+  width: 100%;
+  border: 1px solid black;
 }
