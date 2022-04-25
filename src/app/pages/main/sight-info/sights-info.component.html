@@ -15,8 +15,6 @@
     <mat-icon>star</mat-icon>
     {{ sight.rating }}
   </div>
+  <div *ngIf="!sight">Объект не найден</div>
+  <button (click)="handleReturnClick()">Назад</button>
 </div>
-
-<div *ngIf="!sight">Объект не найден</div>
-
-<button (click)="handleReturnClick()">Назад</button>
