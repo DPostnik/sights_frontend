@@ -5,6 +5,7 @@ import {DashboardPageComponent} from './dashboard-page/dashboard-page.component'
 import {SharedModule} from '@shared/shared.module';
 import {CreateSightPageComponent} from './create-sight-page/create-sight-page.component';
 import {EditSightComponent} from './edit-sight/edit-sight.component';
+import { UserListComponent } from './user-list/user-list.component';
 
 @NgModule({
   imports: [
@@ -21,6 +22,8 @@ import {EditSightComponent} from './edit-sight/edit-sight.component';
           {path: 'dashboard', component: DashboardPageComponent},
           {path: 'create', component: CreateSightPageComponent},
           {path: 'edit/:id', component: EditSightComponent},
+          {path: 'users', component: UserListComponent},
+          {path: 'user/:id', component: UserListComponent},
         ],
       },
     ]),
@@ -32,6 +35,7 @@ import {EditSightComponent} from './edit-sight/edit-sight.component';
     CreateSightPageComponent,
     DashboardPageComponent,
     EditSightComponent,
+    UserListComponent,
   ],
 })
 export class AdminModule {}
