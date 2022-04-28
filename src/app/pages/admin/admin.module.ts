@@ -3,7 +3,7 @@ import {RouterModule} from '@angular/router';
 import {AdminLayoutComponent} from './admin-layout/admin-layout.component';
 import {DashboardPageComponent} from './dashboard-page/dashboard-page.component';
 import {SharedModule} from '@shared/shared.module';
-import {CreateSightPageComponent} from './create-sight-page/create-sight-page.component';
+import {AdminCreateSightComponent} from './create-sight/admin-create-sight.component';
 import {EditSightComponent} from './edit-sight/edit-sight.component';
 
 @NgModule({
@@ -19,7 +19,7 @@ import {EditSightComponent} from './edit-sight/edit-sight.component';
             pathMatch: 'full',
           },
           {path: 'dashboard', component: DashboardPageComponent},
-          {path: 'create', component: CreateSightPageComponent},
+          {path: 'create', component: AdminCreateSightComponent},
           {path: 'edit/:id', component: EditSightComponent},
         ],
       },
@@ -29,7 +29,7 @@ import {EditSightComponent} from './edit-sight/edit-sight.component';
   exports: [RouterModule],
   declarations: [
     AdminLayoutComponent,
-    CreateSightPageComponent,
+    AdminCreateSightComponent,
     DashboardPageComponent,
     EditSightComponent,
   ],

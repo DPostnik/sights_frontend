@@ -2,6 +2,7 @@
   .card-list {
     flex-wrap: wrap;
     justify-content: space-around;
+    margin-bottom: 60px;
 
     .card {
       width: 20%;
@@ -22,7 +23,6 @@
 
 .mat-paginator{
   position: fixed;
-  bottom: 60px;
+  bottom: 0;
   width: 100%;
-  border: 1px solid black;
 }
