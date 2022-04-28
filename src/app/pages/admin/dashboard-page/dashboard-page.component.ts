@@ -1,10 +1,12 @@
 import {Component, OnInit} from '@angular/core';
-import {TableCol} from '@model/table';
+import {ContextMenuActions, TableCol} from '@model/table';
 import {Select, Store} from '@ngxs/store';
 import {SightsState} from '@store/states/sights.state';
 import {Observable, Subscription} from 'rxjs';
 import {Sight} from '@model/sight';
 import {GetSights} from '@store/actions/sights.actions';
+import {sightsTableColumns} from '../../../constants/tableColumns';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-dashboard-page',
@@ -16,12 +18,16 @@ export class DashboardPageComponent implements OnInit {
   @Select(SightsState.selectTotal) total$!: Observable<number>;
 
   total!: number;
-  currentPage?: number;
   data: Sight[] = [];
+  contextMenuItems: ContextMenuActions = {
+    onEdit: this.edit,
+    onRemove: this.remove,
+    onView: this.view,
+  };
 
   subscriptions: Subscription[] = [];
 
-  constructor(private store: Store) {}
+  constructor(private store: Store, private router: Router) {}
 
   ngOnInit(): void {
     this.store.dispatch(new GetSights(10, 0));
@@ -32,30 +38,21 @@ export class DashboardPageComponent implements OnInit {
     );
   }
 
-  tableCols: TableCol[] = [
-    {
-      def: 'id',
-      title: 'ID',
-      field: 'id',
-    },
-    {
-      def: 'founder',
-      title: 'Основатель',
-      field: 'founder',
-    },
-    {
-      def: 'name',
-      title: 'Название',
-      field: 'name',
-    },
-    {
-      def: 'description',
-      title: 'Описание',
-      field: 'description',
-    },
-  ];
+  tableCols: TableCol[] = sightsTableColumns;
 
   handleChangePage(value: number) {
     this.store.dispatch(new GetSights(10, value * 10));
+  }
+
+  async edit(id: number) {
+    await this.router.navigate(['sight', id]);
+  }
+
+  remove(id: number) {
+    console.log(id);
+  }
+
+  async view(id: number) {
+    await this.router.navigate([`/admin/edit`, id]);
   }
 }

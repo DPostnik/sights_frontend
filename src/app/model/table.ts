@@ -4,7 +4,8 @@ export interface TableCol {
   field: string;
 }
 
-export interface Pagination {
-  total: number;
-  currentPage: number;
+export interface ContextMenuActions {
+  onView: (id: number) => void;
+  onEdit: (id: number) => void;
+  onRemove: (id: number) => void;
 }

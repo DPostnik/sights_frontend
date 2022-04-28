@@ -1,11 +1,11 @@
-import {Injectable} from "@angular/core";
-import {HttpClient} from "@angular/common/http";
-import {environment} from "@env/environment";
-import {Observable} from "rxjs";
-import {PaginatedList} from "@model/pagination";
-import {User} from "@model/user";
+import {Injectable} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {environment} from '@env/environment';
+import {Observable} from 'rxjs';
+import {PaginatedList} from '@model/pagination';
+import {User} from '@model/user';
 
-Injectable({
+@Injectable({
   providedIn: 'root',
 })
 export class UserService {
@@ -13,11 +13,7 @@ export class UserService {
 
   prefix = environment.apiUrl;
 
-  getUsers(
-    limit?: number,
-    offset?: number,
-    search: string = '',
-  ): Observable<PaginatedList<User>> {
+  getUsers(limit?: number, offset?: number, search: string = ''): Observable<PaginatedList<User>> {
     const limitField = limit ? `?_limit=${limit}` : '';
     const offsetField = offset ? `&_offset=${offset}` : '';
     const searchField = search ? `&_search=${search}` : '';
@@ -25,5 +21,4 @@ export class UserService {
       `${this.prefix}users${limitField}${offsetField}${searchField}`,
     );
   }
-
 }

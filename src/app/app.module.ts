@@ -16,6 +16,8 @@ import {SightsState} from '@store/states/sights.state';
 import {SightService} from '@store/services/sight.service';
 import {AppState} from '@store/states/app.state';
 import {AppService} from '@store/services/app.service';
+import {UsersState} from '@store/states/users.state';
+import {UserService} from '@store/services/user.service';
 
 registerLocaleData(localeRu, 'ru');
 
@@ -25,7 +27,7 @@ registerLocaleData(localeRu, 'ru');
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    NgxsModule.forRoot([AppState, SightsState], {
+    NgxsModule.forRoot([AppState, SightsState, UsersState], {
       developmentMode: !environment.production,
     }),
     AdminModule,
@@ -33,7 +35,7 @@ registerLocaleData(localeRu, 'ru');
     SharedModule,
     MainModule,
   ],
-  providers: [SightService, AppService, {provide: LOCALE_ID, useValue: 'ru'}],
+  providers: [SightService, AppService, UserService, {provide: LOCALE_ID, useValue: 'ru'}],
   exports: [],
   bootstrap: [AppComponent],
 })

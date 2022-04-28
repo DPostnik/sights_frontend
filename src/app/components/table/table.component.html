@@ -15,7 +15,7 @@
     <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
   </table>
 
-  <ng-container *ngIf="enableContextMenu">
+  <ng-container>
     <div
       style="visibility: hidden; position: fixed"
       [style.left]="contextMenuPosition.x"
@@ -24,9 +24,9 @@
     ></div>
     <mat-menu #contextMenu="matMenu">
       <ng-template matMenuContent let-item="item">
-        <button mat-menu-item (click)="view(item)">Просмотреть</button>
-        <button mat-menu-item (click)="edit(item)">Редактировать</button>
-        <button mat-menu-item (click)="remove(item)">Удалить</button>
+        <button mat-menu-item (click)="this.contextMenuActions?.onView(item)">Просмотреть</button>
+        <button mat-menu-item (click)="this.contextMenuActions?.onEdit(item)">Редактировать</button>
+        <button mat-menu-item (click)="this.contextMenuActions?.onRemove(item)">Удалить</button>
       </ng-template>
     </mat-menu>
   </ng-container>

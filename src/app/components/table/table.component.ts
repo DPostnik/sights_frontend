@@ -1,8 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
-import {TableCol} from '@model/table';
+import {ContextMenuActions, TableCol} from '@model/table';
 import {PageEvent} from '@angular/material/paginator';
 import {MatMenuTrigger} from '@angular/material/menu';
-import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-table',
@@ -15,12 +14,12 @@ export class TableComponent implements OnInit {
   @Input() tableCols!: TableCol[];
   @Input() total!: number;
   @Input() enableContextMenu = false;
+  @Input() contextMenuActions!: ContextMenuActions; // todo
   @Output() handlePage = new EventEmitter<number>();
-
-  constructor(private router: Router) {}
 
   ngOnInit(): void {
     this.displayedColumns = this.tableCols?.map((item) => item.def);
+    console.log(this.contextMenuActions);
   }
 
   handleChangePage(event: PageEvent) {
@@ -43,15 +42,15 @@ export class TableComponent implements OnInit {
     this.contextMenu?.openMenu();
   }
 
-  async view(id: number) {
-    await this.router.navigate(['sight', id]);
+  view(id: number) {
+    this.contextMenuActions?.onView(id);
   }
 
-  async edit(id: number) {
-    await this.router.navigate([`/admin/edit`, id]);
+  edit(id: number) {
+    this.contextMenuActions?.onEdit(id);
   }
 
   remove(id: number) {
-    console.log(id);
+    this.contextMenuActions?.onRemove(id);
   }
 }
