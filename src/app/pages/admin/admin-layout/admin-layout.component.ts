@@ -8,8 +8,8 @@ import {Tab} from '@model/tab';
 })
 export class AdminLayoutComponent {
   tabs: Tab[] = [
-    {routerLink: 'dashboard', value: 'Главная'},
-    {routerLink: 'create', value: 'Создание ОИЗ'},
-    {routerLink: 'users', value: 'Пользователи'},
+    {routerLink: 'sights/dashboard', value: 'Главная'},
+    {routerLink: 'sights/create', value: 'Создание ОИЗ'},
+    {routerLink: 'users/dashboard', value: 'Пользователи'},
   ];
 }

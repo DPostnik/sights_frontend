@@ -5,7 +5,7 @@
       <td
         mat-cell
         *matCellDef="let element"
-        (contextmenu)="enableContextMenu ? onContextMenu($event, element.id) : undefined"
+        (contextmenu)="contextMenuActions ? onContextMenu($event, element.id) : undefined"
       >
         {{ element[item.field] }}
       </td>
@@ -15,7 +15,7 @@
     <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
   </table>
 
-  <ng-container>
+  <ng-container *ngIf="contextMenuActions">
     <div
       style="visibility: hidden; position: fixed"
       [style.left]="contextMenuPosition.x"
@@ -24,9 +24,13 @@
     ></div>
     <mat-menu #contextMenu="matMenu">
       <ng-template matMenuContent let-item="item">
-        <button mat-menu-item (click)="this.contextMenuActions?.onView(item)">Просмотреть</button>
-        <button mat-menu-item (click)="this.contextMenuActions?.onEdit(item)">Редактировать</button>
-        <button mat-menu-item (click)="this.contextMenuActions?.onRemove(item)">Удалить</button>
+        <button
+          mat-menu-item
+          *ngFor="let contextMenuItem of contextMenuActions"
+          (click)="contextMenuItem.action(item)"
+        >
+          {{ contextMenuItem.name }}
+        </button>
       </ng-template>
     </mat-menu>
   </ng-container>

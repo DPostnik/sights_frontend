@@ -13,13 +13,11 @@ export class TableComponent implements OnInit {
   @Input() dataSource!: any[];
   @Input() tableCols!: TableCol[];
   @Input() total!: number;
-  @Input() enableContextMenu = false;
-  @Input() contextMenuActions!: ContextMenuActions; // todo
+  @Input() contextMenuActions?: ContextMenuActions[] | undefined;
   @Output() handlePage = new EventEmitter<number>();
 
   ngOnInit(): void {
     this.displayedColumns = this.tableCols?.map((item) => item.def);
-    console.log(this.contextMenuActions);
   }
 
   handleChangePage(event: PageEvent) {
@@ -40,17 +38,5 @@ export class TableComponent implements OnInit {
     this.contextMenuPosition.y = event.clientY + 'px';
     this.contextMenu.menuData = {item: id};
     this.contextMenu?.openMenu();
-  }
-
-  view(id: number) {
-    this.contextMenuActions?.onView(id);
-  }
-
-  edit(id: number) {
-    this.contextMenuActions?.onEdit(id);
-  }
-
-  remove(id: number) {
-    this.contextMenuActions?.onRemove(id);
   }
 }

@@ -5,7 +5,6 @@ export interface TableCol {
 }
 
 export interface ContextMenuActions {
-  onView: (id: number) => void;
-  onEdit: (id: number) => void;
-  onRemove: (id: number) => void;
+  name: string;
+  action: (id: number) => void;
 }
