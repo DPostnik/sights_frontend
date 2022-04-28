@@ -27,6 +27,7 @@ import {MapComponent} from '@components/map/map.component';
 import {MatButtonModule} from '@angular/material/button';
 import {MatTableModule} from '@angular/material/table';
 import {TableComponent} from '@components/table/table.component';
+import {MatTooltipModule} from '@angular/material/tooltip';
 
 @NgModule({
   declarations: [
@@ -62,6 +63,8 @@ import {TableComponent} from '@components/table/table.component';
     MatButtonModule,
     MatTableModule,
     MatPaginatorModule,
+    MatTooltipModule,
+    MatButtonModule,
   ],
   exports: [
     HttpClientModule,
@@ -92,6 +95,8 @@ import {TableComponent} from '@components/table/table.component';
     MapComponent,
     MatTableModule,
     TableComponent,
+    MatTooltipModule,
+    MatButtonModule,
   ],
 })
 export class SharedModule {}

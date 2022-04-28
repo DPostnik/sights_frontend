@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewContainerRef} from '@angular/core';
 import {Select, Store} from '@ngxs/store';
 import {environment} from '@env/environment';
 import mapBox from 'mapbox-gl';
@@ -8,6 +8,8 @@ import {GetSights} from '@store/actions/sights.actions';
 import {MarkerColor} from '@model/enums/markerColor';
 import {Sight} from '@model/sight';
 import {Router} from '@angular/router';
+import {MapPopupCreateComponent} from '@components/map-popups/map-popup-create/map-popup-create.component';
+import {MapPopupDetailComponent} from '@components/map-popups/map-popup-detail/map-popup-detail.component';
 
 mapBox.accessToken = environment.mapApiKey;
 
@@ -23,7 +25,11 @@ export class MapComponent implements OnInit, OnDestroy {
 
   subscription?: Subscription;
 
-  constructor(private store: Store, private router: Router) {}
+  constructor(
+    private store: Store,
+    private router: Router,
+    private viewContainerRef: ViewContainerRef,
+  ) {}
 
   ngOnInit() {
     this.store.dispatch(GetSights);
@@ -38,52 +44,48 @@ export class MapComponent implements OnInit, OnDestroy {
     map.doubleClickZoom.disable();
 
     map
-      .on('load', () => map.resize())
+      .once('sourcedata', () => map.resize())
       .on('click', (event) => console.log(event.lngLat))
       .on('dblclick', (event) => {
         this.prevNewMarker?.remove();
+
+        const popupComponent = this.viewContainerRef.createComponent(MapPopupCreateComponent);
 
         const popup = new mapBox.Popup({
           anchor: 'bottom',
           closeOnClick: true,
           closeButton: false,
         })
-          .setHTML(
-            `<div class="marker-popup">
-                <button class="marker-link" id="marker-link-create">Добавить место</button>
-            </div>`,
-          )
+          .setDOMContent(popupComponent.location.nativeElement)
           .on('open', () => {
-            document.getElementById('marker-link-create')?.addEventListener('click', () => {
-              console.log('create sight'); // todo create sight
-            });
+            document
+              .querySelectorAll('.mapboxgl-popup')
+              .forEach((p) => (p.className += ' popup-hidden opacity1'));
           });
 
         this.prevNewMarker = new mapBox.Marker({color: MarkerColor.NEW})
           .setLngLat(event.lngLat)
           .setPopup(popup)
-          .addTo(map);
+          .addTo(map)
+          .togglePopup();
       });
 
     this.subscription = this.sights$.subscribe((sights) =>
       sights.forEach((s) => {
-        const id = `marker-link-${s.id}`;
+        const popupComponent = this.viewContainerRef.createComponent(MapPopupDetailComponent);
+        popupComponent.instance.sight = s;
+
         const popup = new mapBox.Popup({
           anchor: 'top',
           closeOnClick: true,
           closeButton: false,
         })
-          .setHTML(
-            `<div class="marker-popup">
-              <h2 class="marker-name">${s.name}</h2>
-              <p class="marker-description">${s.description}</p>
-              <button class="marker-link" id="${id}">Перейти</button>
-            </div>`,
-          )
+          .setDOMContent(popupComponent.location.nativeElement)
           .on('open', () => {
-            document.getElementById(id)?.addEventListener('click', () => this.navigate(s.id));
+            document
+              .querySelectorAll('.mapboxgl-popup')
+              .forEach((p) => (p.className += ' opacity1'));
           });
-
         new mapBox.Marker({color: MarkerColor.Default})
           .setLngLat([s.coordinates.longitude, s.coordinates.latitude])
           .setPopup(popup)
@@ -97,9 +99,5 @@ export class MapComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.subscription?.unsubscribe();
-  }
-
-  navigate(id: number): void {
-    this.router.navigate(['sight', id]).then();
   }
 }

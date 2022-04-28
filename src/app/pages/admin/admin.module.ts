@@ -3,7 +3,7 @@ import {RouterModule} from '@angular/router';
 import {AdminLayoutComponent} from './admin-layout/admin-layout.component';
 import {DashboardPageComponent} from './dashboard-page/dashboard-page.component';
 import {SharedModule} from '@shared/shared.module';
-import {CreateSightPageComponent} from './create-sight-page/create-sight-page.component';
+import {AdminCreateSightComponent} from './create-sight/admin-create-sight.component';
 import {EditSightComponent} from './edit-sight/edit-sight.component';
 import { UserListComponent } from './user-list/user-list.component';
 
@@ -20,7 +20,7 @@ import { UserListComponent } from './user-list/user-list.component';
             pathMatch: 'full',
           },
           {path: 'sights/dashboard', component: DashboardPageComponent},
-          {path: 'sights/create', component: CreateSightPageComponent},
+          {path: 'sights/create', component: AdminCreateSightComponent},
           {path: 'sights/edit/:id', component: EditSightComponent},
           {path: 'users/dashboard', component: UserListComponent},
         ],
@@ -31,7 +31,7 @@ import { UserListComponent } from './user-list/user-list.component';
   exports: [RouterModule],
   declarations: [
     AdminLayoutComponent,
-    CreateSightPageComponent,
+    AdminCreateSightComponent,
     DashboardPageComponent,
     EditSightComponent,
     UserListComponent,

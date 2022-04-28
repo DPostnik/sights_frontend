@@ -20,3 +20,26 @@ body {
 .pointer {
   cursor: pointer;
 }
+
+//map popup
+.mapboxgl-popup {
+  transition: opacity .7s;
+  opacity: 0;
+
+  &.opacity1 {
+    opacity: 1;
+  }
+}
+
+.popup-hidden {
+  .mapboxgl-popup-tip {
+    border: none;
+  }
+
+  .mapboxgl-popup-content {
+    padding: 0;
+    background: none;
+    border-radius: 0;
+    box-shadow: none;
+  }
+}
