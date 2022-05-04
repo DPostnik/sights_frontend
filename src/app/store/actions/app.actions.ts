@@ -1,4 +1,4 @@
-import {Meta} from '@model/meta';
+import {Meta} from '@model/shared/meta';
 
 export class StartLoading {
   static readonly type = '[App] StartLoading';

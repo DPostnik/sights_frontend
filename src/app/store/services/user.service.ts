@@ -2,8 +2,8 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '@env/environment';
 import {Observable} from 'rxjs';
-import {PaginatedList} from '@model/pagination';
-import {User} from '@model/user';
+import {PaginatedList} from '@model/shared/pagination';
+import {User} from '@model/user/user';
 
 @Injectable({
   providedIn: 'root',

@@ -1,10 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
-import {ContextMenuActions, TableCol} from '@model/table';
+import {ContextMenuActions, TableCol} from '@model/shared/table';
 import {Select, Store} from '@ngxs/store';
 import {SightsState} from '@store/states/sights.state';
 import {Observable, Subscription} from 'rxjs';
-import {Sight} from '@model/sight';
+import {Sight} from '@model/sight/sight';
 import {GetSights} from '@store/actions/sights.actions';
 import {sightsTableColumns} from '../../../constants/tableColumns';
 

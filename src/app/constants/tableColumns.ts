@@ -1,4 +1,4 @@
-import {TableCol} from '@model/table';
+import {TableCol} from '@model/shared/table';
 
 export const sightsTableColumns: TableCol[] = [
   {

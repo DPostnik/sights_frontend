@@ -1,8 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {getDecodedAccessToken} from '@utils/jwtParse';
-import {AuthService} from '@services/auth.service';
+import {AuthService} from '@store/services/auth.service';
 import {environment} from '@env/environment';
-import {Tab} from '@model/tab';
+import {Tab} from '@model/shared/tab';
 
 @Component({
   selector: 'app-header',

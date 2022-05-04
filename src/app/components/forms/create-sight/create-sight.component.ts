@@ -1,17 +1,17 @@
 import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Observable, Subscription, tap} from 'rxjs';
-import {Country} from '@model/country';
-import {Region} from '@model/region';
-import {City} from '@model/city';
-import {Category} from '@model/category';
+import {Country} from '@model/location/country';
+import {Region} from '@model/location/region';
+import {City} from '@model/location/city';
+import {Category} from '@model/sight/category';
 import {Select, Store} from '@ngxs/store';
 import {AppState} from '@store/states/app.state';
-import {Meta} from '@model/meta';
+import {Meta} from '@model/shared/meta';
 import {CreateSight, GetSight, UpdateSight} from '@store/actions/sights.actions';
 import {SightDto} from '@model/dto/sightDto';
 import {SightsState} from '@store/states/sights.state';
-import {Sight} from '@model/sight';
+import {Sight} from '@model/sight/sight';
 import {ActivatedRoute} from '@angular/router';
 
 @Component({

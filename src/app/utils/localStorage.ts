@@ -1,4 +1,4 @@
-import {Meta} from '@model/meta';
+import {Meta} from '@model/shared/meta';
 
 export function setMetaLocalStorage(meta: Meta) {
   localStorage.setItem('Meta', JSON.stringify(meta));

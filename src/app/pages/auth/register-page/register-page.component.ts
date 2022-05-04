@@ -1,7 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {AuthService, CreateUserDto} from '@services/auth.service';
 import {ActivatedRoute, Router} from '@angular/router';
+import {CreateUserDto} from "@model/dto/userDto";
+import {AuthService} from '@store/services/auth.service';
 
 @Component({
   selector: 'app-register-page',
@@ -15,11 +16,7 @@ export class RegisterPageComponent implements OnInit {
 
   message: string = '';
 
-  constructor(
-    public auth: AuthService,
-    private router: Router,
-    private route: ActivatedRoute,
-  ) {}
+  constructor(public auth: AuthService, private router: Router, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
     let name = '',

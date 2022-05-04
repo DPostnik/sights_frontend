@@ -1,4 +1,4 @@
-import {Sight} from "@model/sight";
+import {Sight} from "@model/sight/sight";
 
 export interface User {
   id: number;
@@ -13,4 +13,9 @@ export interface Role {
   id: number;
   value: string;
   description: string;
+}
+
+export interface AuthenticatedUser extends User{
+  token: string;
+  refreshToken?: string;
 }

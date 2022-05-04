@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
-import {ContextMenuActions, TableCol} from '@model/table';
+import {ContextMenuActions, TableCol} from '@model/shared/table';
 import {PageEvent} from '@angular/material/paginator';
 import {MatMenuTrigger} from '@angular/material/menu';
 

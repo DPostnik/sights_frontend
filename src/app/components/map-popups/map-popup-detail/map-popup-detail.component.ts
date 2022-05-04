@@ -1,5 +1,5 @@
 import {Component, Input} from '@angular/core';
-import {Sight} from '@model/sight';
+import {Sight} from '@model/sight/sight';
 
 @Component({
   selector: 'app-map-popup-detail',

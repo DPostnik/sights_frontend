@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {AuthService, IUser} from '@services/auth.service';
+import {AuthService} from '@store/services/auth.service';
+import {Credentials} from "@model/user/credentials";
 
 @Component({
   selector: 'app-login-page',
@@ -35,7 +36,7 @@ export class LoginPageComponent implements OnInit {
     }
     this.submitted = true;
 
-    const user: IUser = {
+    const user: Credentials = {
       email: this.form?.value.email,
       password: this.form?.value.password,
     };

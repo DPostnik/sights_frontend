@@ -1,5 +1,5 @@
-import {User} from '@model/user';
-import {PaginatedList} from '@model/pagination';
+import {User} from '@model/user/user';
+import {PaginatedList} from '@model/shared/pagination';
 
 export class GetUsers {
   static readonly type = '[Users] GetUsers';

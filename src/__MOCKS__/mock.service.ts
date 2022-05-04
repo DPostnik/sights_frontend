@@ -1,6 +1,6 @@
 import {delay, Observable, of} from 'rxjs';
-import {PaginatedList} from '@model/pagination';
-import {Sight} from '@model/sight';
+import {PaginatedList} from '@model/shared/pagination';
+import {Sight} from '@model/sight/sight';
 
 export const getSight = (): Observable<Sight> => {
   return of({

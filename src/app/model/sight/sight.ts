@@ -1,4 +1,4 @@
-import {Coordinates} from '@model/coordinates';
+import {Coordinates} from '@model/location/coordinates';
 
 export interface Sight {
   categories?: string[];

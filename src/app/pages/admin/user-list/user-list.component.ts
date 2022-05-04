@@ -2,9 +2,9 @@ import {Component, OnInit} from '@angular/core';
 import {Select, Store} from '@ngxs/store';
 import {UsersState} from '@store/states/users.state';
 import {Observable, Subscription} from 'rxjs';
-import {User} from '@model/user';
+import {User} from '@model/user/user';
 import {GetUsers} from '@store/actions/user.actions';
-import {TableCol} from '@model/table';
+import {TableCol} from '@model/shared/table';
 import {userTableColumns} from '../../../constants/tableColumns';
 
 @Component({

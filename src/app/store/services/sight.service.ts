@@ -2,8 +2,8 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {environment} from '@env/environment';
-import {PaginatedList} from '@model/pagination';
-import {Sight} from '@model/sight';
+import {PaginatedList} from '@model/shared/pagination';
+import {Sight} from '@model/sight/sight';
 import {SightDto} from '@model/dto/sightDto';
 
 @Injectable({

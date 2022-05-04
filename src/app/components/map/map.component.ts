@@ -6,7 +6,7 @@ import {Observable, Subscription} from 'rxjs';
 import {SightsState} from '@store/states/sights.state';
 import {GetSights} from '@store/actions/sights.actions';
 import {MarkerColor} from '@model/enums/markerColor';
-import {Sight} from '@model/sight';
+import {Sight} from '@model/sight/sight';
 import {Router} from '@angular/router';
 import {MapPopupCreateComponent} from '@components/map-popups/map-popup-create/map-popup-create.component';
 import {MapPopupDetailComponent} from '@components/map-popups/map-popup-detail/map-popup-detail.component';

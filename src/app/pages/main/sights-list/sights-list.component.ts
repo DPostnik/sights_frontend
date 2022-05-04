@@ -13,7 +13,7 @@ import {GetSights} from '@store/actions/sights.actions';
 import {SightsState} from '@store/states/sights.state';
 import {Router} from '@angular/router';
 import {environment} from '@env/environment';
-import {Sight} from '@model/sight';
+import {Sight} from '@model/sight/sight';
 
 @Component({
   selector: 'app-sights-list',

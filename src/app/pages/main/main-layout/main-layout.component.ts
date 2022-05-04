@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {Tab} from '@model/tab';
+import {Tab} from '@model/shared/tab';
 
 @Component({
   selector: 'app-main-layout',

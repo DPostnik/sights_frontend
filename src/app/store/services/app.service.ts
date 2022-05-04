@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '@env/environment';
 import {Observable} from 'rxjs';
-import {Meta} from '@model/meta';
+import {Meta} from '@model/shared/meta';
 
 @Injectable({
   providedIn: 'root',

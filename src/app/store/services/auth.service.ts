@@ -2,17 +2,8 @@ import {Injectable} from '@angular/core';
 import {Observable, tap} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '@env/environment';
-
-export interface IUser {
-  email: string;
-  password: string;
-}
-
-export interface CreateUserDto {
-  email: string;
-  password: string;
-  name: string;
-}
+import {Credentials} from '@model/user/credentials';
+import {CreateUserDto} from "@model/dto/userDto";
 
 @Injectable({
   providedIn: 'root',
@@ -22,21 +13,19 @@ export class AuthService {
 
   constructor(private http: HttpClient) {}
 
-  login(user: IUser): Observable<any> {
-    return this.http.post(`${this.route}login`, user).pipe(tap(this.setToken));
+  login(user: Credentials): Observable<any> {
+    return this.http.post(`${this.route}login`, user).pipe(tap(AuthService.setToken));
   }
 
   register(user: CreateUserDto): Observable<any> {
-    return this.http
-      .post(`${this.route}registration`, user)
-      .pipe(tap(this.setToken));
+    return this.http.post(`${this.route}registration`, user).pipe(tap(AuthService.setToken));
   }
 
   logout() {
-    this.setToken(null);
+    AuthService.setToken(null);
   }
 
-  private setToken(response: any | null): void {
+  private static setToken(response: any | null): void {
     if (response) {
       localStorage.setItem('token', response.token);
     } else {
