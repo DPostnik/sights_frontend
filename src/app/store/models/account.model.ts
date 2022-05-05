@@ -1,5 +1,6 @@
-import {AuthenticatedUser} from '@model/user/user';
+import {User} from '@model/user/user';
 
-export interface AccountStateModel extends AuthenticatedUser {
+export interface AccountStateModel {
+  user: User;
   isAuth: boolean;
 }

@@ -1,0 +1,12 @@
+<div *ngIf="(isAuth$ | async) === false; else auth">
+  <button mat-button (click)="signIn()">Sign in</button>
+  <button mat-stroked-button (click)="signUp()">Sign up</button>
+</div>
+
+<ng-template #auth>
+  <div class="user-info">
+    <mat-icon class="user-info__person-icon">person</mat-icon>
+    <span>{{ name$ | async }}</span>
+    <mat-icon (click)="logout()" class="user-info__logout-icon">logout</mat-icon>
+  </div>
+</ng-template>

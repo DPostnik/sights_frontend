@@ -1,0 +1,43 @@
+@import 'src/assets/styles/theme';
+
+.mat-button {
+  &:hover {
+    background: $primary-color-darker;
+  }
+
+  margin-right: 5px;
+}
+
+.user-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+
+  .user-info__person-icon {
+    font-size: 24px;
+    background-color: $white;
+    border-radius: 20%;
+    padding: 5px;
+    margin-right: 10px;
+    color: $primary-color-darker;
+  }
+
+  .user-info__logout-icon {
+    font-size: 24px;
+    margin-left: 10px;
+    color: $white;
+    padding: 10px;
+    border-radius: 50%;
+    opacity: .7;
+    transition: all .3s;
+
+    &:hover {
+      background-color: $accent-color-light;
+    }
+  }
+
+  &:hover {
+    cursor: pointer;
+  }
+}

@@ -18,6 +18,10 @@ import {AppState} from '@store/states/app.state';
 import {AppService} from '@store/services/app.service';
 import {UsersState} from '@store/states/users.state';
 import {UserService} from '@store/services/user.service';
+import {HTTP_INTERCEPTORS} from '@angular/common/http';
+import {AuthInterceptor} from '@store/services/interceptors/auth.interceptor';
+import {AccountState} from '@store/states/account.state';
+import {AuthService} from '@store/services/auth.service';
 
 registerLocaleData(localeRu, 'ru');
 
@@ -27,7 +31,7 @@ registerLocaleData(localeRu, 'ru');
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    NgxsModule.forRoot([AppState, SightsState, UsersState], {
+    NgxsModule.forRoot([AppState, SightsState, UsersState, AccountState], {
       developmentMode: !environment.production,
     }),
     AdminModule,
@@ -35,7 +39,18 @@ registerLocaleData(localeRu, 'ru');
     SharedModule,
     MainModule,
   ],
-  providers: [SightService, AppService, UserService, {provide: LOCALE_ID, useValue: 'ru'}],
+  providers: [
+    SightService,
+    AppService,
+    UserService,
+    AuthService,
+    {provide: LOCALE_ID, useValue: 'ru'},
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true,
+    },
+  ],
   exports: [],
   bootstrap: [AppComponent],
 })
