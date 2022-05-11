@@ -27,6 +27,11 @@ export class AccountState {
   constructor(private authService: AuthService) {}
 
   @Selector()
+  static selectUserRole(state: AccountStateModel) {
+    return state.user.role;
+  }
+
+  @Selector()
   static selectIsAuth(state: AccountStateModel) {
     return state.isAuth;
   }

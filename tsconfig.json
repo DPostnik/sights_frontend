@@ -31,6 +31,7 @@
       "@store/*": ["src/app/store/*"],
       "@utils/*": ["src/app/utils/*"],
       "@env/*": ["src/environments/*"],
+      "@enums/*": ["src/app/enums*"],
     }
   },
   "angularCompilerOptions": {

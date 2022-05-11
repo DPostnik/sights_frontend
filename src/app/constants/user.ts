@@ -6,5 +6,5 @@ export const initialUser: User = {
   gmail: '',
   id: 0,
   name: '',
-  roles: [],
+  role: '',
 };

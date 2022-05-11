@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {Select, Store} from '@ngxs/store';
-import {Observable, Subscription} from 'rxjs';
+import {Observable} from 'rxjs';
 import {Router} from '@angular/router';
 import {Logout} from '@store/actions/account.actions';
 import {AccountState} from '@store/states/account.state';
@@ -14,7 +14,6 @@ export class AccountNavBarComponent {
   constructor(private store: Store, private router: Router) {}
   @Select(AccountState.selectIsAuth) isAuth$!: Observable<boolean>;
   @Select(AccountState.selectUserName) name$!: Observable<string>;
-  subscriptions: Subscription[] = [];
 
   signIn() {
     this.router.navigate(['auth/signin']).then();

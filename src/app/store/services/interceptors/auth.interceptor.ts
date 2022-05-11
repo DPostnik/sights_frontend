@@ -28,14 +28,14 @@ export class AuthInterceptor implements HttpInterceptor {
       : req;
 
     return next.handle(authReq).pipe(
-      tap(
-        (event) => {
+      tap({
+        next: (event) => {
           if (event instanceof HttpResponse) {
             this.counter = 0;
             console.log('server response');
           }
         },
-        (err) => {
+        error: (err) => {
           if (err instanceof HttpErrorResponse) {
             if (this.counter !== 1) {
               this.counter++;
@@ -46,7 +46,7 @@ export class AuthInterceptor implements HttpInterceptor {
             }
           }
         },
-      ),
+      }),
     );
   }
 }

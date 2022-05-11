@@ -5,14 +5,8 @@ export interface User {
   email: string;
   gmail: string;
   name: string;
-  roles: Role[];
+  role: string;
   favouriteSights: Sight[];
-}
-
-export interface Role {
-  id: number;
-  value: string;
-  description: string;
 }
 
 export interface Tokens {
