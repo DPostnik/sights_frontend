@@ -16,8 +16,6 @@ export class SignInSuccess {
 
 export class RefreshToken {
   static readonly type = '[Account] RefreshToken';
-
-  constructor(public refreshToken: string) {}
 }
 
 export class SignUp {
@@ -38,4 +36,8 @@ export class SignUpSuccess {
 
 export class Logout {
   static readonly type = '[Account] RegisterSuccess';
+}
+
+export class Initialize {
+  static readonly type = '[Account] Initialize';
 }

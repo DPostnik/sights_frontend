@@ -3,8 +3,8 @@ import {Observable} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '@env/environment';
 import {Credentials} from '@model/user/credentials';
-import {CreateUserDto} from "@model/dto/userDto";
-import {Tokens} from "@model/user/user";
+import {CreateUserDto} from '@model/dto/userDto';
+import {Tokens} from '@model/user/user';
 
 @Injectable({
   providedIn: 'root',
@@ -23,6 +23,19 @@ export class AuthService {
   }
 
   logout(): void {
-    this.http.post(`${this.route}logout`,{});
+    this.http.post(`${this.route}logout`, {});
+  }
+
+  refreshToken(token: string): Observable<Tokens> {
+    console.log(token);
+    return this.http.post<Tokens>(
+      `${this.route}refresh`,
+      {},
+      {
+        headers: {
+          authorization: `Bearer ${token}`,
+        },
+      },
+    );
   }
 }
