@@ -7,6 +7,7 @@ import {SignIn} from '@store/actions/account.actions';
 import {Router} from '@angular/router';
 import {AccountState} from '@store/states/account.state';
 import {Observable} from 'rxjs';
+import {AuthState} from '@model/enums/auth-state';
 
 @Component({
   selector: 'app-signin-page',
@@ -15,26 +16,23 @@ import {Observable} from 'rxjs';
 })
 export class SigninPageComponent implements OnInit {
   errorMessage: string = '';
-  loginWindow: any = null;
   form: FormGroup = new FormGroup({});
   submitted = false;
   message: string = '';
-  @Select(AccountState.selectIsAuth) isAuth$!: Observable<boolean>;
+  @Select(AccountState.selectAuthState) authState$!: Observable<AuthState>;
 
   constructor(private auth: AuthService, private store: Store, private router: Router) {}
 
   ngOnInit(): void {
     this.form = new FormGroup({
-      email: new FormControl(null, [
-        Validators.required,
-      ]),
+      email: new FormControl(null, [Validators.required]),
       password: new FormControl(null, [
         Validators.required,
         // Validators.minLength(6)
       ]),
     });
-    this.isAuth$.subscribe((isAuth) => {
-      return isAuth && this.router.navigate(['/']);
+    this.authState$.subscribe((authState$) => {
+      return authState$ === AuthState.LOGGED_IN && this.router.navigate(['/']);
     });
   }
 

@@ -6,7 +6,7 @@ import {SharedModule} from '@shared/shared.module';
 import {AdminCreateSightComponent} from './create-sight/admin-create-sight.component';
 import {EditSightComponent} from './edit-sight/edit-sight.component';
 import {UserListComponent} from './user-list/user-list.component';
-import {AdminGuard} from '@store/guards/admin.guard';
+import {AdminGuard} from '@guards/admin.guard';
 
 @NgModule({
   imports: [

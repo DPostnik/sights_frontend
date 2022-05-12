@@ -1,4 +1,4 @@
-<div *ngIf="(isAuth$ | async) === false; else auth">
+<div *ngIf="(authState$ | async) === authState; else auth">
   <button mat-button (click)="signIn()">Sign in</button>
   <button mat-stroked-button (click)="signUp()">Sign up</button>
 </div>

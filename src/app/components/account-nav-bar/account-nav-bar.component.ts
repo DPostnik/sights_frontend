@@ -4,6 +4,7 @@ import {Observable} from 'rxjs';
 import {Router} from '@angular/router';
 import {Logout} from '@store/actions/account.actions';
 import {AccountState} from '@store/states/account.state';
+import {AuthState} from '@model/enums/auth-state';
 
 @Component({
   selector: 'app-account-nav-bar',
@@ -12,8 +13,9 @@ import {AccountState} from '@store/states/account.state';
 })
 export class AccountNavBarComponent {
   constructor(private store: Store, private router: Router) {}
-  @Select(AccountState.selectIsAuth) isAuth$!: Observable<boolean>;
+  @Select(AccountState.selectUserRole) authState$!: Observable<AuthState>;
   @Select(AccountState.selectUserName) name$!: Observable<string>;
+  authState: AuthState = AuthState.LOGGED_IN;
 
   signIn() {
     this.router.navigate(['auth/signin']).then();

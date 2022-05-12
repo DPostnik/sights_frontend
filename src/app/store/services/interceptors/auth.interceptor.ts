@@ -5,17 +5,15 @@ import {
   HttpHandler,
   HttpInterceptor,
   HttpRequest,
-  HttpResponse,
 } from '@angular/common/http';
-import {Observable, tap} from 'rxjs';
+import {catchError, EMPTY, Observable} from 'rxjs';
 import {Store} from '@ngxs/store';
-import {RefreshToken} from '@store/actions/account.actions';
+import {HandleHttpError} from '@store/actions/account.actions';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthInterceptor implements HttpInterceptor {
-  private counter = 0;
   constructor(private store: Store) {}
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
@@ -28,24 +26,14 @@ export class AuthInterceptor implements HttpInterceptor {
       : req;
 
     return next.handle(authReq).pipe(
-      tap({
-        next: (event) => {
-          if (event instanceof HttpResponse) {
-            this.counter = 0;
-            console.log('server response');
+      catchError((err) => {
+        if (err instanceof HttpErrorResponse) {
+          if (err.status === 401) {
+            this.store.dispatch(HandleHttpError);
+            return new Observable<HttpEvent<any>>();
           }
-        },
-        error: (err) => {
-          if (err instanceof HttpErrorResponse) {
-            if (this.counter !== 1) {
-              this.counter++;
-              if (err.status === 401) {
-                this.store.dispatch(RefreshToken);
-                console.log('Unauthorized');
-              }
-            }
-          }
-        },
+        }
+        return EMPTY;
       }),
     );
   }

@@ -41,3 +41,7 @@ export class Logout {
 export class Initialize {
   static readonly type = '[Account] Initialize';
 }
+
+export class HandleHttpError {
+  static readonly type = '[Account] HandleHttpError';
+}

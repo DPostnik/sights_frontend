@@ -9,7 +9,6 @@ import {Initialize} from '@store/actions/account.actions';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
-  title = 'sights_frontend';
   constructor(private store: Store) {}
 
   ngOnInit() {

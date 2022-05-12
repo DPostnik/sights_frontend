@@ -26,12 +26,13 @@
       "@model/*": ["src/app/model/*"],
       "@pages/*": ["src/app/pages/*"],
       "@components/*": ["src/app/components/*"],
+      "@guards/*": ["src/app/guards/*"],
       "@services/*": ["src/app/services/*"],
       "@shared/*": ["src/app/shared/*"],
       "@store/*": ["src/app/store/*"],
       "@utils/*": ["src/app/utils/*"],
       "@env/*": ["src/environments/*"],
-      "@enums/*": ["src/app/enums*"],
+      "@enums/*": ["src/app/model/enums/*"]
     }
   },
   "angularCompilerOptions": {

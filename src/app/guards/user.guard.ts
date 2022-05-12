@@ -3,7 +3,7 @@ import {map, Observable} from 'rxjs';
 import {Select} from '@ngxs/store';
 import {AccountState} from '@store/states/account.state';
 import {Injectable} from '@angular/core';
-import {Roles} from '@enums//roles';
+import {Roles} from '@enums/roles';
 
 @Injectable()
 export class UserGuard implements CanActivate {

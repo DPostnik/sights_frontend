@@ -6,6 +6,7 @@ import {initialUser} from '../../constants/user';
 import {EndLoading, StartLoading} from '@store/actions/app.actions';
 import {finalize, tap} from 'rxjs';
 import {
+  HandleHttpError,
   Initialize,
   Logout,
   RefreshToken,
@@ -14,12 +15,13 @@ import {
 } from '@store/actions/account.actions';
 import {getDecodedAccessToken} from '@utils/jwtParse';
 import {clearLocalStorage} from '@utils/localStorage';
+import {AuthState} from '@model/enums/auth-state';
 
 @State<AccountStateModel>({
   name: 'accountState',
   defaults: {
     user: {...initialUser},
-    isAuth: false,
+    authState: AuthState.ANONYMOUS,
   },
 })
 @Injectable()
@@ -32,13 +34,22 @@ export class AccountState {
   }
 
   @Selector()
-  static selectIsAuth(state: AccountStateModel) {
-    return state.isAuth;
+  static selectUserName(state: AccountStateModel) {
+    return state.user.name;
   }
 
   @Selector()
-  static selectUserName(state: AccountStateModel) {
-    return state.user.name;
+  static selectAuthState(state: AccountStateModel) {
+    return state.authState;
+  }
+
+  @Action(Initialize)
+  initialize(ctx: StateContext<AccountStateModel>) {
+    const accessToken = localStorage.getItem('access_token') || '';
+    const refreshToken = localStorage.getItem('refresh_token') || '';
+    if (accessToken && refreshToken) {
+      ctx.dispatch(new SignInSuccess({accessToken, refreshToken}));
+    }
   }
 
   @Action(SignIn)
@@ -58,27 +69,19 @@ export class AccountState {
     localStorage.setItem('access_token', accessToken);
     localStorage.setItem('refresh_token', refreshToken);
     const userInfo = getDecodedAccessToken(accessToken);
-    ctx.patchState({isAuth: true, user: userInfo});
+    ctx.patchState({user: userInfo, authState: AuthState.LOGGED_IN});
   }
 
   @Action(Logout)
   logout(ctx: StateContext<AccountStateModel>) {
-    ctx.patchState({user: {...initialUser}, isAuth: false});
+    ctx.patchState({user: {...initialUser}, authState: AuthState.ANONYMOUS});
     clearLocalStorage();
     this.authService.logout();
   }
 
-  @Action(Initialize)
-  initialize(ctx: StateContext<AccountStateModel>) {
-    const accessToken = localStorage.getItem('access_token') || '';
-    const refreshToken = localStorage.getItem('refresh_token') || '';
-    if (accessToken && refreshToken) {
-      ctx.dispatch(new SignInSuccess({accessToken, refreshToken}));
-    }
-  }
-
   @Action(RefreshToken)
   refreshToken(ctx: StateContext<AccountStateModel>) {
+    ctx.patchState({authState: AuthState.ACCESS_TOKEN_EXPIRED});
     const refreshToken = localStorage.getItem('refresh_token');
     if (refreshToken) {
       return this.authService.refreshToken(refreshToken).pipe(
@@ -88,5 +91,20 @@ export class AccountState {
       );
     }
     return null;
+  }
+
+  @Action(HandleHttpError)
+  handleHttpError(ctx: StateContext<AccountStateModel>) {
+    switch (ctx.getState().authState) {
+      case AuthState.LOGGED_IN: {
+        ctx.dispatch(RefreshToken);
+        break;
+      }
+      case AuthState.ACCESS_TOKEN_EXPIRED: {
+        // todo notifier
+        ctx.dispatch(Logout);
+        break;
+      }
+    }
   }
 }
