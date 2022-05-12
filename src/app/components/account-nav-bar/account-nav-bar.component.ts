@@ -13,9 +13,9 @@ import {AuthState} from '@model/enums/auth-state';
 })
 export class AccountNavBarComponent {
   constructor(private store: Store, private router: Router) {}
-  @Select(AccountState.selectUserRole) authState$!: Observable<AuthState>;
+  @Select(AccountState.selectAuthState) authState$!: Observable<AuthState>;
   @Select(AccountState.selectUserName) name$!: Observable<string>;
-  authState: AuthState = AuthState.LOGGED_IN;
+  authState: AuthState = AuthState.ANONYMOUS;
 
   signIn() {
     this.router.navigate(['auth/signin']).then();

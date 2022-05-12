@@ -8,6 +8,8 @@ import {SightsInfoComponent} from '@pages/main/sight-info/sights-info.component'
 import {SuggestSightComponent} from '@pages/main/suggest-sight/suggest-sight.component';
 import {MapPopupCreateComponent} from '@components/map-popups/map-popup-create/map-popup-create.component';
 import {MapPopupDetailComponent} from '@components/map-popups/map-popup-detail/map-popup-detail.component';
+import {AccountPageComponent} from '@pages/main/account-page/account-page.component';
+import {UserGuard} from '@guards/user.guard';
 
 @NgModule({
   imports: [SharedModule],
@@ -20,8 +22,9 @@ import {MapPopupDetailComponent} from '@components/map-popups/map-popup-detail/m
     SuggestSightComponent,
     MapPopupCreateComponent,
     MapPopupDetailComponent,
+    AccountPageComponent,
   ],
   exports: [],
-  providers: [],
+  providers: [UserGuard],
 })
 export class MainModule {}
