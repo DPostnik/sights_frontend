@@ -1,15 +1,15 @@
-import {Component, OnInit} from '@angular/core';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {ActivatedRoute, Router} from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {AuthService} from "@store/services/auth.service";
+import {ActivatedRoute, Router} from "@angular/router";
 import {CreateUserDto} from "@model/dto/userDto";
-import {AuthService} from '@store/services/auth.service';
 
 @Component({
-  selector: 'app-register-page',
-  templateUrl: './register-page.component.html',
-  styleUrls: ['./register-page.component.scss'],
+  selector: 'app-signup-page',
+  templateUrl: './signup-page.component.html',
+  styleUrls: ['./signup-page.component.scss']
 })
-export class RegisterPageComponent implements OnInit {
+export class SignupPageComponent implements OnInit {
   form: FormGroup = new FormGroup({});
 
   submitted = false;
@@ -46,10 +46,10 @@ export class RegisterPageComponent implements OnInit {
       name: this.form?.value.name,
     };
 
-    this.auth.register(user).subscribe(() => {
+    this.auth.signUp(user).subscribe(() => {
       this.form.reset();
       this.submitted = false;
-      this.router.navigate(['/']);
+      this.router.navigate(['/']).then();
     });
   }
 }

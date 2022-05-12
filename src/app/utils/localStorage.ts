@@ -11,3 +11,7 @@ export function getMetaFromLocalStorage(): Meta | null {
   }
   return JSON.parse(meta);
 }
+
+export function clearLocalStorage() {
+  localStorage.clear();
+}

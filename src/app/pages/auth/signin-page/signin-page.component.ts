@@ -1,32 +1,38 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {AuthService} from '@store/services/auth.service';
-import {Credentials} from "@model/user/credentials";
+import {Credentials} from '@model/user/credentials';
+import {Select, Store} from '@ngxs/store';
+import {SignIn} from '@store/actions/account.actions';
+import {Router} from '@angular/router';
+import {AccountState} from '@store/states/account.state';
+import {Observable} from 'rxjs';
+import {AuthState} from '@model/enums/auth-state';
 
 @Component({
-  selector: 'app-login-page',
-  templateUrl: './login-page.component.html',
-  styleUrls: ['./login-page.component.scss'],
+  selector: 'app-signin-page',
+  templateUrl: './signin-page.component.html',
+  styleUrls: ['./signin-page.component.scss'],
 })
-export class LoginPageComponent implements OnInit {
+export class SigninPageComponent implements OnInit {
   errorMessage: string = '';
-  loginWindow: any = null;
   form: FormGroup = new FormGroup({});
   submitted = false;
   message: string = '';
+  @Select(AccountState.selectAuthState) authState$!: Observable<AuthState>;
 
-  constructor(public auth: AuthService) {}
+  constructor(private auth: AuthService, private store: Store, private router: Router) {}
 
   ngOnInit(): void {
     this.form = new FormGroup({
-      email: new FormControl(null, [
-        Validators.required,
-        // Validators.email
-      ]),
+      email: new FormControl(null, [Validators.required]),
       password: new FormControl(null, [
         Validators.required,
         // Validators.minLength(6)
       ]),
+    });
+    this.authState$.subscribe((authState$) => {
+      return authState$ === AuthState.LOGGED_IN && this.router.navigate(['/']);
     });
   }
 
@@ -36,19 +42,12 @@ export class LoginPageComponent implements OnInit {
     }
     this.submitted = true;
 
-    const user: Credentials = {
+    const credentials: Credentials = {
       email: this.form?.value.email,
       password: this.form?.value.password,
     };
 
-    this.auth.login(user).subscribe((response) => {
-      if (response.data) {
-        this.form.reset();
-      } else {
-        this.errorMessage = response.message;
-      }
-      this.submitted = false;
-    });
+    this.store.dispatch(new SignIn(credentials));
   }
 
   redirect(): void {

@@ -1,9 +1,10 @@
 import {Injectable} from '@angular/core';
-import {Observable, tap} from 'rxjs';
+import {Observable} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '@env/environment';
 import {Credentials} from '@model/user/credentials';
-import {CreateUserDto} from "@model/dto/userDto";
+import {CreateUserDto} from '@model/dto/userDto';
+import {Tokens} from '@model/user/user';
 
 @Injectable({
   providedIn: 'root',
@@ -13,23 +14,27 @@ export class AuthService {
 
   constructor(private http: HttpClient) {}
 
-  login(user: Credentials): Observable<any> {
-    return this.http.post(`${this.route}login`, user).pipe(tap(AuthService.setToken));
+  signIn(user: Credentials): Observable<Tokens> {
+    return this.http.post<Tokens>(`${this.route}signin`, user);
   }
 
-  register(user: CreateUserDto): Observable<any> {
-    return this.http.post(`${this.route}registration`, user).pipe(tap(AuthService.setToken));
+  signUp(user: CreateUserDto): Observable<any> {
+    return this.http.post<Tokens>(`${this.route}signup`, user);
   }
 
-  logout() {
-    AuthService.setToken(null);
+  logout(): void {
+    this.http.post(`${this.route}logout`, {});
   }
 
-  private static setToken(response: any | null): void {
-    if (response) {
-      localStorage.setItem('token', response.token);
-    } else {
-      localStorage.clear();
-    }
+  refreshToken(token: string): Observable<Tokens> {
+    return this.http.post<Tokens>(
+      `${this.route}refresh`,
+      {},
+      {
+        headers: {
+          authorization: `Bearer ${token}`,
+        },
+      },
+    );
   }
 }

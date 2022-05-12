@@ -28,6 +28,7 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatTableModule} from '@angular/material/table';
 import {TableComponent} from '@components/table/table.component';
 import {MatTooltipModule} from '@angular/material/tooltip';
+import {AccountNavBarComponent} from '@components/account-nav-bar/account-nav-bar.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import {MatTooltipModule} from '@angular/material/tooltip';
     DevMenuComponent,
     MapComponent,
     TableComponent,
+    AccountNavBarComponent,
   ],
   imports: [
     HttpClientModule,
@@ -97,6 +99,7 @@ import {MatTooltipModule} from '@angular/material/tooltip';
     TableComponent,
     MatTooltipModule,
     MatButtonModule,
+    AccountNavBarComponent,
   ],
 })
 export class SharedModule {}

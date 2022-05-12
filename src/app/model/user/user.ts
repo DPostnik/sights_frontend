@@ -1,21 +1,15 @@
-import {Sight} from "@model/sight/sight";
+import {Sight} from '@model/sight/sight';
 
 export interface User {
   id: number;
   email: string;
   gmail: string;
   name: string;
-  roles: Role[];
+  role: string;
   favouriteSights: Sight[];
 }
 
-export interface Role {
-  id: number;
-  value: string;
-  description: string;
-}
-
-export interface AuthenticatedUser extends User{
-  token: string;
-  refreshToken?: string;
+export interface Tokens {
+  accessToken: string;
+  refreshToken: string;
 }
