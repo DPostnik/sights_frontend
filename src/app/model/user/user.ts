@@ -7,6 +7,7 @@ export interface User {
   name: string;
   role: string;
   favouriteSights: Sight[];
+  photoUrl?: string;
 }
 
 export interface Tokens {

@@ -4,9 +4,11 @@
 </div>
 
 <ng-template #auth>
-  <div class="user-info">
-    <mat-icon class="user-info__person-icon">person</mat-icon>
-    <span>{{ name$ | async }}</span>
+  <div class="user-info d-flex">
+    <div class="d-flex" (click)="handleAccountClick()">
+      <mat-icon class="user-info__person-icon">person</mat-icon>
+      <span>{{ name$ | async }}</span>
+    </div>
     <mat-icon (click)="logout()" class="user-info__logout-icon">logout</mat-icon>
   </div>
 </ng-template>

@@ -28,4 +28,8 @@ export class AccountNavBarComponent {
   logout() {
     this.store.dispatch(Logout);
   }
+
+  handleAccountClick() {
+    this.router.navigate(['account']).then();
+  }
 }
