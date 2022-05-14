@@ -7,6 +7,8 @@ import {SightsMapComponent} from '@pages/main/sights-map/sights-map.component';
 import {SightsListComponent} from '@pages/main/sights-list/sights-list.component';
 import {SightsInfoComponent} from '@pages/main/sight-info/sights-info.component';
 import {SuggestSightComponent} from '@pages/main/suggest-sight/suggest-sight.component';
+import {AccountPageComponent} from '@pages/main/account-page/account-page.component';
+import {UserGuard} from '@guards/user.guard';
 
 const routes: Routes = [
   {
@@ -19,6 +21,7 @@ const routes: Routes = [
       {path: 'list', component: SightsListComponent},
       {path: 'suggest', component: SuggestSightComponent},
       {path: 'sight/:id', component: SightsInfoComponent},
+      {path: 'account', component: AccountPageComponent, canActivate: [UserGuard]},
     ],
   },
   {

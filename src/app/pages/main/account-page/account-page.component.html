@@ -1,0 +1,33 @@
+<div class="container">
+  <div class="content">
+    <div class="image relative">
+      <div class="bg-image">
+        <div class="profile-background relative"></div>
+      </div>
+    </div>
+
+    <div class="data-container">
+      <div class="d-flex">
+        <div class="card-container">
+          <div class="card-photo-wrapper">
+            <div class="profile-photo-card d-flex">
+              <img src="{{ user.photoUrl }}" class="border-circle" alt="avatar photo" />
+            </div>
+          </div>
+        </div>
+
+        <div class="edit-container">
+          <button>
+            <mat-icon>edit</mat-icon>
+          </button>
+        </div>
+      </div>
+
+      <div class="user-info-container relative">
+        <h1>{{ user.name }}</h1>
+        <div class="email">Email: {{ user.email }}</div>
+        <div class="role_info">Роль: {{ user.role }}</div>
+      </div>
+    </div>
+  </div>
+</div>

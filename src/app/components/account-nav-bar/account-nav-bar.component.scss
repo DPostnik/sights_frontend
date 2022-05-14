@@ -9,10 +9,6 @@
 }
 
 .user-info {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
 
   .user-info__person-icon {
     font-size: 24px;
@@ -40,4 +36,10 @@
   &:hover {
     cursor: pointer;
   }
+}
+
+.d-flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }

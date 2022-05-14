@@ -42,7 +42,7 @@ export class CreateSightComponent implements OnInit, OnDestroy {
       }),
     );
     this.subscriptions.push(
-      this.route.params.subscribe((p) => this.store.dispatch(new GetSight(p['id']))),
+      this.route.params.subscribe((p) => p['id'] && this.store.dispatch(new GetSight(p['id']))),
       this.sight$.pipe(tap((sight) => (this.sight = sight))).subscribe(() => {
         this.initializeForm();
       }),
