@@ -6,6 +6,7 @@
   padding: 8px 30px;
   height: 60px;
   background: $primary-color-darker;
+  color: $white !important;
 
   .header__content {
     display: flex;
@@ -22,7 +23,6 @@
 
     .header__tabs {
       font-size: 18px;
-      color: $white;
       display: flex;
       align-items: center;
 
@@ -47,11 +47,7 @@
     }
   }
 
-  span {
-    color: $white;
-
-    &:hover {
-      cursor: pointer;
-    }
+  span:hover {
+    cursor: pointer;
   }
 }

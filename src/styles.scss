@@ -43,3 +43,23 @@ body {
     box-shadow: none;
   }
 }
+ //mat-fields
+$matBorderRadius: 12px;
+.mat-form-field {
+  .mat-form-field-subscript-wrapper {
+    font-size: 90%;
+  }
+
+  &:not(.subscript) .mat-form-field-wrapper {
+    padding-bottom: 0;
+  }
+
+  .mat-form-field-outline-start {
+    border-radius: $matBorderRadius 0 0 $matBorderRadius !important;
+    width: $matBorderRadius !important;
+  }
+
+  .mat-form-field-outline-end {
+    border-radius: 0 $matBorderRadius $matBorderRadius 0 !important;
+  }
+}
