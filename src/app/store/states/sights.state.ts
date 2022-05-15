@@ -10,6 +10,7 @@ import {
   GetSightsFailure,
   GetSightsSuccess,
   GetSightSuccess,
+  SetMarkerCoords,
   UpdateSight,
 } from '@store/actions/sights.actions';
 import {SightsStateModel} from '@store/models/sights.model';
@@ -21,6 +22,7 @@ import {EndLoading, StartLoading} from '@store/actions/app.actions';
     data: [],
     total: 0,
     selectedSight: undefined,
+    markerCoords: undefined,
   },
 })
 @Injectable()
@@ -35,6 +37,11 @@ export class SightsState {
   @Selector()
   static selectSight(state: SightsStateModel) {
     return state.selectedSight;
+  }
+
+  @Selector()
+  static selectMarkerCoords(state: SightsStateModel) {
+    return state.markerCoords;
   }
 
   @Selector()
@@ -67,6 +74,11 @@ export class SightsState {
   @Action(GetSightsFailure)
   getSightsFailure(ctx: StateContext<SightsStateModel>) {
     ctx.patchState({data: [], total: 0});
+  }
+
+  @Action(SetMarkerCoords)
+  setMarkerCoords(ctx: StateContext<SightsStateModel>, {coordinates}: SetMarkerCoords) {
+    ctx.patchState({markerCoords: coordinates});
   }
 
   @Action(GetSight)

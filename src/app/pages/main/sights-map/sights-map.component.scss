@@ -1,5 +1,12 @@
-:host {
+:host, .wrapper {
   display: flex;
-  flex-direction: column;
   flex-grow: 1;
+}
+
+:host {
+  flex-direction: column;
+}
+
+.wrapper {
+  flex-direction: row;
 }

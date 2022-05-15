@@ -1,23 +1,24 @@
 @import 'src/assets/styles/theme';
 
-.container {
+form {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
 
-  font-size: 12px;
+  height: 100%;
   width: fit-content;
-  border-radius: 25px;
-  margin: 20px auto;
-  padding: 10px 20px;
+  font-size: 12px;
+  padding: 0 10px;
 
   color: $white;
   background-color: $primary-color-darker;
   box-shadow: 0 0 15px $primary-color-darker;
 
   .form-title {
+    display: block;
     font-size: 18px;
     text-align: center;
+    margin-top: 10px;
     margin-bottom: 5px;
   }
 
@@ -28,7 +29,7 @@
     mat-form-field {
       display: block;
 
-      &+mat-form-field {
+      & + mat-form-field {
         margin-top: 5px;
       }
 
@@ -48,19 +49,19 @@
       font-size: 14px;
     }
   }
+}
 
-  .mat-stroked-button {
-    border-radius: 20px;
-    padding: 4px;
-    transition: .3s;
-    width: 33%;
-    align-self: center;
-    margin-top: 5px;
+.mat-stroked-button {
+  border-radius: 20px;
+  padding: 4px;
+  transition: .3s;
+  width: 33%;
+  align-self: center;
+  margin-top: 5px;
 
-    &:hover {
-      color: $primary-color-darker;
-      background-color: $accent-color-light;
-    }
+  &:hover {
+    color: $primary-color-darker;
+    background-color: $accent-color-light;
   }
 }
 

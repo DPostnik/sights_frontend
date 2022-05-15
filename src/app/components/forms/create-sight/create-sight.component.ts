@@ -1,6 +1,6 @@
 import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {Observable, Subscription, tap} from 'rxjs';
+import {forkJoin, Observable, Subscription} from 'rxjs';
 import {Country} from '@model/location/country';
 import {Region} from '@model/location/region';
 import {City} from '@model/location/city';
@@ -13,6 +13,7 @@ import {SightDto} from '@model/dto/sightDto';
 import {SightsState} from '@store/states/sights.state';
 import {Sight} from '@model/sight/sight';
 import {ActivatedRoute} from '@angular/router';
+import {Coordinates} from '@model/location/coordinates';
 
 @Component({
   selector: 'app-create-sight',
@@ -23,8 +24,11 @@ export class CreateSightComponent implements OnInit, OnDestroy {
   @Input() update = false;
   @Select(AppState.selectMeta) meta$!: Observable<Meta>;
   @Select(SightsState.selectSight) sight$!: Observable<Sight>;
+  @Select(SightsState.selectMarkerCoords) markerCoords$!: Observable<Coordinates>;
+
   form: FormGroup = new FormGroup({});
   sight?: Sight;
+  markerCoords?: Coordinates;
 
   subscriptions: Subscription[] = [];
   countries?: Country[];
@@ -33,8 +37,11 @@ export class CreateSightComponent implements OnInit, OnDestroy {
   categories!: Category[];
 
   ngOnInit(): void {
+    this.initializeForm();
+
     this.subscriptions.push(
       this.meta$.subscribe((meta) => {
+        if (!meta) return;
         this.countries = meta.countries;
         this.regions = meta.regions;
         this.cities = meta.cities;
@@ -43,8 +50,17 @@ export class CreateSightComponent implements OnInit, OnDestroy {
     );
     this.subscriptions.push(
       this.route.params.subscribe((p) => p['id'] && this.store.dispatch(new GetSight(p['id']))),
-      this.sight$.pipe(tap((sight) => (this.sight = sight))).subscribe(() => {
+      forkJoin([this.sight$, this.markerCoords$]).subscribe(([sight, markerCoords]) => {
+        this.sight = sight;
+        this.markerCoords = markerCoords;
         this.initializeForm();
+      }),
+      this.markerCoords$.subscribe((c) => {
+        if (!c) return;
+        this.form?.patchValue({
+          longitude: c.longitude,
+          latitude: c.latitude,
+        });
       }),
     );
   }
@@ -61,8 +77,14 @@ export class CreateSightComponent implements OnInit, OnDestroy {
       country: new FormControl(this.sight?.location?.country || null, [Validators.required]),
       region: new FormControl(this.sight?.location?.region || null, [Validators.required]),
       city: new FormControl(this.sight?.location?.city || null, [Validators.required]),
-      latitude: new FormControl(this.sight?.coordinates?.latitude || null, [Validators.required]),
-      longitude: new FormControl(this.sight?.coordinates?.longitude || null, [Validators.required]),
+      latitude: new FormControl(
+        (this.update ? this.sight?.coordinates?.latitude : this.markerCoords?.latitude) || null,
+        [Validators.required],
+      ),
+      longitude: new FormControl(
+        (this.update ? this.sight?.coordinates?.latitude : this.markerCoords?.longitude) || null,
+        [Validators.required],
+      ),
       categories: new FormControl(this.sight?.categories || null),
     });
   }

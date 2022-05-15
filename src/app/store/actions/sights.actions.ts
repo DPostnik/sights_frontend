@@ -1,6 +1,7 @@
 import {PaginatedList} from '@model/shared/pagination';
 import {Sight} from '@model/sight/sight';
 import {SightDto} from '@model/dto/sightDto';
+import {Coordinates} from '@model/location/coordinates';
 
 export class GetSights {
   static readonly type = '[Sights] GetSights';
@@ -36,10 +37,18 @@ export class GetSightFailure {
 
 export class CreateSight {
   static readonly type = '[Sights] CreateSight';
+
   constructor(public dto: SightDto) {}
 }
 
 export class UpdateSight {
   static readonly type = '[Sight] UpdateSight';
+
   constructor(public sight: SightDto, public id: number) {}
+}
+
+export class SetMarkerCoords {
+  static readonly type = '[Sight] SetMarkerCoords';
+
+  constructor(public coordinates: Coordinates) {}
 }

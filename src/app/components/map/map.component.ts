@@ -1,10 +1,10 @@
-import {Component, OnDestroy, OnInit, ViewContainerRef} from '@angular/core';
+import {Component, Input, OnDestroy, OnInit, ViewContainerRef} from '@angular/core';
 import {Select, Store} from '@ngxs/store';
 import {environment} from '@env/environment';
 import mapBox from 'mapbox-gl';
 import {Observable, Subscription} from 'rxjs';
 import {SightsState} from '@store/states/sights.state';
-import {GetSights} from '@store/actions/sights.actions';
+import {GetSights, SetMarkerCoords} from '@store/actions/sights.actions';
 import {MarkerColor} from '@model/enums/markerColor';
 import {Sight} from '@model/sight/sight';
 import {Router} from '@angular/router';
@@ -20,6 +20,8 @@ mapBox.accessToken = environment.mapApiKey;
 })
 export class MapComponent implements OnInit, OnDestroy {
   @Select(SightsState.selectData) sights$!: Observable<Sight[]>;
+
+  @Input() createButton?: boolean = true;
 
   prevNewMarker?: mapBox.Marker;
 
@@ -65,9 +67,18 @@ export class MapComponent implements OnInit, OnDestroy {
 
         this.prevNewMarker = new mapBox.Marker({color: MarkerColor.NEW})
           .setLngLat(event.lngLat)
-          .setPopup(popup)
-          .addTo(map)
-          .togglePopup();
+          .addTo(map);
+
+        if (this.createButton) {
+          this.prevNewMarker.setPopup(popup).togglePopup();
+        }
+
+        this.store.dispatch(
+          new SetMarkerCoords({
+            latitude: event.lngLat.lat,
+            longitude: event.lngLat.lng,
+          }),
+        );
       });
 
     this.subscription = this.sights$.subscribe((sights) =>

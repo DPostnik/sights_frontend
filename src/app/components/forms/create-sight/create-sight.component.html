@@ -1,112 +1,110 @@
 <form [formGroup]="form" (submit)="submitForm()">
-  <div class="container">
-    <mat-label class="form-title">Добавление нового объекта</mat-label>
+  <mat-label class="form-title">Добавление нового объекта</mat-label>
 
-    <div class="form-group">
-      <mat-form-field color="accent" appearance="outline">
-        <mat-label>Название</mat-label>
-        <input matInput type="text" placeholder="Введите слово для поиска" formControlName="name" />
-      </mat-form-field>
+  <div class="form-group">
+    <mat-form-field color="accent" appearance="outline">
+      <mat-label>Название</mat-label>
+      <input matInput type="text" placeholder="Введите слово для поиска" formControlName="name" />
+    </mat-form-field>
 
-      <mat-form-field color="accent" appearance="outline">
-        <mat-label>Описание</mat-label>
-        <input matInput type="text" id="description" formControlName="description" />
-      </mat-form-field>
+    <mat-form-field color="accent" appearance="outline">
+      <mat-label>Описание</mat-label>
+      <input matInput type="text" id="description" formControlName="description" />
+    </mat-form-field>
 
-      <mat-form-field color="accent" appearance="outline">
-        <mat-label>Главная фотография</mat-label>
-        <input matInput type="text" formControlName="mainImage" />
-      </mat-form-field>
+    <mat-form-field color="accent" appearance="outline">
+      <mat-label>Главная фотография</mat-label>
+      <input matInput type="text" formControlName="mainImage" />
+    </mat-form-field>
 
-      <mat-form-field color="accent" appearance="outline">
-        <mat-label>Основатель</mat-label>
-        <input matInput id="founder" type="text" formControlName="founder" />
-      </mat-form-field>
+    <mat-form-field color="accent" appearance="outline">
+      <mat-label>Основатель</mat-label>
+      <input matInput id="founder" type="text" formControlName="founder" />
+    </mat-form-field>
 
-      <mat-form-field color="accent" appearance="outline" class="subscript">
-        <mat-label>Дата основания</mat-label>
-        <input readonly matInput [matDatepicker]="picker" formControlName="date" />
-        <mat-hint>Месяц.День.Год</mat-hint>
-        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-        <mat-datepicker #picker startView="year"></mat-datepicker>
-      </mat-form-field>
-    </div>
-
-    <div class="form-group">
-      <mat-label class="field-title">Местоположение</mat-label>
-      <mat-form-field color="accent" appearance="outline">
-        <mat-label>Страна</mat-label>
-        <mat-select required formControlName="country">
-          <mat-option *ngFor="let country of countries" [value]="country.name">{{
-            country.name
-          }}</mat-option>
-        </mat-select>
-      </mat-form-field>
-      <mat-form-field color="accent" appearance="outline">
-        <mat-label>Область</mat-label>
-        <mat-select required formControlName="region">
-          <mat-option *ngFor="let region of regions" [value]="region.name">{{
-            region.name
-          }}</mat-option>
-        </mat-select>
-      </mat-form-field>
-      <mat-form-field color="accent" appearance="outline">
-        <mat-label>Город</mat-label>
-        <mat-select required formControlName="city">
-          <mat-option *ngFor="let city of cities" [value]="city.name">{{ city.name }}</mat-option>
-        </mat-select>
-      </mat-form-field>
-    </div>
-
-    <div class="form-group">
-      <mat-label class="field-title">Координаты</mat-label>
-      <mat-form-field color="accent" appearance="outline">
-        <mat-label>Долгота</mat-label>
-        <input matInput type="text" formControlName="longitude" readonly />
-      </mat-form-field>
-      <mat-form-field color="accent" appearance="outline">
-        <mat-label>Широта</mat-label>
-        <input matInput type="text" formControlName="latitude" readonly />
-      </mat-form-field>
-    </div>
-
-    <div class="form-group">
-      <mat-form-field color="accent" appearance="outline">
-        <mat-label>Категории</mat-label>
-        <mat-select formControlName="categories">
-          <mat-option *ngFor="let category of categories" [value]="category.name">
-            {{ category.name }}
-          </mat-option>
-          <mat-option>Без категории</mat-option>
-        </mat-select>
-      </mat-form-field>
-
-      <!--      <mat-form-field class="example-chip-list" appearance="fill">-->
-      <!--        <mat-label>Categories</mat-label>-->
-      <!--        <mat-chip-list #chipList aria-label="category selection">-->
-      <!--          <mat-chip *ngFor="let category of selectedCategories" (removed)="onRemove(category)">-->
-      <!--            {{ category }}-->
-      <!--            <button matChipRemove>-->
-      <!--              <mat-icon>cancel</mat-icon>-->
-      <!--            </button>-->
-      <!--          </mat-chip>-->
-      <!--          <input-->
-      <!--            placeholder="New Category..."-->
-      <!--            #categoryInput-->
-      <!--            formControlName="categories"-->
-      <!--            [matAutocomplete]="auto"-->
-      <!--            [matChipInputFor]="chipList"-->
-      <!--            [matChipInputSeparatorKeyCodes]="separatorKeysCodes"-->
-      <!--            (matChipInputTokenEnd)="addCategory($event)"-->
-      <!--          />-->
-      <!--        </mat-chip-list>-->
-      <!--        <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">-->
-      <!--          <mat-option *ngFor="let category of filteredList" [value]="category">-->
-      <!--            {{ category }}-->
-      <!--          </mat-option>-->
-      <!--        </mat-autocomplete>-->
-      <!--      </mat-form-field>-->
-    </div>
-    <button mat-stroked-button (submit)="submitForm()">Создать</button>
+    <mat-form-field color="accent" appearance="outline" class="subscript">
+      <mat-label>Дата основания</mat-label>
+      <input readonly matInput [matDatepicker]="picker" formControlName="date" />
+      <mat-hint>Месяц.День.Год</mat-hint>
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker startView="year"></mat-datepicker>
+    </mat-form-field>
   </div>
+
+  <div class="form-group">
+    <mat-label class="field-title">Местоположение</mat-label>
+    <mat-form-field color="accent" appearance="outline">
+      <mat-label>Страна</mat-label>
+      <mat-select required formControlName="country">
+        <mat-option *ngFor="let country of countries" [value]="country.name">{{
+          country.name
+        }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field color="accent" appearance="outline">
+      <mat-label>Область</mat-label>
+      <mat-select required formControlName="region">
+        <mat-option *ngFor="let region of regions" [value]="region.name">{{
+          region.name
+        }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field color="accent" appearance="outline">
+      <mat-label>Город</mat-label>
+      <mat-select required formControlName="city">
+        <mat-option *ngFor="let city of cities" [value]="city.name">{{ city.name }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <div class="form-group">
+    <mat-label class="field-title">Координаты</mat-label>
+    <mat-form-field color="accent" appearance="outline">
+      <mat-label>Долгота</mat-label>
+      <input matInput type="text" formControlName="longitude" readonly />
+    </mat-form-field>
+    <mat-form-field color="accent" appearance="outline">
+      <mat-label>Широта</mat-label>
+      <input matInput type="text" formControlName="latitude" readonly />
+    </mat-form-field>
+  </div>
+
+  <div class="form-group">
+    <mat-form-field color="accent" appearance="outline">
+      <mat-label>Категории</mat-label>
+      <mat-select formControlName="categories">
+        <mat-option *ngFor="let category of categories" [value]="category.name">
+          {{ category.name }}
+        </mat-option>
+        <mat-option>Без категории</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <!--      <mat-form-field class="example-chip-list" appearance="fill">-->
+    <!--        <mat-label>Categories</mat-label>-->
+    <!--        <mat-chip-list #chipList aria-label="category selection">-->
+    <!--          <mat-chip *ngFor="let category of selectedCategories" (removed)="onRemove(category)">-->
+    <!--            {{ category }}-->
+    <!--            <button matChipRemove>-->
+    <!--              <mat-icon>cancel</mat-icon>-->
+    <!--            </button>-->
+    <!--          </mat-chip>-->
+    <!--          <input-->
+    <!--            placeholder="New Category..."-->
+    <!--            #categoryInput-->
+    <!--            formControlName="categories"-->
+    <!--            [matAutocomplete]="auto"-->
+    <!--            [matChipInputFor]="chipList"-->
+    <!--            [matChipInputSeparatorKeyCodes]="separatorKeysCodes"-->
+    <!--            (matChipInputTokenEnd)="addCategory($event)"-->
+    <!--          />-->
+    <!--        </mat-chip-list>-->
+    <!--        <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">-->
+    <!--          <mat-option *ngFor="let category of filteredList" [value]="category">-->
+    <!--            {{ category }}-->
+    <!--          </mat-option>-->
+    <!--        </mat-autocomplete>-->
+    <!--      </mat-form-field>-->
+  </div>
+  <button mat-stroked-button (submit)="submitForm()">Создать</button>
 </form>
