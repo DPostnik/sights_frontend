@@ -4,8 +4,8 @@ import {GetMeta} from '@store/actions/app.actions';
 
 @Component({
   selector: 'app-dev-menu',
-  templateUrl: './devMenu.component.html',
-  styleUrls: ['./devMenu.component.scss'],
+  templateUrl: './dev-menu.component.html',
+  styleUrls: ['./dev-menu.component.scss'],
 })
 export class DevMenuComponent {
   constructor(private store: Store) {}

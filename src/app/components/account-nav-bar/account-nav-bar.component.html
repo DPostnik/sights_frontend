@@ -1,11 +1,11 @@
 <div *ngIf="(authState$ | async) === authState; else auth">
-  <button mat-button (click)="signIn()">Sign in</button>
-  <button mat-stroked-button (click)="signUp()">Sign up</button>
+  <button mat-stroked-button (click)="signIn()">Войти</button>
+  <button mat-stroked-button (click)="signUp()">Создать</button>
 </div>
 
 <ng-template #auth>
-  <div class="user-info d-flex">
-    <div class="d-flex" (click)="handleAccountClick()">
+  <div class="user-info flex-center justify-content-between">
+    <div class="flex-center justify-content-between" (click)="handleAccountClick()">
       <mat-icon class="user-info__person-icon">person</mat-icon>
       <span>{{ name$ | async }}</span>
     </div>

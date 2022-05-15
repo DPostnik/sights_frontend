@@ -22,7 +22,7 @@ import {MatSelectModule} from '@angular/material/select';
 import {LoaderComponent} from '@components/loader/loader.component';
 import {HeaderComponent} from '@components/header/header.component';
 import {FooterComponent} from '@components/footer/footer.component';
-import {DevMenuComponent} from '@components/devMenu/devMenu.component';
+import {DevMenuComponent} from '@components/dev-menu/dev-menu.component';
 import {MapComponent} from '@components/map/map.component';
 import {MatButtonModule} from '@angular/material/button';
 import {MatTableModule} from '@angular/material/table';

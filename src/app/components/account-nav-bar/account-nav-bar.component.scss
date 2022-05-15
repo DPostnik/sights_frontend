@@ -1,17 +1,9 @@
 @import 'src/assets/styles/theme';
 
-.mat-button {
-  &:hover {
-    background: $primary-color-darker;
-  }
-
-  margin-right: 5px;
-}
-
 .user-info {
 
   .user-info__person-icon {
-    font-size: 24px;
+    font-size: 18px;
     background-color: $white;
     border-radius: 20%;
     padding: 5px;
@@ -20,7 +12,7 @@
   }
 
   .user-info__logout-icon {
-    font-size: 24px;
+    font-size: 18px;
     margin-left: 10px;
     color: $white;
     padding: 10px;
@@ -38,8 +30,24 @@
   }
 }
 
-.d-flex {
-  display: flex;
+.justify-content-between {
   justify-content: space-between;
-  align-items: center;
+}
+
+button {
+  font-size: 16px;
+  padding: 3px 10px;
+  width: 80px;
+  border-radius: 15px 0 0 15px;
+  transition: .3s;
+
+  &+button {
+    border-radius: 0 15px 15px 0;
+    border-left: none;
+  }
+
+  &:hover {
+    background-color: $accent-color-light;
+    color: $primary-color-darker;
+  }
 }
