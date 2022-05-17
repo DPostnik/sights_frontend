@@ -29,6 +29,11 @@ export class AccountState {
   constructor(private authService: AuthService) {}
 
   @Selector()
+  static selectUser(state: AccountStateModel) {
+    return state.user;
+  }
+
+  @Selector()
   static selectUserRole(state: AccountStateModel) {
     return state.user.role;
   }
@@ -106,5 +111,10 @@ export class AccountState {
         break;
       }
     }
+  }
+
+  @Action(UpdateAccountInfo)
+  updateAccountInfo(ctx: StateContext<AccountStateModel>, {data}: UpdateAccountInfo) {
+    ctx.patchState({user: {...ctx.getState().user, photoUrl: data.photoUrl, name: data.name}});
   }
 }

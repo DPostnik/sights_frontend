@@ -1,17 +1,22 @@
 import {Action, Selector, State, StateContext} from '@ngxs/store';
 import {Injectable} from '@angular/core';
 import {UsersStateModel} from '@store/models/users.model';
-import {GetUsers, GetUsersFailure, GetUsersSuccess} from '@store/actions/user.actions';
+import {
+  GetUsers,
+  GetUsersFailure,
+  GetUsersSuccess,
+  UpdateUserInfo, UpdateUserInfoSuccess,
+} from '@store/actions/user.actions';
 import {UserService} from '@store/services/user.service';
 import {EndLoading, StartLoading} from '@store/actions/app.actions';
-import {catchError, EMPTY, finalize, switchMap} from 'rxjs';
+import {catchError, EMPTY, finalize, switchMap, tap} from 'rxjs';
+import {UpdateAccountInfo} from '@store/actions/account.actions';
 
 @State<UsersStateModel>({
   name: 'usersState',
   defaults: {
     data: [],
     total: 0,
-    selectedUser: undefined,
   },
 })
 @Injectable()
@@ -56,5 +61,19 @@ export class UsersState {
       data: [],
       total: 0,
     });
+  }
+
+  @Action(UpdateUserInfo)
+  updateUserInfo(ctx: StateContext<UsersStateModel>, {user}: UpdateUserInfo) {
+    return this.userService.updateUser(user).pipe(
+      tap(() => {
+        ctx.dispatch(new UpdateUserInfoSuccess(user));
+      })
+    );
+  }
+
+  @Action(UpdateUserInfoSuccess)
+  updateUserInfoSuccess(ctx: StateContext<UsersStateModel>, {user}: UpdateUserInfo) {
+    ctx.dispatch(new UpdateAccountInfo(user)); // todo notify
   }
 }

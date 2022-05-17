@@ -1,6 +1,7 @@
 import {Credentials} from '@model/user/credentials';
 import {Tokens} from '@model/user/user';
 import {CreateUserDto} from '@model/dto/userDto';
+import {UserModalData} from '@model/shared/userModalData';
 
 export class SignIn {
   static readonly type = '[Account] SignIn';
@@ -44,4 +45,9 @@ export class Initialize {
 
 export class HandleHttpError {
   static readonly type = '[Account] HandleHttpError';
+}
+
+export class UpdateAccountInfo {
+  static readonly type = '[Account] UpdateAccountInfo';
+  constructor(public data: UserModalData) {}
 }

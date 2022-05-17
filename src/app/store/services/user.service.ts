@@ -4,6 +4,7 @@ import {environment} from '@env/environment';
 import {Observable} from 'rxjs';
 import {PaginatedList} from '@model/shared/pagination';
 import {User} from '@model/user/user';
+import {UserModalData} from "@model/shared/userModalData";
 
 @Injectable({
   providedIn: 'root',
@@ -20,5 +21,9 @@ export class UserService {
     return this.http.get<PaginatedList<User>>(
       `${this.prefix}users${limitField}${offsetField}${searchField}`,
     );
+  }
+
+  updateUser(user: UserModalData) {
+    return this.http.put(`${this.prefix}users/${user.id}`, user);
   }
 }
