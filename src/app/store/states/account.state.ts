@@ -12,6 +12,7 @@ import {
   RefreshToken,
   SignIn,
   SignInSuccess,
+  UpdateAccountInfo,
 } from '@store/actions/account.actions';
 import {getDecodedAccessToken} from '@utils/jwtParse';
 import {clearLocalStorage} from '@utils/localStorage';
@@ -79,9 +80,12 @@ export class AccountState {
 
   @Action(Logout)
   logout(ctx: StateContext<AccountStateModel>) {
-    ctx.patchState({user: {...initialUser}, authState: AuthState.ANONYMOUS});
-    clearLocalStorage();
-    this.authService.logout();
+    return this.authService.logout().pipe(
+      tap(() => {
+        ctx.patchState({user: {...initialUser}, authState: AuthState.ANONYMOUS});
+        clearLocalStorage();
+      }),
+    );
   }
 
   @Action(RefreshToken)
