@@ -29,6 +29,8 @@ import {MatTableModule} from '@angular/material/table';
 import {TableComponent} from '@components/table/table.component';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {AccountNavBarComponent} from '@components/account-nav-bar/account-nav-bar.component';
+import {UserEditModalComponent} from '@components/user-edit-modal/user-edit-modal.component';
+import {MatDialogModule} from "@angular/material/dialog";
 
 @NgModule({
   declarations: [
@@ -42,6 +44,7 @@ import {AccountNavBarComponent} from '@components/account-nav-bar/account-nav-ba
     MapComponent,
     TableComponent,
     AccountNavBarComponent,
+    UserEditModalComponent,
   ],
   imports: [
     HttpClientModule,
@@ -67,6 +70,7 @@ import {AccountNavBarComponent} from '@components/account-nav-bar/account-nav-ba
     MatPaginatorModule,
     MatTooltipModule,
     MatButtonModule,
+    MatDialogModule,
   ],
   exports: [
     HttpClientModule,
@@ -100,6 +104,7 @@ import {AccountNavBarComponent} from '@components/account-nav-bar/account-nav-ba
     MatTooltipModule,
     MatButtonModule,
     AccountNavBarComponent,
+    UserEditModalComponent,
   ],
 })
 export class SharedModule {}
