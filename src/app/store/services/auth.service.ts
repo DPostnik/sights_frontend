@@ -22,8 +22,8 @@ export class AuthService {
     return this.http.post<Tokens>(`${this.route}signup`, user);
   }
 
-  logout(): void {
-    this.http.post(`${this.route}logout`, {});
+  logout() {
+    return this.http.post(`${this.route}logout`, {});
   }
 
   refreshToken(token: string): Observable<Tokens> {
