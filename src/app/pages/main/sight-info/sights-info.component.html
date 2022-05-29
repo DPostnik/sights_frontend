@@ -15,7 +15,7 @@
   </p>
   <p>Основатель: {{ sight.founder }}</p>
   <p>Дата основания: {{ sight.date | date: 'longDate' }}</p>
-  <mat-icon class="active" *ngFor="let i of sightsStars">star</mat-icon>
-  <mat-icon class="inactive" *ngFor="let i of notSightsStar">star</mat-icon>
+  <mat-icon class="active" *ngFor="let i of sightStars?.filled">star</mat-icon>
+  <mat-icon class="inactive" *ngFor="let i of sightStars?.notFilled">star</mat-icon>
   <div *ngIf="!sight">Объект не найден</div>
 </div>

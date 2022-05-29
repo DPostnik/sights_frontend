@@ -14,6 +14,7 @@ import {SightsState} from '@store/states/sights.state';
 import {Router} from '@angular/router';
 import {environment} from '@env/environment';
 import {Sight} from '@model/sight/sight';
+import {Rating} from "@model/sight/rating";
 
 @Component({
   selector: 'app-sights-list',
@@ -30,6 +31,11 @@ export class SightsListComponent implements OnInit, OnDestroy {
   search$ = new Subject<string>();
 
   subscriptions: Subscription[] = [];
+
+  sightsStars: Rating = {
+    filled: [],
+    notFilled: [],
+  };
 
   constructor(private store: Store, private router: Router) {}
 
@@ -63,5 +69,12 @@ export class SightsListComponent implements OnInit, OnDestroy {
 
   handleSearch(value: string) {
     this.search$.next(value);
+  }
+
+  getRatingCard(rating: number): Rating {
+    return {
+      filled: Array(rating).fill(1),
+      notFilled: Array(5 - rating).fill(1),
+    };
   }
 }

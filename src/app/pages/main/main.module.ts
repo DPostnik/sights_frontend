@@ -10,9 +10,10 @@ import {MapPopupCreateComponent} from '@components/map-popups/map-popup-create/m
 import {MapPopupDetailComponent} from '@components/map-popups/map-popup-detail/map-popup-detail.component';
 import {AccountPageComponent} from '@pages/main/account-page/account-page.component';
 import {UserGuard} from '@guards/user.guard';
+import {PipeModule} from "@pipes/pipe.module";
 
 @NgModule({
-  imports: [SharedModule],
+    imports: [SharedModule, PipeModule],
   declarations: [
     MainLayoutComponent,
     HomeComponent,
