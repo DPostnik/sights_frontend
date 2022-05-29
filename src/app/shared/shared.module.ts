@@ -31,6 +31,7 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import {AccountNavBarComponent} from '@components/account-nav-bar/account-nav-bar.component';
 import {UserEditModalComponent} from '@components/user-edit-modal/user-edit-modal.component';
 import {MatDialogModule} from "@angular/material/dialog";
+import {PipeModule} from "@pipes/pipe.module";
 
 @NgModule({
   declarations: [
@@ -71,6 +72,7 @@ import {MatDialogModule} from "@angular/material/dialog";
     MatTooltipModule,
     MatButtonModule,
     MatDialogModule,
+    PipeModule,
   ],
   exports: [
     HttpClientModule,

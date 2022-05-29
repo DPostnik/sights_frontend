@@ -43,16 +43,23 @@
     </mat-form-field>
     <mat-form-field color="accent" appearance="outline">
       <mat-label>Область</mat-label>
-      <mat-select required formControlName="region">
-        <mat-option *ngFor="let region of regions" [value]="region.name">{{
+      <mat-select
+        required
+        formControlName="region"
+        (selectionChange)="selectRegion($event.value)"
+        [(value)]="selectedRegion"
+      >
+        <mat-option *ngFor="let region of regions | region: selectedCountryId" [value]="region">{{
           region.name
         }}</mat-option>
       </mat-select>
     </mat-form-field>
     <mat-form-field color="accent" appearance="outline">
       <mat-label>Город</mat-label>
-      <mat-select required formControlName="city">
-        <mat-option *ngFor="let city of cities" [value]="city.name">{{ city.name }}</mat-option>
+      <mat-select required formControlName="city" (selectionChange)="selectCity($event.value)">
+        <mat-option *ngFor="let city of cities | city: selectedRegionId" [value]="city">{{
+          city.name
+        }}</mat-option>
       </mat-select>
     </mat-form-field>
   </div>
