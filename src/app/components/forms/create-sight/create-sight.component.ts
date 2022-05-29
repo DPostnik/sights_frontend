@@ -36,6 +36,13 @@ export class CreateSightComponent implements OnInit, OnDestroy {
   cities?: City[];
   categories!: Category[];
 
+  selectedCountryId: number = 0;
+  selectedRegionId: number = 0;
+  selectedCityId: number = 0;
+  selectedRegion: any;
+  selectedCountry: any;
+  selectedCity: any;
+
   ngOnInit(): void {
     this.initializeForm();
 
@@ -101,7 +108,7 @@ export class CreateSightComponent implements OnInit, OnDestroy {
       date: new Date(),
       description: this.form.get('description')?.value,
       founder: this.form.get('founder')?.value,
-      city: this.form.get('city')?.value,
+      city: this.form.get('city')?.value.name,
       name: this.form.get('name')?.value,
       mainImage: this.form.get('mainImage')?.value,
     };
@@ -116,47 +123,18 @@ export class CreateSightComponent implements OnInit, OnDestroy {
     this.subscriptions.forEach((s) => s.unsubscribe());
   }
 
-  // @ViewChild('categoryInput') categoryInput!: ElementRef<HTMLInputElement>;
-  // separatorKeysCodes: number[] = [ENTER, COMMA];
-  //
-  // onRemove(name: string) {
-  //   this.selectedCategories = this.selectedCategories.filter((item) => item !== name);
-  // }
-  //
-  // addCategory(event: MatChipInputEvent) {
-  //   console.log(event);
-  //   const value = (event.value || '').trim();
-  //   if (value) {
-  //     this.selectedCategories.push(value);
-  //   }
-  //   event.chipInput!.clear();
-  // }
-  //
-  // selected(event: MatAutocompleteSelectedEvent) {
-  //   const value = event.option.value;
-  //   this.selectedCategories.push(value);
-  //   this.filteredList = this.filteredCategories(value)
-  //   this.categoryInput.nativeElement.value = '';
-  // }
-  //
-  // filteredCategories(value: string) {
-  //   return this.categories
-  //     .filter((item) => this.selectedCategories.includes(item.name))
-  //     .filter((item) => item.name.includes(value))
-  //     .map(item => item.name);
-  // }
-  //
-  // const categoriesForm = this.form.get('categories');
-  // if (categoriesForm) {
-  //   this.subscriptions.push(
-  //     categoriesForm.valueChanges
-  //       .pipe(
-  //         startWith(null),
-  //         map((value: string | null) => {
-  //           return value ? this.filteredCategories(value) : this.categories.map((item) => item.name);
-  //         }),
-  //       )
-  //       .subscribe(value => this.filteredList = value),
-  //   );
-  // }
+  selectRegion(value: Region) {
+    this.selectedRegionId = value.id;
+    this.selectedCountryId = value.countryId;
+    this.selectedRegion = value;
+  }
+
+  selectCity(value: any) {
+    this.selectedCityId = value.id;
+    this.selectedRegionId = value.regionId;
+    this.selectedCity = value;
+    this.selectedRegion = this.regions?.find((item) => {
+      return item.id === value.regionId
+    });
+  }
 }
