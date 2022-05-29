@@ -15,6 +15,9 @@ import {Sight} from '@model/sight/sight';
 export class SightsInfoComponent implements OnInit, OnDestroy {
   @Select(SightsState.selectSight) sight$!: Observable<Sight>;
 
+  sightsStars: any[] = [];
+  notSightsStar: any[] = [];
+
   sight?: Sight;
 
   subscriptions: Subscription[] = [];
@@ -24,7 +27,11 @@ export class SightsInfoComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.subscriptions.push(
       this.route.params.subscribe((p) => this.store.dispatch(new GetSight(p['id']))),
-      this.sight$.subscribe((sight) => (this.sight = sight)),
+      this.sight$.subscribe((sight) => {
+        this.sight = sight;
+        this.sightsStars = Array(sight?.rating).fill(1);
+        this.notSightsStar = Array(5 - sight?.rating).fill(1);
+      }),
     );
   }
 
