@@ -60,7 +60,7 @@ export class SigninPageComponent implements OnInit {
     const interval = setInterval(() => {
       if (ref) {
         href = ref.location.href;
-        if (href.includes('4200')) {
+        if (href?.includes('4200')) {
           ref.close();
           clearInterval(interval);
           window.location.href = href;

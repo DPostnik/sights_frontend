@@ -1,5 +1,5 @@
 import {CanActivate, Router, UrlTree} from '@angular/router';
-import {Observable} from 'rxjs';
+import {map, Observable} from 'rxjs';
 import {Select} from '@ngxs/store';
 import {AccountState} from '@store/states/account.state';
 import {Injectable} from '@angular/core';
@@ -7,6 +7,7 @@ import {AuthState} from '@enums/auth-state';
 
 @Injectable()
 export class UserGuard implements CanActivate {
+  @Select(AccountState.selectUserRole) role$!: Observable<string>;
   @Select(AccountState.selectAuthState) authState$!: Observable<AuthState>;
   authState?: AuthState;
 
@@ -20,6 +21,14 @@ export class UserGuard implements CanActivate {
     if (this.authState === AuthState.ANONYMOUS) {
       return this.router.parseUrl('/auth');
     }
-    return true;
+
+    return this.role$.pipe(
+      map((role) => {
+        if (role) {
+          return true;
+        }
+        return this.router.parseUrl('/not-found');
+      }),
+    );
   }
 }

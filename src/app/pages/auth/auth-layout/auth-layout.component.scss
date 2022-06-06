@@ -1,13 +1,16 @@
+@import 'src/assets/styles/theme';
+
 app-layout {
   justify-content: center;
   align-items: center;
 }
 
-.auth-container {
+.auth__container {
   width: 400px;
   height: 50vh;
-  background-color: white;
+  background-color: $primary-color-darker;
   padding: 40px 60px;
   border-radius: 20px;
   text-align: center;
+  color: $accent-color;
 }
