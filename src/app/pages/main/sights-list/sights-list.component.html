@@ -1,21 +1,22 @@
 <div class="search-container">
   <app-search (search)="handleSearch($event)"></app-search>
 </div>
-<div class="filter-container">filter block</div>
+<!--<div class="filter-container">filter block</div>-->
 
 <div class="cards-container" *ngIf="data.length; else elseBlock">
   <div class="card-list flex-center">
     <mat-card class="card pointer" *ngFor="let card of data" (click)="onCardClick(card)">
       <mat-card-header>
-        <mat-card-title>{{ card.name }}</mat-card-title>
+        <mat-card-title>{{ card.name | truncate:26 }}</mat-card-title>
       </mat-card-header>
-      <img mat-card-image [src]="card.mainImage" alt="Photo of {{ card.name }}" />
+      <img class="main-image" height="200" width="283" mat-card-image [src]="card.mainImage || '/assets/img/no-image.jpg'" alt="Photo of {{ card.name }}" />
       <mat-card-content>
-        <p>{{ card.description }}</p>
+        <p *ngIf="!card.description"><br/></p>
+        <p>{{ card.description | truncate:25}}</p>
       </mat-card-content>
-      <mat-card-footer>
-        <mat-icon>star</mat-icon>
-        <span class="rating">{{ card.rating }}</span>
+      <mat-card-footer class="flex-center">
+        <mat-icon class="active" *ngFor="let i of getRatingCard(card.rating).filled || []">star</mat-icon>
+        <mat-icon class="inactive" *ngFor="let i of getRatingCard(card.rating).notFilled || []">star</mat-icon>
       </mat-card-footer>
     </mat-card>
   </div>

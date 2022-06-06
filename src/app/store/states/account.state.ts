@@ -80,9 +80,14 @@ export class AccountState {
 
   @Action(Logout)
   logout(ctx: StateContext<AccountStateModel>) {
-    return this.authService.logout().pipe(
+    ctx.patchState({authState: AuthState.ANONYMOUS});
+    const refreshToken = localStorage.getItem('refresh_token');
+    if (!refreshToken) {
+      clearLocalStorage();
+      return null;
+    }
+    return this.authService.logout(refreshToken).pipe(
       tap(() => {
-        ctx.patchState({user: {...initialUser}, authState: AuthState.ANONYMOUS});
         clearLocalStorage();
       }),
     );
@@ -112,6 +117,11 @@ export class AccountState {
       case AuthState.ACCESS_TOKEN_EXPIRED: {
         // todo notifier
         ctx.dispatch(Logout);
+        break;
+      }
+      case AuthState.ANONYMOUS: {
+        ctx.patchState({user: {...initialUser}})
+        clearLocalStorage();
         break;
       }
     }

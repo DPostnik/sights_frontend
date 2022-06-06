@@ -2,8 +2,39 @@
 
 .container {
   background-color: aliceblue;
-  width: 30%;
-  margin: 0 auto;
+  width: 70%;
+  padding: 40px 100px;
+  border-radius: 10px;
+  margin: 30px auto 0 auto;
+  min-height: 80vh;
+
+  .mat-icon.active {
+    color: blue;
+  }
+
+  .mat-icon.inactive {
+    color: black;
+  }
+
+  .mat-icon.arrow:hover {
+    border-radius: 50%;
+    background-color: #aaa;
+    cursor: pointer;
+  }
+
+  .d-flex {
+    display: flex;
+  }
+
+  .sight-name {
+    margin: 0 0 40px 20px;
+  }
+
+  .sight-image {
+    width: 500px;
+    margin-bottom: 30px;
+  }
+
   .tag {
     padding: 4px;
     border-radius: 4px;

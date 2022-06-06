@@ -1,17 +1,17 @@
-.login__container{
-  width: 400px;
-  height: 50vh;
-  background-color: white;
-  padding: 40px 60px;
-  border-radius: 20px;
-  text-align: center;
+input {
+  color: white;
+}
 
-  span.login__title{
-    font-size: 30px;
-  }
+h2 {
+  color: white;
+}
 
-  .validation
-  {
-    color: red;
-  }
+button {
+  border-radius: 12px;
+  border: 1px solid black;
+  min-width: 100px;
+}
+
+button.disabled{
+
 }

@@ -5,7 +5,17 @@
 
 <ng-template #auth>
   <div class="user-info flex-center justify-content-between">
-    <div class="flex-center justify-content-between" (click)="handleAccountClick()">
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item (click)="handleAccountClick()">
+        <mat-icon>account_circle</mat-icon>
+        <span>Личный кабинет</span>
+      </button>
+      <button mat-menu-item *ngIf="(role$ | async) === adminRole" (click)="handleAdminClick()">
+        <mat-icon>extension</mat-icon>
+        <span>Страница Администратора</span>
+      </button>
+    </mat-menu>
+    <div class="flex-center justify-content-between" [matMenuTriggerFor]="menu">
       <mat-icon class="user-info__person-icon">person</mat-icon>
       <span>{{ name$ | async }}</span>
     </div>

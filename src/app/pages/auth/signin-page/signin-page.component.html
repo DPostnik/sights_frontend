@@ -1,6 +1,6 @@
-<form [formGroup]="form" (ngSubmit)="submit()">
+<form [formGroup]="form" (ngSubmit)="submit()" class="login__container">
   <div>
-    <span class="login__title">Welcome</span>
+    <h2>Страница входа</h2>
   </div>
 
   <span>{{ this.errorMessage }}</span>
@@ -8,70 +8,59 @@
   <div
     class="form_control"
     [ngClass]="{
-            invalid: form?.get('email')?.invalid && form?.get('email')?.touched
-        }"
+      invalid: form?.get('email')?.invalid && form?.get('email')?.touched
+    }"
   >
-    <label for="email">Login:</label><br />
-    <input
-      id="email"
-      type="text"
-      class="form-control"
-      formControlName="email"
-      (input)="resetErrorMessage()"
-    />
+    <mat-form-field color="accent" appearance="outline">
+      <mat-label>Логин</mat-label>
+      <input
+        matInput
+        type="text"
+        id="email"
+        formControlName="email"
+        (input)="resetErrorMessage()"
+      />
+    </mat-form-field>
 
-    <div
-      class="validation"
-      *ngIf="form?.get('email')?.touched && form?.get('email')?.invalid"
-    >
-      <small *ngIf="form?.get('email')?.errors?.['required']"
-      >*Введите поле email</small
-      >
-      <small *ngIf="form?.get('email')?.errors?.['email']"
-      >*Введите корректный email</small
-      >
+    <div class="validation" *ngIf="form?.get('email')?.touched && form?.get('email')?.invalid">
+      <mat-error *ngIf="form?.get('email')?.errors?.['required']">*Введите поле логина</mat-error>
+<!--      <mat-error *ngIf="form?.get('email')?.errors?.['email']">*Введите корректный email</mat-error>-->
     </div>
   </div>
 
   <div
     class="form_control"
     [ngClass]="{
-            invalid:
-                form?.get('password')?.invalid && form?.get('password')?.touched
-        }"
+      invalid: form?.get('password')?.invalid && form?.get('password')?.touched
+    }"
   >
-    <label for="password">Password:</label><br />
-    <input
-      id="password"
-      type="password"
-      class="form-control"
-      formControlName="password"
-      (input)="resetErrorMessage()"
-    />
+    <mat-form-field color="accent" appearance="outline">
+      <mat-label>Пароль</mat-label>
+      <input
+        matInput
+        type="text"
+        id="password"
+        formControlName="password"
+        (input)="resetErrorMessage()"
+      />
+    </mat-form-field>
 
     <div
       class="validation"
-      *ngIf="
-                form?.get('password')?.touched && form?.get('password')?.invalid
-            "
+      *ngIf="form?.get('password')?.touched && form?.get('password')?.invalid"
     >
-      <small *ngIf="form?.get('password')?.errors?.['required']"
-      >*Введите поле password</small
-      >
-      <small *ngIf="form?.get('password')?.errors?.['minLength']"
-      >*Пароль должен быть не менее символов</small
-      >
+      <mat-error *ngIf="form?.get('password')?.errors?.['required']">*Введите поле пароля</mat-error>
     </div>
   </div>
 
   <button
+    mat-button
     type="submit"
     (submit)="submit()"
-    class="btn btn-primary"
     [disabled]="form?.invalid || submitted"
   >
     Войти
   </button>
 </form>
 
-<button (click)="redirect()">Login via Google</button>
+<button mat-button (click)="redirect()">Login via Google</button>

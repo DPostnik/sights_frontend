@@ -8,6 +8,25 @@
       width: 20%;
       margin: 20px;
       transition: .3s;
+      min-width: 330px;
+      max-width: 370px;
+      height: 320px;
+
+      .mat-card-content{
+        flex-grow: 1;
+      }
+
+      .mat-icon.active{
+        color: yellow;
+      }
+
+      .mat-icon.inactive{
+        color: white
+      }
+
+      img.main-image{
+        object-fit: cover;
+      }
 
       &:hover {
         filter: brightness(1.25);
