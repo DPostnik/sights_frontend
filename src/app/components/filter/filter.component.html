@@ -1,0 +1,10 @@
+<div [formGroup]="form">
+  <ng-container *ngFor="let field of fields">
+    <mat-form-field>
+      <mat-select *ngIf="isSelect(field.type)" [formControlName]="field.name">
+        <mat-option *ngFor="let option of field.options" [value]="option.value">{{ option.value }}</mat-option>
+      </mat-select>
+      <input matInput type="text" *ngIf="isText(field.type)" [formControlName]="field.name" />
+    </mat-form-field>
+  </ng-container>
+</div>

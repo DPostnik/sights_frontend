@@ -21,7 +21,6 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatSelectModule} from '@angular/material/select';
 import {LoaderComponent} from '@components/loader/loader.component';
 import {HeaderComponent} from '@components/header/header.component';
-import {FooterComponent} from '@components/footer/footer.component';
 import {DevMenuComponent} from '@components/dev-menu/dev-menu.component';
 import {MapComponent} from '@components/map/map.component';
 import {MatButtonModule} from '@angular/material/button';
@@ -30,8 +29,9 @@ import {TableComponent} from '@components/table/table.component';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {AccountNavBarComponent} from '@components/account-nav-bar/account-nav-bar.component';
 import {UserEditModalComponent} from '@components/user-edit-modal/user-edit-modal.component';
-import {MatDialogModule} from "@angular/material/dialog";
-import {PipeModule} from "@pipes/pipe.module";
+import {MatDialogModule} from '@angular/material/dialog';
+import {PipeModule} from '@pipes/pipe.module';
+import {FilterComponent} from '@components/filter/filter.component';
 
 @NgModule({
   declarations: [
@@ -40,12 +40,12 @@ import {PipeModule} from "@pipes/pipe.module";
     CreateSightComponent,
     LoaderComponent,
     HeaderComponent,
-    FooterComponent,
     DevMenuComponent,
     MapComponent,
     TableComponent,
     AccountNavBarComponent,
     UserEditModalComponent,
+    FilterComponent,
   ],
   imports: [
     HttpClientModule,
@@ -98,7 +98,6 @@ import {PipeModule} from "@pipes/pipe.module";
     MatSelectModule,
     LoaderComponent,
     HeaderComponent,
-    FooterComponent,
     DevMenuComponent,
     MapComponent,
     MatTableModule,
@@ -107,6 +106,7 @@ import {PipeModule} from "@pipes/pipe.module";
     MatButtonModule,
     AccountNavBarComponent,
     UserEditModalComponent,
+    FilterComponent,
   ],
 })
 export class SharedModule {}
