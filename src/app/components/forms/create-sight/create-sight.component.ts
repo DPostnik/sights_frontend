@@ -1,6 +1,6 @@
 import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {forkJoin, Observable, Subscription} from 'rxjs';
+import {Observable, Subscription, tap} from 'rxjs';
 import {Country} from '@model/location/country';
 import {Region} from '@model/location/region';
 import {City} from '@model/location/city';
@@ -12,7 +12,7 @@ import {CreateSight, GetSight, UpdateSight} from '@store/actions/sights.actions'
 import {SightDto} from '@model/dto/sightDto';
 import {SightsState} from '@store/states/sights.state';
 import {Sight} from '@model/sight/sight';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {Coordinates} from '@model/location/coordinates';
 
 @Component({
@@ -40,7 +40,6 @@ export class CreateSightComponent implements OnInit, OnDestroy {
   selectedRegionId: number = 0;
   selectedCityId: number = 0;
   selectedRegion: any;
-  selectedCountry: any;
   selectedCity: any;
 
   ngOnInit(): void {
@@ -57,9 +56,7 @@ export class CreateSightComponent implements OnInit, OnDestroy {
     );
     this.subscriptions.push(
       this.route.params.subscribe((p) => p['id'] && this.store.dispatch(new GetSight(p['id']))),
-      forkJoin([this.sight$, this.markerCoords$]).subscribe(([sight, markerCoords]) => {
-        this.sight = sight;
-        this.markerCoords = markerCoords;
+      this.sight$.pipe(tap((sight) => (this.sight = sight))).subscribe(() => {
         this.initializeForm();
       }),
       this.markerCoords$.subscribe((c) => {
@@ -72,7 +69,7 @@ export class CreateSightComponent implements OnInit, OnDestroy {
     );
   }
 
-  constructor(private store: Store, private route: ActivatedRoute) {}
+  constructor(private store: Store, private route: ActivatedRoute, private router: Router) {}
 
   private initializeForm(): void {
     this.form = new FormGroup({
@@ -112,11 +109,10 @@ export class CreateSightComponent implements OnInit, OnDestroy {
       name: this.form.get('name')?.value,
       mainImage: this.form.get('mainImage')?.value,
     };
-    if (this.update) {
-      this.store.dispatch(new UpdateSight(sight, this.sight!.id));
-      return;
-    }
-    this.store.dispatch(new CreateSight(sight));
+    if (this.update)
+      this.store.dispatch(new UpdateSight(sight, this.sight!.id))
+    else this.store.dispatch(new CreateSight(sight));
+    this.router.navigate(['admin/sights/dashboard']).then();
   }
 
   ngOnDestroy(): void {
@@ -134,7 +130,7 @@ export class CreateSightComponent implements OnInit, OnDestroy {
     this.selectedRegionId = value.regionId;
     this.selectedCity = value;
     this.selectedRegion = this.regions?.find((item) => {
-      return item.id === value.regionId
+      return item.id === value.regionId;
     });
   }
 }

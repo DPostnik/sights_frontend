@@ -14,7 +14,8 @@ import {SightsState} from '@store/states/sights.state';
 import {Router} from '@angular/router';
 import {environment} from '@env/environment';
 import {Sight} from '@model/sight/sight';
-import {Rating} from "@model/sight/rating";
+import {Rating} from '@model/sight/rating';
+import {IFilter} from '@model/shared/filter';
 
 @Component({
   selector: 'app-sights-list',
@@ -32,10 +33,23 @@ export class SightsListComponent implements OnInit, OnDestroy {
 
   subscriptions: Subscription[] = [];
 
-  sightsStars: Rating = {
-    filled: [],
-    notFilled: [],
-  };
+  filterFields: IFilter[] = [
+    {
+      action: () => {},
+      label: 'Страна',
+      name: 'country',
+      type: 'string',
+      value: '',
+    },
+    {
+      action: () => {},
+      label: 'Категории',
+      name: 'category',
+      options: [{value: 'da', key: 'da'}],
+      type: 'select',
+      value: '',
+    },
+  ];
 
   constructor(private store: Store, private router: Router) {}
 

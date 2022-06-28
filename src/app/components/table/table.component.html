@@ -7,7 +7,7 @@
         *matCellDef="let element"
         (contextmenu)="contextMenuActions ? onContextMenu($event, element.id) : undefined"
       >
-        {{ element[item.field] }}
+        {{ element[item.field] | truncate:50 }}
       </td>
     </ng-container>
 

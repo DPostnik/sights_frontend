@@ -36,7 +36,11 @@
 }
 
 .search-container{
-  width:20%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 1000px;
   margin: 0 auto;
 }
 

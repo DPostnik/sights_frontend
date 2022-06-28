@@ -113,5 +113,5 @@
     <!--        </mat-autocomplete>-->
     <!--      </mat-form-field>-->
   </div>
-  <button mat-stroked-button (submit)="submitForm()">Создать</button>
+  <button mat-stroked-button (submit)="submitForm()">{{this.update ? 'Обновить' : 'Создать'}}</button>
 </form>

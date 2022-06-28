@@ -1,6 +1,6 @@
 import {Action, Selector, State, StateContext} from '@ngxs/store';
 import {Injectable} from '@angular/core';
-import {catchError, EMPTY, finalize, switchMap} from 'rxjs';
+import {catchError, EMPTY, finalize, switchMap, tap} from 'rxjs';
 import {SightService} from '@store/services/sight.service';
 import {
   CreateSight,
@@ -110,6 +110,7 @@ export class SightsState {
   @Action(CreateSight)
   createSight(ctx: StateContext<SightsStateModel>, {dto}: CreateSight) {
     return this.sightService.postSight(dto).pipe(
+      tap(() => ctx.patchState({selectedSight: undefined})),
       catchError((e) => {
         console.error('getSight error', e);
         return EMPTY;
@@ -120,6 +121,7 @@ export class SightsState {
   @Action(UpdateSight)
   updateSight(ctx: StateContext<SightsStateModel>, {sight, id}: UpdateSight) {
     return this.sightService.putSight(sight, id).pipe(
+      tap(() => ctx.patchState({selectedSight: undefined})),
       catchError((e) => {
         console.error('getSight error', e);
         return EMPTY;

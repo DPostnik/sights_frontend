@@ -1,10 +1,27 @@
-<div [formGroup]="form">
+<div [formGroup]="form" class="filter-container">
   <ng-container *ngFor="let field of fields">
-    <mat-form-field>
-      <mat-select *ngIf="isSelect(field.type)" [formControlName]="field.name">
-        <mat-option *ngFor="let option of field.options" [value]="option.value">{{ option.value }}</mat-option>
-      </mat-select>
-      <input matInput type="text" *ngIf="isText(field.type)" [formControlName]="field.name" />
+    <mat-form-field appearance="outline">
+      <mat-label>{{ field.label }}</mat-label>
+      <ng-container [ngSwitch]="field.type.toLowerCase()">
+        <mat-select
+          *ngSwitchCase="'select'"
+          [formControlName]="field.name"
+        >
+          <mat-option>Не выбрано</mat-option>
+          <mat-option *ngFor="let option of field.options" [value]="option.value">{{
+            option.value
+          }}</mat-option>
+        </mat-select>
+
+        <input
+          matInput
+          type="text"
+          *ngSwitchDefault
+          [formControlName]="field.name"
+        />
+      </ng-container>
     </mat-form-field>
   </ng-container>
+  <button mat-button color="primary" class="button-search" (click)="clear()">Очистить</button>
+  <button mat-button color="primary" class="button-search" (click)="onSubmit()">Поиск</button>
 </div>

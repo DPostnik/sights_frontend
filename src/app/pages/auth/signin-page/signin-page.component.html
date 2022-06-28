@@ -3,7 +3,7 @@
     <h2>Страница входа</h2>
   </div>
 
-  <span>{{ this.errorMessage }}</span>
+  <span *ngIf="(authState$ | async) === invalidCreds">{{ this.errorMessage }}</span>
 
   <div
     class="form_control"
@@ -24,7 +24,7 @@
 
     <div class="validation" *ngIf="form?.get('email')?.touched && form?.get('email')?.invalid">
       <mat-error *ngIf="form?.get('email')?.errors?.['required']">*Введите поле логина</mat-error>
-<!--      <mat-error *ngIf="form?.get('email')?.errors?.['email']">*Введите корректный email</mat-error>-->
+      <!--      <mat-error *ngIf="form?.get('email')?.errors?.['email']">*Введите корректный email</mat-error>-->
     </div>
   </div>
 
@@ -38,7 +38,7 @@
       <mat-label>Пароль</mat-label>
       <input
         matInput
-        type="text"
+        type="password"
         id="password"
         formControlName="password"
         (input)="resetErrorMessage()"
@@ -49,16 +49,13 @@
       class="validation"
       *ngIf="form?.get('password')?.touched && form?.get('password')?.invalid"
     >
-      <mat-error *ngIf="form?.get('password')?.errors?.['required']">*Введите поле пароля</mat-error>
+      <mat-error *ngIf="form?.get('password')?.errors?.['required']"
+        >*Введите поле пароля</mat-error
+      >
     </div>
   </div>
 
-  <button
-    mat-button
-    type="submit"
-    (submit)="submit()"
-    [disabled]="form?.invalid || submitted"
-  >
+  <button mat-button type="submit" (submit)="submit()" [disabled]="form?.invalid || submitted">
     Войти
   </button>
 </form>

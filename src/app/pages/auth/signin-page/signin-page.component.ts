@@ -18,7 +18,7 @@ export class SigninPageComponent implements OnInit {
   errorMessage: string = '';
   form: FormGroup = new FormGroup({});
   submitted = false;
-  message: string = '';
+  invalidCreds = AuthState.INVALID_CREDENTIALS;
   @Select(AccountState.selectAuthState) authState$!: Observable<AuthState>;
 
   constructor(private auth: AuthService, private store: Store, private router: Router) {}
@@ -32,8 +32,14 @@ export class SigninPageComponent implements OnInit {
       ]),
     });
     this.authState$.subscribe((authState$) => {
+      if (authState$ === AuthState.INVALID_CREDENTIALS) {
+        this.form.reset();
+        this.errorMessage = "Неверные данные для входа";
+        this.submitted = false;
+      }
       return authState$ === AuthState.LOGGED_IN && this.router.navigate(['/']);
-    });
+    }
+    );
   }
 
   submit(): void {
