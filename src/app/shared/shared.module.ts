@@ -32,6 +32,8 @@ import {UserEditModalComponent} from '@components/user-edit-modal/user-edit-moda
 import {MatDialogModule} from '@angular/material/dialog';
 import {PipeModule} from '@pipes/pipe.module';
 import {FilterComponent} from '@components/filter/filter.component';
+import {MatTabsModule} from '@angular/material/tabs';
+import {CustomButtonComponent} from '@components/customButton/custom-button.component';
 
 @NgModule({
   declarations: [
@@ -46,6 +48,7 @@ import {FilterComponent} from '@components/filter/filter.component';
     AccountNavBarComponent,
     UserEditModalComponent,
     FilterComponent,
+    CustomButtonComponent,
   ],
   imports: [
     HttpClientModule,
@@ -73,6 +76,7 @@ import {FilterComponent} from '@components/filter/filter.component';
     MatButtonModule,
     MatDialogModule,
     PipeModule,
+    MatTabsModule,
   ],
   exports: [
     HttpClientModule,
@@ -107,6 +111,8 @@ import {FilterComponent} from '@components/filter/filter.component';
     AccountNavBarComponent,
     UserEditModalComponent,
     FilterComponent,
+    MatTabsModule,
+    CustomButtonComponent,
   ],
 })
 export class SharedModule {}

@@ -16,6 +16,7 @@ $theme: map-merge($theme, (background: $background));
 @include mat.all-component-themes($theme);
 
 $primary-color: mat.get-color-from-palette($primary-palette, 500);
+$primary-background: mat.get-color-from-palette($primary-palette, 800);
 $primary-color-darker: mat.get-color-from-palette($primary-palette, 900);
 $primary-color-lighter: mat.get-color-from-palette($primary-palette, 100);
 

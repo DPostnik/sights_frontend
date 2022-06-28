@@ -1,63 +1,75 @@
-<form [formGroup]="form" (ngSubmit)="submit()" class="login__container">
-  <div>
-    <h2>Страница входа</h2>
-  </div>
-
-  <span *ngIf="(authState$ | async) === invalidCreds">{{ this.errorMessage }}</span>
-
-  <div
-    class="form_control"
-    [ngClass]="{
-      invalid: form?.get('email')?.invalid && form?.get('email')?.touched
-    }"
-  >
-    <mat-form-field color="accent" appearance="outline">
-      <mat-label>Логин</mat-label>
-      <input
-        matInput
-        type="text"
-        id="email"
-        formControlName="email"
-        (input)="resetErrorMessage()"
-      />
-    </mat-form-field>
-
-    <div class="validation" *ngIf="form?.get('email')?.touched && form?.get('email')?.invalid">
-      <mat-error *ngIf="form?.get('email')?.errors?.['required']">*Введите поле логина</mat-error>
-      <!--      <mat-error *ngIf="form?.get('email')?.errors?.['email']">*Введите корректный email</mat-error>-->
-    </div>
-  </div>
-
-  <div
-    class="form_control"
-    [ngClass]="{
-      invalid: form?.get('password')?.invalid && form?.get('password')?.touched
-    }"
-  >
-    <mat-form-field color="accent" appearance="outline">
-      <mat-label>Пароль</mat-label>
-      <input
-        matInput
-        type="password"
-        id="password"
-        formControlName="password"
-        (input)="resetErrorMessage()"
-      />
-    </mat-form-field>
+<div class="container">
+  <form [formGroup]="form" (ngSubmit)="submit()">
+    <span class="validation" *ngIf="authState === invalidCredentials">{{ this.errorMessage }}</span>
 
     <div
-      class="validation"
-      *ngIf="form?.get('password')?.touched && form?.get('password')?.invalid"
+      class="form_control"
+      [ngClass]="{
+        invalid: form?.get('email')?.invalid && form?.get('email')?.touched
+      }"
     >
-      <mat-error *ngIf="form?.get('password')?.errors?.['required']"
-        >*Введите поле пароля</mat-error
-      >
+      <mat-form-field color="accent" appearance="outline">
+        <mat-label>Логин</mat-label>
+        <input
+          matInput
+          type="text"
+          id="email"
+          formControlName="email"
+          (input)="resetErrorMessage()"
+        />
+      </mat-form-field>
+
+      <div class="validation" *ngIf="form?.get('email')?.touched && form?.get('email')?.invalid">
+        <mat-error *ngIf="form?.get('email')?.errors?.['required']">*Введите поле логина</mat-error>
+      </div>
     </div>
-  </div>
 
-  <button mat-button type="submit" (submit)="submit()" [disabled]="form?.invalid || submitted">
-    Войти
-  </button>
-</form>
+    <div
+      class="form_control"
+      [ngClass]="{
+        invalid: form?.get('password')?.invalid && form?.get('password')?.touched
+      }"
+    >
+      <mat-form-field color="accent" appearance="outline">
+        <mat-label>Пароль</mat-label>
+        <input
+          matInput
+          type="password"
+          id="password"
+          formControlName="password"
+          (input)="resetErrorMessage()"
+        />
+      </mat-form-field>
 
-<button mat-button (click)="redirect()">Login via Google</button>
+      <div
+        class="validation"
+        *ngIf="form?.get('password')?.touched && form?.get('password')?.invalid"
+      >
+        <mat-error *ngIf="form?.get('password')?.errors?.['required']"
+          >*Введите поле пароля</mat-error
+        >
+      </div>
+    </div>
+
+    <ng-template #newTemplate>
+      <button
+        mat-stroked-button
+        type="submit"
+        (submit)="submit()"
+        [disabled]="form?.invalid || submitted"
+      >
+        Войти
+      </button>
+    </ng-template>
+
+    <app-custom-button
+      [disabled]="form?.invalid || submitted"
+      (clicked)="submit()"
+      [classNames]="[]"
+      label="Войти"
+    ></app-custom-button>
+    <app-custom-button [optionTemplate]="newTemplate"></app-custom-button>
+  </form>
+
+  <button mat-button (click)="redirect()">Login via Google</button>
+</div>

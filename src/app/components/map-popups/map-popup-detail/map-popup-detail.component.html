@@ -1,5 +1,5 @@
 <div class="marker-popup">
   <h2 class="marker-name">{{ sight.name }}</h2>
-  <p class="marker-description">{{ sight.description }}</p>
+  <p class="marker-description">{{ sight.description | truncate: 90}}</p>
   <a class="marker-link" [routerLink]="['/sight', this.sight.id]">Перейти</a>
 </div>

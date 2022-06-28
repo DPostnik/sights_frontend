@@ -1,3 +1,15 @@
+.container{
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  span {
+    color: rgb(229, 115, 115);
+    margin-bottom: 20px;
+  }
+}
+
 input {
   color: white;
 }
@@ -6,12 +18,16 @@ h2 {
   color: white;
 }
 
-button {
-  border-radius: 12px;
-  border: 1px solid black;
-  min-width: 100px;
-}
+//button {
+//  border-radius: 12px;
+//  border: 1px solid black;
+//  min-width: 100px;
+//}
 
 button.disabled{
 
+}
+
+.mat-form-field-wrapper {
+  padding-bottom: 0;
 }

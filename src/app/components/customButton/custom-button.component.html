@@ -1,0 +1,5 @@
+<ng-template #defaultTemplate>
+  <button mat-stroked-button [disabled]="disabled">{{ label }}</button>
+</ng-template>
+
+<ng-container [ngTemplateOutlet]="optionTemplate || defaultTemplate"> </ng-container>

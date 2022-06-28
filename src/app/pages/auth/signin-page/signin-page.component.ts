@@ -1,9 +1,9 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {AuthService} from '@store/services/auth.service';
 import {Credentials} from '@model/user/credentials';
 import {Select, Store} from '@ngxs/store';
-import {SignIn} from '@store/actions/account.actions';
+import {Logout, SignIn} from '@store/actions/account.actions';
 import {Router} from '@angular/router';
 import {AccountState} from '@store/states/account.state';
 import {Observable} from 'rxjs';
@@ -14,11 +14,13 @@ import {AuthState} from '@model/enums/auth-state';
   templateUrl: './signin-page.component.html',
   styleUrls: ['./signin-page.component.scss'],
 })
-export class SigninPageComponent implements OnInit {
+export class SigninPageComponent implements OnInit, OnDestroy {
   errorMessage: string = '';
   form: FormGroup = new FormGroup({});
   submitted = false;
-  invalidCreds = AuthState.INVALID_CREDENTIALS;
+  authState?: AuthState;
+  invalidCredentials = AuthState.INVALID_CREDENTIALS;
+
   @Select(AccountState.selectAuthState) authState$!: Observable<AuthState>;
 
   constructor(private auth: AuthService, private store: Store, private router: Router) {}
@@ -26,20 +28,17 @@ export class SigninPageComponent implements OnInit {
   ngOnInit(): void {
     this.form = new FormGroup({
       email: new FormControl(null, [Validators.required]),
-      password: new FormControl(null, [
-        Validators.required,
-        // Validators.minLength(6)
-      ]),
+      password: new FormControl(null, [Validators.required]),
     });
     this.authState$.subscribe((authState$) => {
+      this.authState = authState$;
       if (authState$ === AuthState.INVALID_CREDENTIALS) {
         this.form.reset();
-        this.errorMessage = "Неверные данные для входа";
+        this.errorMessage = 'Неверные данные для входа';
         this.submitted = false;
       }
       return authState$ === AuthState.LOGGED_IN && this.router.navigate(['/']);
-    }
-    );
+    });
   }
 
   submit(): void {
@@ -77,5 +76,9 @@ export class SigninPageComponent implements OnInit {
 
   resetErrorMessage() {
     this.errorMessage = '';
+  }
+
+  ngOnDestroy(): void {
+    if (this.authState === AuthState.INVALID_CREDENTIALS) this.store.dispatch(Logout);
   }
 }

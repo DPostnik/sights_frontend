@@ -1,5 +1,12 @@
 <app-layout>
   <div class="auth__container">
+    <div class="navigation">
+      <button (click)="goHome()"><mat-icon>keyboard_arrow_left</mat-icon></button>
+      <mat-tab-group (selectedTabChange)="navigate($event)" [(selectedIndex)]="index">
+        <mat-tab label="Вход" ></mat-tab>
+        <mat-tab label="Регистрация"></mat-tab>
+      </mat-tab-group>
+    </div>
     <router-outlet></router-outlet>
   </div>
 </app-layout>
