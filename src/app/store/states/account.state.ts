@@ -4,13 +4,14 @@ import {Injectable} from '@angular/core';
 import {AuthService} from '@store/services/auth.service';
 import {initialUser} from '../../constants/user';
 import {EndLoading, StartLoading} from '@store/actions/app.actions';
-import {finalize, tap} from 'rxjs';
+import {catchError, EMPTY, finalize, tap} from 'rxjs';
 import {
   HandleHttpError,
   Initialize,
   Logout,
   RefreshToken,
   SignIn,
+  SignInFailure,
   SignInSuccess,
   UpdateAccountInfo,
 } from '@store/actions/account.actions';
@@ -54,18 +55,24 @@ export class AccountState {
     const accessToken = localStorage.getItem('access_token') || '';
     const refreshToken = localStorage.getItem('refresh_token') || '';
     if (accessToken && refreshToken) {
-      ctx.dispatch(new SignInSuccess({accessToken, refreshToken}));
+      ctx.dispatch(new RefreshToken());
     }
   }
 
   @Action(SignIn)
   signIn(ctx: StateContext<AccountStateModel>, {credentials}: SignIn) {
     ctx.dispatch(StartLoading);
+    ctx.patchState({authState: AuthState.AUTHENTICATE})
     return this.authService.signIn(credentials).pipe(
-      tap((tokens) => {
-        ctx.dispatch(new SignInSuccess(tokens));
-      }),
+      tap((tokens) => ctx.dispatch(new SignInSuccess(tokens))),
       finalize(() => ctx.dispatch(EndLoading)),
+      catchError((e) => {
+        if (e.status === 403) {
+          ctx.dispatch(new SignInFailure());
+          console.log('error', e);
+        }
+        return EMPTY;
+      }),
     );
   }
 
@@ -76,6 +83,11 @@ export class AccountState {
     localStorage.setItem('refresh_token', refreshToken);
     const userInfo = getDecodedAccessToken(accessToken);
     ctx.patchState({user: userInfo, authState: AuthState.LOGGED_IN});
+  }
+
+  @Action(SignInFailure)
+  signInFailure(ctx: StateContext<AccountStateModel>) {
+    ctx.patchState({authState: AuthState.INVALID_CREDENTIALS});
   }
 
   @Action(Logout)
@@ -120,7 +132,7 @@ export class AccountState {
         break;
       }
       case AuthState.ANONYMOUS: {
-        ctx.patchState({user: {...initialUser}})
+        ctx.patchState({user: {...initialUser}});
         clearLocalStorage();
         break;
       }

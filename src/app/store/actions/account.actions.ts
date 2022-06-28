@@ -15,6 +15,11 @@ export class SignInSuccess {
   constructor(public tokens: Tokens) {}
 }
 
+export class SignInFailure {
+  static readonly type = '[Account] SignInFailure';
+}
+
+
 export class RefreshToken {
   static readonly type = '[Account] RefreshToken';
 }

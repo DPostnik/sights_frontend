@@ -6,7 +6,7 @@ import {
   HttpInterceptor,
   HttpRequest,
 } from '@angular/common/http';
-import {catchError, EMPTY, Observable} from 'rxjs';
+import {catchError, Observable, throwError} from 'rxjs';
 import {Store} from '@ngxs/store';
 import {HandleHttpError} from '@store/actions/account.actions';
 
@@ -33,7 +33,7 @@ export class AuthInterceptor implements HttpInterceptor {
             return new Observable<HttpEvent<any>>();
           }
         }
-        return EMPTY;
+        return throwError(err);
       }),
     );
   }

@@ -14,8 +14,8 @@ export class AuthService {
 
   constructor(private http: HttpClient) {}
 
-  signIn(user: Credentials): Observable<Tokens> {
-    return this.http.post<Tokens>(`${this.route}signin`, user);
+  signIn(credentials: Credentials): Observable<Tokens> {
+    return this.http.post<Tokens>(`${this.route}signin`, credentials);
   }
 
   signUp(user: CreateUserDto): Observable<any> {
@@ -23,11 +23,15 @@ export class AuthService {
   }
 
   logout(refreshToken: string) {
-    return this.http.post(`${this.route}logout`, {}, {
-      headers: {
-        authorization: `Bearer ${refreshToken}`,
+    return this.http.post(
+      `${this.route}logout`,
+      {},
+      {
+        headers: {
+          authorization: `Bearer ${refreshToken}`,
+        },
       },
-    });
+    );
   }
 
   refreshToken(token: string): Observable<Tokens> {
